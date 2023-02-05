@@ -6,12 +6,12 @@ if ! type getarg >/dev/null 2>&1 && ! type getargbool >/dev/null 2>&1; then
     . /lib/dracut-lib.sh
 fi
 
-echo void-live > ${NEWROOT}/etc/hostname
+echo lazylinux-live > ${NEWROOT}/etc/hostname
 
 USERNAME=$(getarg live.user)
 USERSHELL=$(getarg live.shell)
 
-[ -z "$USERNAME" ] && USERNAME=anon
+[ -z "$USERNAME" ] && USERNAME=slacker
 [ -x $NEWROOT/bin/bash -a -z "$USERSHELL" ] && USERSHELL=/bin/bash
 [ -z "$USERSHELL" ] && USERSHELL=/bin/sh
 

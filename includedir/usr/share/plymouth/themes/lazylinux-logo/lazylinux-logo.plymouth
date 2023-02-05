@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=LazyLinux Logo
+Description=A theme that features a blank background with a LazyLinux logo.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/lazylinux-logo
+ScriptFile=/usr/share/plymouth/themes/lazylinux-logo/lazylinux-logo.script

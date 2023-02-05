@@ -166,7 +166,7 @@ generate_initramfs() {
 
         # Apply Plymouth theme
         if [ -f "$ROOTFS/etc/plymouth/plymouthd.conf" ]; then
-            chroot "$ROOTFS" plymouth-set-default-theme -R lazylinux_logo
+            chroot "$ROOTFS" plymouth-set-default-theme -R lazylinux-logo
         fi 
 
     mv "$ROOTFS"/boot/initrd "$BOOT_DIR"
