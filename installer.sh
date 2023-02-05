@@ -45,7 +45,7 @@ MIRROR_DONE=
 
 TARGETDIR=/mnt/target
 LOG=/dev/tty8
-CONF_FILE=/tmp/.void-installer.conf
+CONF_FILE=/tmp/.lazy-installer.conf
 if [ ! -f $CONF_FILE ]; then
     touch -f $CONF_FILE
 fi
@@ -1371,7 +1371,7 @@ Root partition not empty! Aborting..." ${MSGBOXSIZE}
         . /etc/default/live.conf
         rm -f $TARGETDIR/etc/motd
         rm -f $TARGETDIR/etc/issue
-        rm -f $TARGETDIR/usr/sbin/void-installer
+        rm -f $TARGETDIR/usr/sbin/lazy-installer
         # Remove modified sddm.conf to let sddm use the defaults.
         rm -f $TARGETDIR/etc/sddm.conf
         # Remove live user.
@@ -1430,6 +1430,11 @@ Root partition not empty! Aborting..." ${MSGBOXSIZE}
     cp $TARGETDIR/etc/skel/.[bix]* $TARGETDIR/root
 
     NETWORK_DONE="$(get_option NETWORK)"
+    # Enable plymouth
+    if [ -f $TARGETDIR/etc/plymouth/plymouthd.conf ]; then
+        chroot $TARGETDIR plymouth-set-default-theme -R lazylinux_logo >>$LOG 2>&1
+    fi
+
     # network settings for target
     if [ -n "$NETWORK_DONE" ]; then
         local net="$(get_option NETWORK)"
@@ -1447,7 +1452,7 @@ Root partition not empty! Aborting..." ${MSGBOXSIZE}
         elif [ -n "$_dev" -a "$_type" = "static" ]; then
             # static IP through dhcpcd.
             mv $TARGETDIR/etc/dhcpcd.conf $TARGETDIR/etc/dhcpcd.conf.orig
-            echo "# Static IP configuration set by the void-installer for $_dev." \
+            echo "# Static IP configuration set by the lazy-installer for $_dev." \
                 >$TARGETDIR/etc/dhcpcd.conf
             echo "interface $_dev" >>$TARGETDIR/etc/dhcpcd.conf
             echo "static ip_address=$_ip" >>$TARGETDIR/etc/dhcpcd.conf
@@ -1609,7 +1614,7 @@ if ! command -v dialog >/dev/null; then
 fi
 
 if [ "$(id -u)" != "0" ]; then
-   echo "void-installer must run as root" 1>&2
+   echo "lazy-installer must run as root" 1>&2
    exit 1
 fi
 

@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-panel" version="1.0">
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <property name="dark-mode" type="bool" value="false"/>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=6;x=0;y=0"/>
+      <property name="length" type="uint" value="100"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="icon-size" type="uint" value="16"/>
+      <property name="size" type="uint" value="32"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="23"/>
+        <value type="int" value="4"/>
+        <value type="int" value="2"/>
+        <value type="int" value="3"/>
+        <value type="int" value="5"/>
+        <value type="int" value="16"/>
+        <value type="int" value="8"/>
+        <value type="int" value="7"/>
+        <value type="int" value="6"/>
+        <value type="int" value="14"/>
+        <value type="int" value="9"/>
+        <value type="int" value="25"/>
+        <value type="int" value="11"/>
+        <value type="int" value="12"/>
+        <value type="int" value="13"/>
+        <value type="int" value="1"/>
+      </property>
+    </property>
+  </property>
+  <property name="plugins" type="empty">
+    <property name="plugin-2" type="string" value="tasklist">
+      <property name="grouping" type="uint" value="1"/>
+    </property>
+    <property name="plugin-3" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-4" type="string" value="pager">
+      <property name="rows" type="uint" value="1"/>
+      <property name="miniature-view" type="bool" value="false"/>
+    </property>
+    <property name="plugin-5" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-6" type="string" value="systray">
+      <property name="square-icons" type="bool" value="true"/>
+      <property name="known-legacy-items" type="array">
+        <value type="string" value="xfce terminal"/>
+        <value type="string" value="networkmanager applet"/>
+        <value type="string" value="ethernet network connection “wired connection 1” active"/>
+      </property>
+      <property name="known-items" type="array">
+        <value type="string" value="flameshot"/>
+        <value type="string" value="Podman Desktop1"/>
+        <value type="string" value="Slack1"/>
+        <value type="string" value="qBittorrent"/>
+        <value type="string" value="Mailspring1"/>
+        <value type="string" value="vlc"/>
+        <value type="string" value="blueman"/>
+        <value type="string" value="TelegramDesktop"/>
+        <value type="string" value="remmina-icon"/>
+      </property>
+      <property name="icon-size" type="int" value="22"/>
+      <property name="hidden-items" type="array">
+        <value type="string" value="qBittorrent"/>
+        <value type="string" value="remmina-icon"/>
+        <value type="string" value="Slack1"/>
+        <value type="string" value="Podman Desktop1"/>
+        <value type="string" value="flameshot"/>
+      </property>
+    </property>
+    <property name="plugin-9" type="string" value="power-manager-plugin"/>
+    <property name="plugin-11" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-12" type="string" value="clock">
+      <property name="digital-layout" type="uint" value="3"/>
+      <property name="digital-time-font" type="string" value="Sans 11"/>
+      <property name="digital-date-format" type="string" value="%a, %d %b %Y"/>
+      <property name="timezone" type="string" value="Asia/Yerevan"/>
+    </property>
+    <property name="plugin-13" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-7" type="string" value="xfce4-clipman-plugin"/>
+    <property name="plugin-8" type="string" value="xkb">
+      <property name="display-type" type="uint" value="2"/>
+      <property name="group-policy" type="uint" value="0"/>
+    </property>
+    <property name="plugin-14" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+      <property name="mpris-players" type="string" value="chromium.instance2405;chromium.instance2539;chromium.instance2640;chromium.instance2912;chromium.instance3073;chromium.instance3082;vlc"/>
+    </property>
+    <property name="plugin-23" type="string" value="whiskermenu"/>
+    <property name="clipman" type="empty">
+      <property name="tweaks" type="empty">
+        <property name="paste-on-activate" type="uint" value="2"/>
+        <property name="popup-at-pointer" type="bool" value="true"/>
+        <property name="never-confirm-history-clear" type="bool" value="false"/>
+      </property>
+    </property>
+    <property name="plugin-25" type="string" value="weather">
+      <property name="location" type="empty">
+        <property name="name" type="string" value="Yerevan, Armenia"/>
+        <property name="latitude" type="string" value="40.181700"/>
+        <property name="longitude" type="string" value="44.509900"/>
+      </property>
+      <property name="msl" type="int" value="995"/>
+      <property name="timezone" type="string" value="Asia/Yerevan"/>
+      <property name="offset" type="string" value="+04:00"/>
+      <property name="cache-max-age" type="int" value="172800"/>
+      <property name="power-saving" type="bool" value="true"/>
+      <property name="units" type="empty">
+        <property name="temperature" type="int" value="0"/>
+        <property name="pressure" type="int" value="0"/>
+        <property name="windspeed" type="int" value="0"/>
+        <property name="precipitation" type="int" value="0"/>
+        <property name="altitude" type="int" value="0"/>
+        <property name="apparent-temperature" type="int" value="0"/>
+      </property>
+      <property name="round" type="bool" value="true"/>
+      <property name="single-row" type="bool" value="true"/>
+      <property name="tooltip-style" type="int" value="1"/>
+      <property name="forecast" type="empty">
+        <property name="layout" type="int" value="1"/>
+        <property name="days" type="int" value="5"/>
+      </property>
+      <property name="theme-dir" type="string" value="/usr/share/xfce4/weather/icons/liquid-dark"/>
+      <property name="scrollbox" type="empty">
+        <property name="show" type="bool" value="true"/>
+        <property name="animate" type="bool" value="true"/>
+        <property name="lines" type="int" value="1"/>
+        <property name="color" type="string" value="rgba(0,0,0,0)"/>
+        <property name="use-color" type="bool" value="false"/>
+      </property>
+    </property>
+    <property name="plugin-16" type="string" value="systemload">
+      <property name="swap" type="empty">
+        <property name="enabled" type="bool" value="false"/>
+      </property>
+      <property name="uptime" type="empty">
+        <property name="enabled" type="bool" value="false"/>
+      </property>
+      <property name="cpu" type="empty">
+        <property name="color" type="array">
+          <value type="double" value="0.8784313725490196"/>
+          <value type="double" value="0.10588235294117647"/>
+          <value type="double" value="0.14117647058823529"/>
+          <value type="double" value="1"/>
+        </property>
+      </property>
+      <property name="memory" type="empty">
+        <property name="color" type="array">
+          <value type="double" value="0.10980392156862745"/>
+          <value type="double" value="0.44313725490196076"/>
+          <value type="double" value="0.84705882352941175"/>
+          <value type="double" value="1"/>
+        </property>
+      </property>
+      <property name="network" type="empty">
+        <property name="color" type="array">
+          <value type="double" value="1"/>
+          <value type="double" value="0.47058823529411764"/>
+          <value type="double" value="0"/>
+          <value type="double" value="1"/>
+        </property>
+      </property>
+    </property>
+    <property name="plugin-1" type="string" value="showdesktop"/>
+  </property>
+</channel>

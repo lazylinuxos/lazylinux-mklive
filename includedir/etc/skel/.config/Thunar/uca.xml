@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<submenu></submenu>
+	<unique-id>1673977573411025-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<range></range>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon>gksu-root-terminal</icon>
+	<name>Open root terminal here</name>
+	<submenu></submenu>
+	<unique-id>1674396583008262-1</unique-id>
+	<command>xfce4-terminal -e &quot;sudo -s&quot;</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>krusader_root</icon>
+	<name>Open thunar as root here</name>
+	<submenu></submenu>
+	<unique-id>1674396626474046-2</unique-id>
+	<command>pkexec thunar %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>regedit</icon>
+	<name>Edit as root</name>
+	<submenu></submenu>
+	<unique-id>1674396716398802-3</unique-id>
+	<command>pkexec mousepad %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<text-files/>
+</action>
+<action>
+	<icon>visualstudiocode</icon>
+	<name>Open in VSCode</name>
+	<submenu></submenu>
+	<unique-id>1674585917141495-1</unique-id>
+	<command>code-oss %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+</actions>

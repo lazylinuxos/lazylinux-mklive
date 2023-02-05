@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=PulseAudio Equalizer
+GenericName=Equalizer
+Comment=Adjust the audio configs
+Exec=qpaeq
+Icon=equaliser
+Type=Application
+Categories=AudioVideo;Audio;Mixer;GTK;Settings;X-XFCE-SettingsDialog;X-XFCE-HardwareSettings;

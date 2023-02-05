@@ -1,0 +1,3 @@
+#!/bin/sh
+
+flameshot gui --raw | zbarimg -q --raw - | xclip -in -selection clipboard
