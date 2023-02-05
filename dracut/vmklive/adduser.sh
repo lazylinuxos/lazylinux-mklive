@@ -4,13 +4,13 @@
 
 type getarg >/dev/null 2>&1 || . /lib/dracut-lib.sh
 
-echo void-live > ${NEWROOT}/etc/hostname
+echo lazylinux-live > ${NEWROOT}/etc/hostname
 
 AUTOLOGIN=$(getarg live.autologin)
 USERNAME=$(getarg live.user)
 USERSHELL=$(getarg live.shell)
 
-[ -z "$USERNAME" ] && USERNAME=anon
+[ -z "$USERNAME" ] && USERNAME=slacker
 [ -x $NEWROOT/bin/bash -a -z "$USERSHELL" ] && USERSHELL=/bin/bash
 [ -z "$USERSHELL" ] && USERSHELL=/bin/sh
 

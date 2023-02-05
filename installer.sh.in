@@ -1316,7 +1316,7 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
 
     # Enable plymouth
     if [ -f $TARGETDIR/etc/plymouth/plymouthd.conf ]; then
-        chroot $TARGETDIR plymouth-set-default-theme -R lazylinux_logo >>$LOG 2>&1
+        chroot $TARGETDIR plymouth-set-default-theme -R lazylinux-logo >>$LOG 2>&1
     fi 
 
     # network settings for target
