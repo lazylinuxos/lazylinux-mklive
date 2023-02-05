@@ -30,7 +30,7 @@ build_variant() {
     XORG_PKGS="xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio"
     REC_PKGS="void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree curl wget git nano vim gptfdisk mtools mlocate ntfs-3g fuse-exfat bash-completion linux-headers ffmpeg mesa-vdpau mesa-vaapi htop webkit2gtk hostapd create_ap cronie bluez blueman cups cups-pk-helper cups-filters foomatic-db foomatic-db-engine system-config-printer tlp tlp-rdw powertop"
     DEV_PKGS="yad cargo nodejs autoconf automake bison m4 make libtool flex meson ninja optipng sassc gtk+3-devel glib-devel gcc pkg-config make qrencode-devel libpng-devel libX11-devel libXft-devel libXcursor-devel libXrandr-devel libXinerama-devel libXi-devel python3-pip qt5 python3-PyQt5-dbus"
-    LAZY_PKGS="thunderbird plymouth simple-scan bleachbit dbeaver tmux fsearch qdirstat neofetch fzf imagewriter zbar tesseract-ocr tesseract-ocr-eng tesseract-ocr-hye tesseract-ocr-rus tesseract-ocr-script-Armenian rofi qbittorrent handbrake inkscape flameshot flatpak docker telegram-desktop remmina openfortivpn gimp vlc timeshift zoxide bat ripgrep exa dust lazygit lazydocker neovim vscode dino dconf-editor libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-draw libreoffice-math libreoffice-base libreoffice-gnome libreoffice-i18n-en-US"
+    LAZY_PKGS="plymouth thunderbird simple-scan bleachbit dbeaver tmux fsearch qdirstat neofetch fzf imagewriter zbar tesseract-ocr tesseract-ocr-eng tesseract-ocr-hye tesseract-ocr-rus tesseract-ocr-script-Armenian rofi qbittorrent handbrake inkscape flameshot flatpak docker telegram-desktop remmina openfortivpn gimp vlc timeshift zoxide bat ripgrep exa dust lazygit lazydocker neovim vscode dino dconf-editor libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-draw libreoffice-math libreoffice-base libreoffice-gnome libreoffice-i18n-en-US"
     SERVICES="sshd"
 
     case $variant in
@@ -75,7 +75,7 @@ build_variant() {
         ;;
     esac
 
-    ./mklive.sh -a "$ARCH" -o "$IMG" -p "$PKGS" -I ./includedir/ -S "$SERVICES" ${REPO} "$@"
+    ./mklive.sh -a "$ARCH" -o "$IMG" -v "linux5.15" -T "LazyLinux" -p "$PKGS" -I ./includedir/ -S "$SERVICES" ${REPO} "$@"
 }
 
 if [ ! -x mklive.sh ]; then
