@@ -24,10 +24,13 @@ shift $((OPTIND - 1))
 
 build_variant() {
     variant="$1"
-    IMG=void-live-${ARCH}-${DATE}-${variant}.iso
+    IMG=lazylinux-live-${ARCH}-${DATE}-${variant}.iso
     GRUB_PKGS="grub-i386-efi grub-x86_64-efi"
-    PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse xtools-minimal $GRUB_PKGS"
-    XORG_PKGS="xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf alsa-plugins-pulseaudio"
+    PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse xtools xcolor xclip xarchiver xreader xz zip unzip base-devel octoxbps xkill vsv mugshot xdg-user-dirs xdg-user-dirs-gtk socklog-void xkblayout-state hardinfo $GRUB_PKGS"
+    XORG_PKGS="xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio"
+    REC_PKGS="void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree curl wget git nano vim gptfdisk mtools mlocate ntfs-3g fuse-exfat bash-completion linux-headers ffmpeg mesa-vdpau mesa-vaapi htop webkit2gtk hostapd create_ap cronie bluez blueman cups cups-pk-helper cups-filters foomatic-db foomatic-db-engine system-config-printer tlp tlp-rdw powertop"
+    DEV_PKGS="yad cargo nodejs autoconf automake bison m4 make libtool flex meson ninja optipng sassc gtk+3-devel glib-devel gcc pkg-config make qrencode-devel libpng-devel libX11-devel libXft-devel libXcursor-devel libXrandr-devel libXinerama-devel libXi-devel python3-pip qt5 python3-PyQt5-dbus"
+    LAZY_PKGS="thunderbird touchegg-gce simple-scan bleachbit dbeaver tmux fsearch qdirstat neofetch fzf imagewriter zbar tesseract-ocr tesseract-ocr-eng tesseract-ocr-hye tesseract-ocr-rus tesseract-ocr-script-Armenian rofi qbittorrent handbrake inkscape flameshot flatpak docker telegram-desktop remmina openfortivpn gimp vlc timeshift zoxide bat ripgrep exa dust lazygit lazydocker neovim vscode dino dconf-editor libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-draw libreoffice-math libreoffice-base libreoffice-gnome libreoffice-i18n-en-US"
     SERVICES="sshd"
 
     case $variant in
@@ -39,8 +42,8 @@ build_variant() {
             SERVICES="$SERVICES acpid dhcpcd wpa_supplicant lxdm dbus polkitd"
         ;;
         xfce)
-            PKGS="$PKGS $XORG_PKGS lxdm xfce4 gnome-themes-standard gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
-            SERVICES="$SERVICES dbus elogind lxdm NetworkManager polkitd"
+            PKGS="$PKGS $XORG_PKGS $REC_PKGS $DEV_PKGS $LAZY_PKGS lightdm lightdm-gtk3-greeter lightdm-gtk-greeter-settings xfce4 xfce4-plugins thunar-archive-plugin galculator-gtk3 gnome-themes-standard gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
+            SERVICES="$SERVICES dbus elogind lightdm NetworkManager polkitd docker containerd tlp cupsd cups-browsed bluetoothd cronie socklog-unix nanoklogd touchegg"
         ;;
         mate)
             PKGS="$PKGS $XORG_PKGS lxdm mate mate-extra gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
@@ -72,7 +75,7 @@ build_variant() {
         ;;
     esac
 
-    ./mklive.sh -a "$ARCH" -o "$IMG" -p "$PKGS" -S "$SERVICES" ${REPO} "$@"
+    ./mklive.sh -a "$ARCH" -o "$IMG" -p "$PKGS" -I ./includedir/ -S "$SERVICES" ${REPO} "$@"
 }
 
 if [ ! -x mklive.sh ]; then

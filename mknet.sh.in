@@ -231,7 +231,7 @@ if [ ${bootloader_pkg} = "syslinux" ] ; then
         -e "s|@@KEYMAP@@|${KEYMAP-us}|" \
         -e "s|@@ARCH@@|$XBPS_TARGET_ARCH|" \
         -e "s|@@LOCALE@@|${LOCALE-en_US.UTF-8}|" \
-        -e "s|@@BOOT_TITLE@@|${BOOT_TITLE-Void Linux}|" \
+        -e "s|@@BOOT_TITLE@@|${BOOT_TITLE-LazyLinux}|" \
         -e "s|@@BOOT_CMDLINE@@|${BOOT_CMDLINE}|" \
         "$PXELINUX_DIR/default"
 else

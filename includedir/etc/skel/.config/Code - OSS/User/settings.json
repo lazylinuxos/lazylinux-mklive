@@ -1,0 +1,11 @@
+{
+    "workbench.colorTheme": "Gnome Dark (GitHub)",
+    "editor.fontFamily": "'JetBrains Mono',Consolas, 'Courier New', monospace",
+    "files.autoSave": "afterDelay",
+    "explorer.fileNesting.enabled": true,
+    "terminal.integrated.fontFamily": "'JetBrainsMono NF'",
+    "editor.fontLigatures": true,
+    "editor.stickyScroll.enabled": true,
+    "editor.fontSize": 15,
+    "terminal.integrated.fontSize": 15
+}

@@ -1,0 +1,59 @@
+{
+	"name": "fedora-gnome-light-dark",
+	"displayName": "Fedora GNOME light & dark themes",
+	"description": "Light and dark themes to match GNOME Adwaita and Adwaita-dark themes - based on GitHub and Atom One themes.",
+	"version": "0.0.4",
+	"publisher": "olifink",
+	"engines": {
+		"vscode": "^1.54.0"
+	},
+	"categories": [
+		"Themes"
+	],
+	"icon": "images/gnome-icon.png",
+	"galleryBanner": {
+		"color": "#1e1e1e",
+		"theme": "dark"
+	},
+	"contributes": {
+		"themes": [
+			{
+				"label": "Gnome Dark (GitHub)",
+				"uiTheme": "vs-dark",
+				"path": "./themes/adwaita-gh-dark-color-theme.json"
+			},
+			{
+				"label": "Gnome Light (GitHub)",
+				"uiTheme": "vs",
+				"path": "./themes/adwaita-gh-light-color-theme.json"
+			},
+			{
+				"label": "Gnome Dark (Atom One)",
+				"uiTheme": "vs-dark",
+				"path": "./themes/adwaita-atom-dark-color-theme.json"
+			},
+			{
+				"label": "Gnome Light (Atom One)",
+				"uiTheme": "vs",
+				"path": "./themes/adwaita-atom-light-color-theme.json"
+			}
+		]
+	},
+	"license": "MIT - see LICENSE file",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/olifink/vscode-fedora-gnome-theme.git"
+	},
+	"homepage": "https://github.com/olifink/vscode-fedora-gnome-theme#readme",
+	"__metadata": {
+		"id": "e7fc1901-d69c-424b-b2f5-b44c4d9fe0b3",
+		"publisherId": "1a0c0296-7edb-4998-ab3c-bf8f6abc4302",
+		"publisherDisplayName": "Oliver Fink",
+		"targetPlatform": "undefined",
+		"isApplicationScoped": false,
+		"updated": false,
+		"isPreReleaseVersion": false,
+		"installedTimestamp": 1674148012970,
+		"preRelease": false
+	}
+}

@@ -133,9 +133,9 @@ install_packages() {
     chroot "$ROOTFS" env -i xbps-reconfigure -a
 
     if [ -x installer.sh ]; then
-        install -Dm755 installer.sh "$ROOTFS"/usr/sbin/void-installer
+        install -Dm755 installer.sh "$ROOTFS"/usr/sbin/lazy-installer
     else
-        install -Dm755 /usr/sbin/void-installer "$ROOTFS"/usr/sbin/void-installer
+        install -Dm755 /usr/sbin/lazy-installer "$ROOTFS"/usr/sbin/lazy-installer
     fi
     # Cleanup and remove useless stuff.
     rm -rf "$ROOTFS"/var/cache/* "$ROOTFS"/run/* "$ROOTFS"/var/run/*
@@ -163,6 +163,11 @@ generate_initramfs() {
     chroot "$ROOTFS" env -i /usr/bin/dracut -N --"${INITRAMFS_COMPRESSION}" \
         --add-drivers "ahci" --force-add "vmklive autoinstaller" --omit systemd "/boot/initrd" $KERNELVERSION
     [ $? -ne 0 ] && die "Failed to generate the initramfs"
+
+        # Apply Plymouth theme
+        if [ -f "$ROOTFS/etc/plymouth/plymouthd.conf" ]; then
+            chroot "$ROOTFS" plymouth-set-default-theme -R lazylinux_logo
+        fi 
 
     mv "$ROOTFS"/boot/initrd "$BOOT_DIR"
     cp "$ROOTFS"/boot/vmlinuz-$KERNELVERSION "$BOOT_DIR"/vmlinuz
@@ -203,14 +208,14 @@ generate_isolinux_boot() {
 
 generate_grub_efi_boot() {
     cp -f grub/grub.cfg "$GRUB_DIR"
-    cp -f grub/grub_void.cfg.in "$GRUB_DIR"/grub_void.cfg
+    cp -f grub/grub_lazylinux.cfg.in "$GRUB_DIR"/grub_lazylinux.cfg
     sed -i  -e "s|@@SPLASHIMAGE@@|$(basename "${SPLASH_IMAGE}")|" \
         -e "s|@@KERNVER@@|${KERNELVERSION}|" \
         -e "s|@@KEYMAP@@|${KEYMAP}|" \
         -e "s|@@ARCH@@|$BASE_ARCH|" \
         -e "s|@@BOOT_TITLE@@|${BOOT_TITLE}|" \
         -e "s|@@BOOT_CMDLINE@@|${BOOT_CMDLINE}|" \
-        -e "s|@@LOCALE@@|${LOCALE}|" "$GRUB_DIR"/grub_void.cfg
+        -e "s|@@LOCALE@@|${LOCALE}|" "$GRUB_DIR"/grub_lazylinux.cfg
     mkdir -p "$GRUB_DIR"/fonts
     cp -f "$GRUB_DATADIR"/unicode.pf2 "$GRUB_DIR"/fonts
 
@@ -281,7 +286,7 @@ generate_iso_image() {
         -iso-level 3 -rock -joliet \
         -max-iso9660-filenames -omit-period \
         -omit-version-number -relaxed-filenames -allow-lowercase \
-        -volid "VOID_LIVE" \
+        -volid "LazyLinux_LIVE" \
         -eltorito-boot boot/isolinux/isolinux.bin \
         -eltorito-catalog boot/isolinux/boot.cat \
         -no-emul-boot -boot-load-size 4 -boot-info-table \
@@ -331,7 +336,7 @@ ARCH=$(xbps-uhelper arch)
 : ${INITRAMFS_COMPRESSION:=xz}
 : ${SQUASHFS_COMPRESSION:=xz}
 : ${BASE_SYSTEM_PKG:=base-system}
-: ${BOOT_TITLE:="Void Linux"}
+: ${BOOT_TITLE:="LazyLinux"}
 
 # Required packages in the image for a working system.
 PACKAGE_LIST="$BASE_SYSTEM_PKG $PACKAGE_LIST"

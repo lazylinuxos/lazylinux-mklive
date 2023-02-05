@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec create_ap --config /etc/create_ap.conf
