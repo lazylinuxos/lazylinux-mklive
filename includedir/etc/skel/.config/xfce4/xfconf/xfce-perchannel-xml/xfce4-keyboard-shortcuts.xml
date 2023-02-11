@@ -52,7 +52,6 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;l" type="string" value="xflock4"/>
       <property name="&lt;Alt&gt;F1" type="string" value="xfce4-popup-applicationsmenu"/>
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
-      <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="xfce4-taskmanager"/>
       <property name="&lt;Super&gt;e" type="string" value="thunar"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;Escape" type="string" value="xkill"/>
       <property name="HomePage" type="string" value="exo-open --launch WebBrowser"/>
@@ -67,6 +66,7 @@
       <property name="&lt;Shift&gt;&lt;Super&gt;e" type="string" value="ocr-en"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;h" type="string" value="ocr-hy"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;r" type="string" value="ocr-ru"/>
+      <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="/usr/bin/system-monitoring-center"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">

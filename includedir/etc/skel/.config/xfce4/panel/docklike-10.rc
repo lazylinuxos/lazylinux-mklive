@@ -1,0 +1,12 @@
+[user]
+indicatorStyle=0
+indicatorOrientation=1
+forceIconSize=false
+showWindowCount=true
+showPreviews=true
+onlyDisplayVisible=true
+noWindowsListIfSingle=false
+indicatorColor=rgb(97,97,97)
+inactiveColor=rgb(138,138,138)
+pinned=/usr/share/applications/io.github.cboxdoerfer.FSearch.desktop;/usr/share/applications/thunar.desktop;/usr/share/applications/xfce4-terminal.desktop;/usr/share/applications/firefox.desktop;/usr/share/applications/code-oss.desktop;
+keyComboActive=true
