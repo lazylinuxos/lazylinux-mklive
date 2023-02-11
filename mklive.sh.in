@@ -77,6 +77,7 @@ directory if unset).
  -s <gzip|lzo|xz>     Compression type for the squashfs image (xz if unset)
  -o <file>          Output file name for the ISO image (auto if unset).
  -p "pkg pkgN ..."  Install additional packages into the ISO image.
+ -R "pkg pkgN ..."  Remove preinstalled packages
  -I <includedir>    Include directory structure under given path into rootfs
  -S "service serviceN ..." Services to enable
 
@@ -139,6 +140,12 @@ install_packages() {
     fi
     # Cleanup and remove useless stuff.
     rm -rf "$ROOTFS"/var/cache/* "$ROOTFS"/run/* "$ROOTFS"/var/run/*
+}
+
+remove_packages(){
+    if [ -n "${RM_PACKAGES}" ]; then
+        xbps-remove -r "$ROOTFS" -y ${RM_PACKAGES} >/dev/null 2>&1
+    fi
 }
 
 enable_services() {
@@ -298,7 +305,7 @@ generate_iso_image() {
 #
 # main()
 #
-while getopts "a:b:r:c:C:T:Kk:l:i:I:S:s:o:p:v:h" opt; do
+while getopts "a:b:r:c:C:T:Kk:l:i:I:S:s:o:p:R:v:h" opt; do
     case $opt in
         a) BASE_ARCH="$OPTARG";;
         b) BASE_SYSTEM_PKG="$OPTARG";;
@@ -313,6 +320,7 @@ while getopts "a:b:r:c:C:T:Kk:l:i:I:S:s:o:p:v:h" opt; do
         s) SQUASHFS_COMPRESSION="$OPTARG";;
         o) OUTPUT_FILE="$OPTARG";;
         p) PACKAGE_LIST="$OPTARG";;
+        R) RM_PACKAGES="$OPTARG";;
         C) BOOT_CMDLINE="$OPTARG";;
         T) BOOT_TITLE="$OPTARG";;
         v) LINUX_VERSION="$OPTARG";;
@@ -340,6 +348,7 @@ ARCH=$(xbps-uhelper arch)
 
 # Required packages in the image for a working system.
 PACKAGE_LIST="$BASE_SYSTEM_PKG $PACKAGE_LIST"
+RM_PACKAGES="$RM_PACKAGES"
 
 # Check for root permissions.
 if [ "$(id -u)" -ne 0 ]; then
@@ -360,7 +369,7 @@ ISOLINUX_DIR="$BOOT_DIR/isolinux"
 GRUB_DIR="$BOOT_DIR/grub"
 ISOLINUX_CFG="$ISOLINUX_DIR/isolinux.cfg"
 CURRENT_STEP=0
-STEP_COUNT=9
+STEP_COUNT=10
 [ -n "${INCLUDE_DIRECTORY}" ] && STEP_COUNT=$((STEP_COUNT+1))
 
 : ${SYSLINUX_DATADIR:="$VOIDHOSTDIR"/usr/lib/syslinux}
@@ -421,6 +430,9 @@ if [ -n "${INCLUDE_DIRECTORY}" ];then
     print_step "Copying directory structure into the rootfs: ${INCLUDE_DIRECTORY} ..."
     copy_include_directory
 fi
+
+print_step "Removing preinstalled pkgs from the rootfs: ${RM_PACKAGES} ..."
+remove_packages
 
 print_step "Generating initramfs image ($INITRAMFS_COMPRESSION)..."
 generate_initramfs

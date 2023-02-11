@@ -1,6 +1,6 @@
 favorites=xfce4-file-manager.desktop,io.github.cboxdoerfer.FSearch.desktop,xfce4-terminal-emulator.desktop,firefox.desktop,thunderbird.desktop,octoxbps.desktop,code-oss.desktop,org.remmina.Remmina.desktop,org.telegram.desktop.desktop,org.bleachbit.BleachBit.desktop,qdirstat.desktop
 recent=
-button-title=Apps\ 
+button-title=\ LazyLinux\ 
 button-icon=/usr/share/pixmaps/LazyLinux_logo.png
 button-single-row=false
 show-button-title=true

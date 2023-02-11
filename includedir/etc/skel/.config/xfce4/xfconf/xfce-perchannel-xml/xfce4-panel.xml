@@ -6,7 +6,7 @@
     <value type="int" value="1"/>
     <property name="dark-mode" type="bool" value="false"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=6;x=0;y=0"/>
+      <property name="position" type="string" value="p=6;x=960;y=17"/>
       <property name="length" type="uint" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
       <property name="icon-size" type="uint" value="16"/>
@@ -14,7 +14,8 @@
       <property name="plugin-ids" type="array">
         <value type="int" value="23"/>
         <value type="int" value="4"/>
-        <value type="int" value="2"/>
+        <value type="int" value="15"/>
+        <value type="int" value="10"/>
         <value type="int" value="3"/>
         <value type="int" value="5"/>
         <value type="int" value="16"/>
@@ -32,9 +33,6 @@
     </property>
   </property>
   <property name="plugins" type="empty">
-    <property name="plugin-2" type="string" value="tasklist">
-      <property name="grouping" type="uint" value="1"/>
-    </property>
     <property name="plugin-3" type="string" value="separator">
       <property name="expand" type="bool" value="true"/>
       <property name="style" type="uint" value="0"/>
@@ -49,16 +47,17 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="liferea"/>
+        <value type="string" value="blueman"/>
+        <value type="string" value="octoxbps-notifier"/>
         <value type="string" value="xfce terminal"/>
         <value type="string" value="networkmanager applet"/>
         <value type="string" value="ethernet network connection “wired connection 1” active"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="octoxbps-notifier"/>
         <value type="string" value="flameshot"/>
-        <value type="string" value="Podman Desktop1"/>
-        <value type="string" value="Slack1"/>
         <value type="string" value="qBittorrent"/>
-        <value type="string" value="Mailspring1"/>
         <value type="string" value="vlc"/>
         <value type="string" value="blueman"/>
         <value type="string" value="TelegramDesktop"/>
@@ -68,8 +67,6 @@
       <property name="hidden-items" type="array">
         <value type="string" value="qBittorrent"/>
         <value type="string" value="remmina-icon"/>
-        <value type="string" value="Slack1"/>
-        <value type="string" value="Podman Desktop1"/>
         <value type="string" value="flameshot"/>
       </property>
     </property>
@@ -93,7 +90,7 @@
     </property>
     <property name="plugin-14" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="chromium.instance2405;chromium.instance2539;chromium.instance2640;chromium.instance2912;chromium.instance3073;chromium.instance3082;vlc"/>
+      <property name="mpris-players" type="string" value="chromium.instance2405;chromium.instance2406;chromium.instance2539;chromium.instance2640;chromium.instance2912;chromium.instance3073;chromium.instance3082;chromium.instance5686;vlc"/>
     </property>
     <property name="plugin-23" type="string" value="whiskermenu"/>
     <property name="clipman" type="empty">
@@ -169,7 +166,12 @@
           <value type="double" value="1"/>
         </property>
       </property>
+      <property name="system-monitor-command" type="string" value="system-monitoring-center"/>
     </property>
     <property name="plugin-1" type="string" value="showdesktop"/>
+    <property name="plugin-10" type="string" value="docklike"/>
+    <property name="plugin-15" type="string" value="separator">
+      <property name="style" type="uint" value="2"/>
+    </property>
   </property>
 </channel>
