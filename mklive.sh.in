@@ -143,9 +143,11 @@ install_packages() {
 }
 
 remove_packages(){
-    if [ -n "${RM_PACKAGES}" ]; then
-        xbps-remove -r "$ROOTFS" -y ${RM_PACKAGES} >/dev/null 2>&1
-    fi
+    mkdir -p "$ROOTFS"/etc/xbps.d
+    for f in ${RM_PACKAGES}; do
+        echo "ignorepkg=${f}" >> "$ROOTFS"/etc/xbps.d/10-ignore.conf
+        xbps-remove -r "$ROOTFS" -y ${f} >/dev/null 2>&1
+    done
 }
 
 enable_services() {
@@ -422,6 +424,9 @@ mkdir -p "$ROOTFS"/etc
 print_step "Installing void pkgs into the rootfs: ${PACKAGE_LIST} ..."
 install_packages
 
+print_step "Removing preinstalled pkgs from the rootfs: ${RM_PACKAGES} ..."
+remove_packages
+
 : ${DEFAULT_SERVICE_LIST:=agetty-tty1 agetty-tty2 agetty-tty3 agetty-tty4 agetty-tty5 agetty-tty6 udevd}
 print_step "Enabling services: ${SERVICE_LIST} ..."
 enable_services ${DEFAULT_SERVICE_LIST} ${SERVICE_LIST}
@@ -430,9 +435,6 @@ if [ -n "${INCLUDE_DIRECTORY}" ];then
     print_step "Copying directory structure into the rootfs: ${INCLUDE_DIRECTORY} ..."
     copy_include_directory
 fi
-
-print_step "Removing preinstalled pkgs from the rootfs: ${RM_PACKAGES} ..."
-remove_packages
 
 print_step "Generating initramfs image ($INITRAMFS_COMPRESSION)..."
 generate_initramfs
