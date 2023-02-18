@@ -45,7 +45,7 @@ build_variant() {
         ;;
         xfce)
             PKGS="$PKGS $XORG_PKGS $REC_PKGS $DEV_PKGS $LAZY_PKGS $CUSTOM_PKGS lightdm lightdm-gtk3-greeter lightdm-gtk-greeter-settings xfce4 xfce4-plugins xfce4-docklike-plugin thunar-archive-plugin galculator-gtk3 gnome-themes-standard gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
-            SERVICES="$SERVICES dbus elogind lightdm NetworkManager polkitd docker containerd tlp cupsd cups-browsed bluetoothd cronie snooze-daily socklog-unix nanoklogd preload"
+            SERVICES="$SERVICES dbus elogind lightdm NetworkManager polkitd docker containerd tlp cupsd cups-browsed bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon"
         ;;
         mate)
             PKGS="$PKGS $XORG_PKGS lxdm mate mate-extra gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
