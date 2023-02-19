@@ -5,6 +5,7 @@ alias untar='tar -zxvf'
 alias wget='wget -c'
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+alias upg='topgrade --disable git_repos'
 ## Improved commands
 alias du='dust'
 alias grep='rg'
