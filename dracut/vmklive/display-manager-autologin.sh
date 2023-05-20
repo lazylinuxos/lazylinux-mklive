@@ -25,7 +25,11 @@ fi
 if [ -x ${NEWROOT}/usr/bin/sddm ]; then
     cat > ${NEWROOT}/etc/sddm.conf <<_EOF
 [Autologin]
+<<<<<<< HEAD
 User=slacker
+=======
+User=${USERNAME}
+>>>>>>> origin/master
 Session=plasma.desktop
 _EOF
 fi
