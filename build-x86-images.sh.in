@@ -25,16 +25,16 @@ shift $((OPTIND - 1))
 build_variant() {
     variant="$1"
     shift
-    IMG=void-live-${ARCH}-${DATE}-${variant}.iso
+    IMG=lazylinux-live-${ARCH}-${DATE}-${variant}.iso
     GRUB_PKGS="grub-i386-efi grub-x86_64-efi"
     PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse xtools-minimal $GRUB_PKGS"
     XORG_PKGS="xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio"
     REC_PKGS="void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree xcolor xclip xarchiver xreader xz zip unzip 7zip-unrar chrony xkill xdg-user-dirs xdg-user-dirs-gtk socklog-void preload xkblayout-state curl wget git gptfdisk mtools mlocate ntfs-3g fuse-exfat bash-completion linux-headers ffmpeg mesa-vdpau mesa-vaapi webkit2gtk hostapd cronie snooze bluez blueman cups cups-pk-helper cups-filters foomatic-db foomatic-db-engine system-config-printer tlp tlp-rdw powertop NetworkManager-openvpn NetworkManager-openconnect NetworkManager-strongswan NetworkManager-l2tp NetworkManager-pptp flatpak"
     DEV_PKGS="base-devel docker nix cargo nodejs autoconf automake bison m4 make libtool flex meson ninja optipng sassc gtk+3-devel glib-devel gcc pkg-config make qrencode-devel libpng-devel libX11-devel libXft-devel libXcursor-devel libXrandr-devel libXinerama-devel libXi-devel python3-pip qt5 python3-PyQt5-dbus"
     GUI_PKGS="onboard gufw mugshot octoxbps hardinfo ghostwriter gparted obs keepassxc filezilla syncthing syncthingtray deadbeef gpodder liferea cherrytree plymouth thunderbird simple-scan bleachbit dbeaver fsearch qdirstat imagewriter qbittorrent handbrake inkscape flameshot telegram-desktop remmina gimp vlc timeshift vscode hexchat dino dconf-editor libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-draw libreoffice-math libreoffice-base libreoffice-gnome"
-    TUI_PKGS="xmirror nano vim btop vsv topgrade nnn hblock fish-shell neofetch fzf zoxide bat ripgrep exa dust Clipboard lazygit lazydocker helix rofi openfortivpn zbar tesseract-ocr tesseract-ocr-eng tesseract-ocr-hye tesseract-ocr-rus tesseract-ocr-script-Armenian"
+    TUI_PKGS="zellij xmirror nano vim btop vsv topgrade nnn hblock fish-shell neofetch fzf zoxide bat ripgrep exa dust Clipboard lazygit lazydocker helix rofi openfortivpn zbar tesseract-ocr tesseract-ocr-eng tesseract-ocr-hye tesseract-ocr-rus tesseract-ocr-script-Armenian"
     LANG_PKGS="libreoffice-i18n-en-US libreoffice-i18n-ru firefox-i18n-en-US firefox-i18n-hy-AM firefox-i18n-ru thunderbird-i18n-en-US thunderbird-i18n-hy-AM thunderbird-i18n-ru"
-    CUSTOM_PKGS="brave-browser linux-wifi-hotspot zellij"
+    CUSTOM_PKGS="brave-browser linux-wifi-hotspot"
     PKGS_TO_REMOVE="parole"
     SERVICES="sshd chronyd"
 
