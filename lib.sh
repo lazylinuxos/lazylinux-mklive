@@ -324,9 +324,9 @@ rk33xx_flash_uboot() {
 
 # These should all resolve even if they won't have the appropriate
 # repodata files for the selected architecture.
-: "${XBPS_REPOSITORY:=--repository=https://hostdir/binpkgs/current \
-                      --repository=https://hostdir/binpkgs/current/musl \
-                      --repository=https://hostdir/binpkgs/current/aarch64}"
+: "${XBPS_REPOSITORY:=--repository=/hostdir/binpkgs/current \
+                      --repository=/hostdir/binpkgs/current/musl \
+                      --repository=/hostdir/binpkgs/current/aarch64}"
 
 # This library is the authoritative source of the platform map,
 # because of this we may need to get this information from the command
