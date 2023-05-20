@@ -16,10 +16,10 @@ insmod font
 if loadfont "(${lazylinuxlive})/boot/grub/fonts/unicode.pf2" ; then
     insmod gfxterm
     set gfxmode="auto"
-    
+
     terminal_input console
     terminal_output gfxterm
-    
+
     insmod png
     background_image "(${lazylinuxlive})/boot/isolinux/@@SPLASHIMAGE@@"
 fi
