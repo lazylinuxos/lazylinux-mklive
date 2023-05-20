@@ -1,6 +1,22 @@
 #!/bin/sh
 
+<<<<<<< HEAD
 type getargbool >/dev/null 2>&1 || . /lib/dracut-lib.sh
+=======
+set -e
+
+# These are for all you erroring dracuts out there
+# VAI_getarg() {
+# 	set +e
+# 	getarg "$@"
+# 	set -e
+# }
+# VAI_getargbool() {
+# 	set +e
+# 	getargbool "$@"
+# 	set -e
+# }
+>>>>>>> e33a0628a (fixed autoinstaller issue)
 
 # These functions pulled from void's excellent mklive.sh
 VAI_info_msg() {
@@ -241,9 +257,13 @@ VAI_configure_autoinstall() {
     esac
 
     # --------------- Pull config URL out of kernel cmdline -------------------------
+<<<<<<< HEAD
     set +e
     if getargbool 0 autourl ; then
         set -e
+=======
+    if getargbool 0 autourl ; then
+>>>>>>> e33a0628a (fixed autoinstaller issue)
         xbps-uhelper fetch "$(getarg autourl)>/etc/autoinstall.cfg"
 
     else
@@ -324,7 +344,10 @@ VAI_main() {
 
 # If we are using the autoinstaller, launch it
 if getargbool 0 auto  ; then
+<<<<<<< HEAD
     set -e
+=======
+>>>>>>> e33a0628a (fixed autoinstaller issue)
     VAI_main
     # Very important to release this before returning to dracut code
     set +e
