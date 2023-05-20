@@ -166,7 +166,7 @@
           <value type="double" value="1"/>
         </property>
       </property>
-      <property name="system-monitor-command" type="string" value="system-monitoring-center"/>
+      <property name="system-monitor-command" type="string" value="xfce4-taskmanager"/>
     </property>
     <property name="plugin-1" type="string" value="showdesktop"/>
     <property name="plugin-10" type="string" value="docklike"/>
