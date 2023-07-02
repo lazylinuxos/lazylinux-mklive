@@ -47,6 +47,14 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="anydesk"/>
+        <value type="string" value="hexchat"/>
+        <value type="string" value="deadbeef"/>
+        <value type="string" value="teams"/>
+        <value type="string" value="mailspring"/>
+        <value type="string" value="slack"/>
+        <value type="string" value="podman-desktop"/>
+        <value type="string" value="onboard"/>
         <value type="string" value="liferea"/>
         <value type="string" value="blueman"/>
         <value type="string" value="octoxbps-notifier"/>
@@ -55,6 +63,17 @@
         <value type="string" value="ethernet network connection “wired connection 1” active"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="1"/>
+        <value type="string" value="Microsoft Teams - Preview1"/>
+        <value type="string" value="chrome_status_icon_1"/>
+        <value type="string" value="Otter"/>
+        <value type="string" value="Ripcord"/>
+        <value type="string" value="Slack1"/>
+        <value type="string" value="obs"/>
+        <value type="string" value="Mailspring1"/>
+        <value type="string" value="teams-for-linux1"/>
+        <value type="string" value="KeePassXC"/>
+        <value type="string" value="Syncthing Tray"/>
         <value type="string" value="octoxbps-notifier"/>
         <value type="string" value="flameshot"/>
         <value type="string" value="qBittorrent"/>
@@ -69,6 +88,9 @@
         <value type="string" value="remmina-icon"/>
         <value type="string" value="flameshot"/>
       </property>
+      <property name="single-row" type="bool" value="false"/>
+      <property name="hide-new-items" type="bool" value="false"/>
+      <property name="symbolic-icons" type="bool" value="false"/>
     </property>
     <property name="plugin-9" type="string" value="power-manager-plugin"/>
     <property name="plugin-11" type="string" value="separator">
@@ -85,12 +107,14 @@
     </property>
     <property name="plugin-7" type="string" value="xfce4-clipman-plugin"/>
     <property name="plugin-8" type="string" value="xkb">
-      <property name="display-type" type="uint" value="2"/>
+      <property name="display-type" type="uint" value="0"/>
       <property name="group-policy" type="uint" value="0"/>
+      <property name="display-scale" type="uint" value="90"/>
+      <property name="display-name" type="uint" value="0"/>
     </property>
     <property name="plugin-14" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="chromium.instance2405;chromium.instance2406;chromium.instance2539;chromium.instance2640;chromium.instance2912;chromium.instance3073;chromium.instance3082;chromium.instance5686;vlc"/>
+      <property name="mpris-players" type="string" value="brave.instance11171;brave.instance1134;brave.instance11467;brave.instance11698;brave.instance12834;brave.instance13925;brave.instance14104;brave.instance14274;brave.instance14275;brave.instance15376;brave.instance15998;brave.instance18617;brave.instance19310;brave.instance21398;brave.instance24825;brave.instance26680;brave.instance4375;brave.instance5859;brave.instance5982;brave.instance6031;brave.instance6504;brave.instance6526;brave.instance6721;brave.instance6722;brave.instance6750;brave.instance6863;brave.instance7000;brave.instance8269;brave.instance8457;brave.instance8478;brave.instance8496;brave.instance8739;brave.instance8839;brave.instance8916;brave.instance9137;chromium.instance11187;chromium.instance11756;chromium.instance12827;chromium.instance14357;chromium.instance18379;chromium.instance19109;chromium.instance22516;chromium.instance2405;chromium.instance2406;chromium.instance2539;chromium.instance25845;chromium.instance2640;chromium.instance26477;chromium.instance2912;chromium.instance3073;chromium.instance3082;chromium.instance30925;chromium.instance3707;chromium.instance3977;chromium.instance4144;chromium.instance4663;chromium.instance4733;chromium.instance4737;chromium.instance4773;chromium.instance4823;chromium.instance5097;chromium.instance5189;chromium.instance5200;chromium.instance5247;chromium.instance5686;chromium.instance5770;chromium.instance6315;chromium.instance6370;chromium.instance6756;chromium.instance7054;chromium.instance7124;chromium.instance7867;chromium.instance7972;vlc"/>
     </property>
     <property name="plugin-23" type="string" value="whiskermenu"/>
     <property name="clipman" type="empty">

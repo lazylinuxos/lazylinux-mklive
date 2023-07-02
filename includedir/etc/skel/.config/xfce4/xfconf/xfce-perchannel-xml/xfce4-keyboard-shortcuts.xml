@@ -66,7 +66,9 @@
       <property name="&lt;Shift&gt;&lt;Super&gt;e" type="string" value="ocr-en"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;h" type="string" value="ocr-hy"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;r" type="string" value="ocr-ru"/>
-      <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="/usr/bin/system-monitoring-center"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;m" type="string" value="/usr/bin/magnus"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;t" type="string" value="/usr/bin/cortile"/>
+      <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="xfce4-taskmanager"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
