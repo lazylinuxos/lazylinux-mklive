@@ -1,0 +1,11 @@
+#!/bin/bash
+
+clip_out=$(xclip -selection clipboard -out -t TARGETS | grep "plain\|image")
+
+case $clip_out in
+	*"image"* )
+		xclip -selection clipboard -target image/png -out > "$1/image_$(date +%s).png"
+		;;
+	* )
+		xclip -selection clipboard -target text/plain -out > "$1/text_$(date +%s).txt"
+esac

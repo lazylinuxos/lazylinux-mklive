@@ -1,2 +1,2 @@
 export USER="$(id -u -n)"
-./build-x86-images.sh -b "xfce" -r /hostdir/binpkgs -r /home/$USER/repos/lazy-repo -r /home/$USER/repos/lazy-repo-xdeb -r https://repo-default.voidlinux.org/current/nonfree 
+./build-x86-images.sh -b "xfce" -r /hostdir/binpkgs -r /home/nerdyslacker/repos/lazy-repo -r /home/nerdyslacker/repos/lazy-repo-xdeb -r https://repo-default.voidlinux.org/current/nonfree 

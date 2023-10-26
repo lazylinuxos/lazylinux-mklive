@@ -18,7 +18,14 @@
         <value type="int" value="10"/>
         <value type="int" value="3"/>
         <value type="int" value="5"/>
-        <value type="int" value="16"/>
+        <value type="int" value="17"/>
+        <value type="int" value="21"/>
+        <value type="int" value="19"/>
+        <value type="int" value="22"/>
+        <value type="int" value="2"/>
+        <value type="int" value="24"/>
+        <value type="int" value="18"/>
+        <value type="int" value="20"/>
         <value type="int" value="8"/>
         <value type="int" value="7"/>
         <value type="int" value="6"/>
@@ -47,6 +54,7 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="ethernet network connection “enp2s0” active"/>
         <value type="string" value="anydesk"/>
         <value type="string" value="hexchat"/>
         <value type="string" value="deadbeef"/>
@@ -63,6 +71,8 @@
         <value type="string" value="ethernet network connection “wired connection 1” active"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="redshift"/>
+        <value type="string" value="cortile"/>
         <value type="string" value="1"/>
         <value type="string" value="Microsoft Teams - Preview1"/>
         <value type="string" value="chrome_status_icon_1"/>
@@ -91,6 +101,8 @@
       <property name="single-row" type="bool" value="false"/>
       <property name="hide-new-items" type="bool" value="false"/>
       <property name="symbolic-icons" type="bool" value="false"/>
+      <property name="hidden-legacy-items" type="array">
+      </property>
     </property>
     <property name="plugin-9" type="string" value="power-manager-plugin"/>
     <property name="plugin-11" type="string" value="separator">
@@ -101,6 +113,7 @@
       <property name="digital-time-font" type="string" value="Sans 11"/>
       <property name="digital-date-format" type="string" value="%a, %d %b %Y"/>
       <property name="timezone" type="string" value="Asia/Yerevan"/>
+      <property name="digital-time-format" type="string" value="%T"/>
     </property>
     <property name="plugin-13" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
@@ -114,9 +127,52 @@
     </property>
     <property name="plugin-14" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
-      <property name="mpris-players" type="string" value="brave.instance11171;brave.instance1134;brave.instance11467;brave.instance11698;brave.instance12834;brave.instance13925;brave.instance14104;brave.instance14274;brave.instance14275;brave.instance15376;brave.instance15998;brave.instance18617;brave.instance19310;brave.instance21398;brave.instance24825;brave.instance26680;brave.instance4375;brave.instance5859;brave.instance5982;brave.instance6031;brave.instance6504;brave.instance6526;brave.instance6721;brave.instance6722;brave.instance6750;brave.instance6863;brave.instance7000;brave.instance8269;brave.instance8457;brave.instance8478;brave.instance8496;brave.instance8739;brave.instance8839;brave.instance8916;brave.instance9137;chromium.instance11187;chromium.instance11756;chromium.instance12827;chromium.instance14357;chromium.instance18379;chromium.instance19109;chromium.instance22516;chromium.instance2405;chromium.instance2406;chromium.instance2539;chromium.instance25845;chromium.instance2640;chromium.instance26477;chromium.instance2912;chromium.instance3073;chromium.instance3082;chromium.instance30925;chromium.instance3707;chromium.instance3977;chromium.instance4144;chromium.instance4663;chromium.instance4733;chromium.instance4737;chromium.instance4773;chromium.instance4823;chromium.instance5097;chromium.instance5189;chromium.instance5200;chromium.instance5247;chromium.instance5686;chromium.instance5770;chromium.instance6315;chromium.instance6370;chromium.instance6756;chromium.instance7054;chromium.instance7124;chromium.instance7867;chromium.instance7972;vlc"/>
+      <property name="mpris-players" type="string" value="brave.instance10442;brave.instance11171;brave.instance11281;brave.instance1134;brave.instance11467;brave.instance11698;brave.instance12520;brave.instance12834;brave.instance12849;brave.instance13925;brave.instance14104;brave.instance14274;brave.instance14275;brave.instance14970;brave.instance15025;brave.instance15038;brave.instance15376;brave.instance15998;brave.instance18617;brave.instance19310;brave.instance2090;brave.instance21398;brave.instance24158;brave.instance24825;brave.instance26680;brave.instance30207;brave.instance31912;brave.instance4375;brave.instance5001;brave.instance5270;brave.instance5859;brave.instance5982;brave.instance6031;brave.instance6504;brave.instance6526;brave.instance6721;brave.instance6722;brave.instance6750;brave.instance6764;brave.instance6863;brave.instance6902;brave.instance6925;brave.instance7000;brave.instance7017;brave.instance7103;brave.instance7151;brave.instance8126;brave.instance8269;brave.instance8457;brave.instance8478;brave.instance8496;brave.instance8639;brave.instance8695;brave.instance8739;brave.instance8839;brave.instance8916;brave.instance8959;brave.instance8966;brave.instance9011;brave.instance9137;brave.instance9347;chromium.instance11187;chromium.instance11756;chromium.instance12827;chromium.instance14357;chromium.instance18379;chromium.instance19109;chromium.instance22516;chromium.instance2405;chromium.instance2406;chromium.instance2539;chromium.instance25845;chromium.instance2640;chromium.instance26477;chromium.instance2912;chromium.instance3073;chromium.instance3082;chromium.instance30925;chromium.instance3707;chromium.instance3977;chromium.instance4144;chromium.instance4663;chromium.instance4733;chromium.instance4737;chromium.instance4773;chromium.instance4823;chromium.instance5097;chromium.instance5189;chromium.instance5200;chromium.instance5247;chromium.instance5686;chromium.instance5770;chromium.instance6315;chromium.instance6370;chromium.instance6756;chromium.instance7054;chromium.instance7124;chromium.instance7867;chromium.instance7972;vlc"/>
+      <property name="known-players" type="string" value="Brave;VLC media player"/>
     </property>
-    <property name="plugin-23" type="string" value="whiskermenu"/>
+    <property name="plugin-23" type="string" value="whiskermenu">
+      <property name="button-title" type="string" value=" LazyLinux "/>
+      <property name="button-icon" type="string" value="/usr/share/pixmaps/LazyLinux_logo.png"/>
+      <property name="show-button-title" type="bool" value="true"/>
+      <property name="hover-switch-category" type="bool" value="true"/>
+      <property name="category-show-name" type="bool" value="false"/>
+      <property name="favorites-in-recent" type="bool" value="true"/>
+      <property name="position-search-alternate" type="bool" value="false"/>
+      <property name="position-categories-alternate" type="bool" value="false"/>
+      <property name="position-categories-horizontal" type="bool" value="true"/>
+      <property name="menu-width" type="int" value="505"/>
+      <property name="menu-height" type="int" value="573"/>
+      <property name="command-switchuser" type="string" value="dm-tool switch-to-greeter"/>
+      <property name="show-command-restart" type="bool" value="true"/>
+      <property name="show-command-shutdown" type="bool" value="true"/>
+      <property name="favorites" type="array">
+        <value type="string" value="xfce4-file-manager.desktop"/>
+        <value type="string" value="io.github.cboxdoerfer.FSearch.desktop"/>
+        <value type="string" value="xfce4-terminal-emulator.desktop"/>
+        <value type="string" value="firefox.desktop"/>
+        <value type="string" value="thunderbird.desktop"/>
+        <value type="string" value="octoxbps.desktop"/>
+        <value type="string" value="code-oss.desktop"/>
+        <value type="string" value="org.remmina.Remmina.desktop"/>
+        <value type="string" value="org.telegram.desktop.desktop"/>
+        <value type="string" value="org.bleachbit.BleachBit.desktop"/>
+        <value type="string" value="qdirstat.desktop"/>
+        <value type="string" value="jetbrains-rider.desktop"/>
+      </property>
+      <property name="recent" type="array">
+        <value type="string" value="org.telegram.desktop.desktop"/>
+        <value type="string" value="btop.desktop"/>
+        <value type="string" value="org.gnome.DiskUtility.desktop"/>
+        <value type="string" value="qdirstat.desktop"/>
+        <value type="string" value="xfce-keyboard-settings.desktop"/>
+        <value type="string" value="xfce-wm-settings.desktop"/>
+        <value type="string" value="xfce-ui-settings.desktop"/>
+        <value type="string" value="org.remmina.Remmina.desktop"/>
+        <value type="string" value="slack.desktop"/>
+        <value type="string" value="xfce-mouse-settings.desktop"/>
+      </property>
+      <property name="position-profile-alternate" type="bool" value="true"/>
+    </property>
     <property name="clipman" type="empty">
       <property name="tweaks" type="empty">
         <property name="paste-on-activate" type="uint" value="2"/>
@@ -159,43 +215,26 @@
         <property name="use-color" type="bool" value="false"/>
       </property>
     </property>
-    <property name="plugin-16" type="string" value="systemload">
-      <property name="swap" type="empty">
-        <property name="enabled" type="bool" value="false"/>
-      </property>
-      <property name="uptime" type="empty">
-        <property name="enabled" type="bool" value="false"/>
-      </property>
-      <property name="cpu" type="empty">
-        <property name="color" type="array">
-          <value type="double" value="0.8784313725490196"/>
-          <value type="double" value="0.10588235294117647"/>
-          <value type="double" value="0.14117647058823529"/>
-          <value type="double" value="1"/>
-        </property>
-      </property>
-      <property name="memory" type="empty">
-        <property name="color" type="array">
-          <value type="double" value="0.10980392156862745"/>
-          <value type="double" value="0.44313725490196076"/>
-          <value type="double" value="0.84705882352941175"/>
-          <value type="double" value="1"/>
-        </property>
-      </property>
-      <property name="network" type="empty">
-        <property name="color" type="array">
-          <value type="double" value="1"/>
-          <value type="double" value="0.47058823529411764"/>
-          <value type="double" value="0"/>
-          <value type="double" value="1"/>
-        </property>
-      </property>
-      <property name="system-monitor-command" type="string" value="xfce4-taskmanager"/>
-    </property>
     <property name="plugin-1" type="string" value="showdesktop"/>
     <property name="plugin-10" type="string" value="docklike"/>
     <property name="plugin-15" type="string" value="separator">
       <property name="style" type="uint" value="2"/>
+    </property>
+    <property name="plugin-2" type="string" value="genmon"/>
+    <property name="plugin-17" type="string" value="genmon"/>
+    <property name="plugin-18" type="string" value="genmon"/>
+    <property name="plugin-19" type="string" value="genmon"/>
+    <property name="plugin-20" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-21" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-22" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-24" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
     </property>
   </property>
 </channel>
