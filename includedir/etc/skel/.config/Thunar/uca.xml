@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
+	<icon>accessories-thesaurus</icon>
+	<name>Paste as file</name>
+	<submenu></submenu>
+	<unique-id>1698334942181508-1</unique-id>
+	<command>paste_as_file %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
 	<icon>utilities-terminal</icon>
 	<name>Open Terminal Here</name>
 	<submenu></submenu>
