@@ -34,7 +34,7 @@ build_variant() {
     GUI_PKGS="barrier barrier-gui redshift-gtk wireshark imhex virt-manager qemu libvirt bridge-utils onboard gufw mugshot octoxbps hardinfo ghostwriter gparted obs keepassxc filezilla syncthing syncthingtray deadbeef gpodder liferea cherrytree plymouth thunderbird simple-scan bleachbit dbeaver fsearch qdirstat imagewriter qbittorrent handbrake inkscape flameshot telegram-desktop remmina gimp vlc timeshift vscode hexchat dino dconf-editor libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-draw libreoffice-math libreoffice-base libreoffice-gnome"
     TUI_PKGS="hddtemp lm_sensors zellij xmirror nano vim btop vsv topgrade nnn hblock fish-shell neofetch fzf zoxide bat ripgrep exa dust Clipboard lazygit lazydocker helix rofi openfortivpn zbar tesseract-ocr tesseract-ocr-eng tesseract-ocr-hye tesseract-ocr-rus tesseract-ocr-script-Armenian"
     LANG_PKGS="libreoffice-i18n-en-US libreoffice-i18n-ru firefox-i18n-en-US firefox-i18n-hy-AM firefox-i18n-ru thunderbird-i18n-en-US thunderbird-i18n-hy-AM thunderbird-i18n-ru"
-    CUSTOM_PKGS="brave-browser linux-wifi-hotspot cortile"
+    CUSTOM_PKGS="brave-browser linux-wifi-hotspot cortile neohtop"
     PKGS_TO_REMOVE="parole"
     SERVICES="sshd chronyd libvirtd virtlockd virtlogd"
 
