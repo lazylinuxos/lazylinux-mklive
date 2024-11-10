@@ -16,3 +16,4 @@ release/
 packer/cloud-*/
 packer/vagrant-*/
 mklive-build*/
+!includedir/usr/local/share/.genmon-plugin/*.sh
