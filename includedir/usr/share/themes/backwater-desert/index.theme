@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Backwater-Desert
+Comment=Simple theme with dull borders
+Version=v0.4
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Backwater-Desert

@@ -55,11 +55,9 @@
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
         <value type="string" value="ethernet network connection “enp2s0” active"/>
-        <value type="string" value="anydesk"/>
         <value type="string" value="hexchat"/>
         <value type="string" value="deadbeef"/>
         <value type="string" value="teams"/>
-        <value type="string" value="mailspring"/>
         <value type="string" value="slack"/>
         <value type="string" value="podman-desktop"/>
         <value type="string" value="onboard"/>
@@ -74,13 +72,10 @@
         <value type="string" value="redshift"/>
         <value type="string" value="cortile"/>
         <value type="string" value="1"/>
-        <value type="string" value="Microsoft Teams - Preview1"/>
         <value type="string" value="chrome_status_icon_1"/>
-        <value type="string" value="Otter"/>
         <value type="string" value="Ripcord"/>
         <value type="string" value="Slack1"/>
         <value type="string" value="obs"/>
-        <value type="string" value="Mailspring1"/>
         <value type="string" value="teams-for-linux1"/>
         <value type="string" value="KeePassXC"/>
         <value type="string" value="Syncthing Tray"/>
@@ -149,7 +144,7 @@
         <value type="string" value="xfce4-file-manager.desktop"/>
         <value type="string" value="io.github.cboxdoerfer.FSearch.desktop"/>
         <value type="string" value="xfce4-terminal-emulator.desktop"/>
-        <value type="string" value="firefox.desktop"/>
+        <value type="string" value="brave-browser.desktop"/>
         <value type="string" value="thunderbird.desktop"/>
         <value type="string" value="octoxbps.desktop"/>
         <value type="string" value="code-oss.desktop"/>
@@ -157,7 +152,6 @@
         <value type="string" value="org.telegram.desktop.desktop"/>
         <value type="string" value="org.bleachbit.BleachBit.desktop"/>
         <value type="string" value="qdirstat.desktop"/>
-        <value type="string" value="jetbrains-rider.desktop"/>
       </property>
       <property name="recent" type="array">
         <value type="string" value="org.telegram.desktop.desktop"/>
@@ -168,7 +162,6 @@
         <value type="string" value="xfce-wm-settings.desktop"/>
         <value type="string" value="xfce-ui-settings.desktop"/>
         <value type="string" value="org.remmina.Remmina.desktop"/>
-        <value type="string" value="slack.desktop"/>
         <value type="string" value="xfce-mouse-settings.desktop"/>
       </property>
       <property name="position-profile-alternate" type="bool" value="true"/>

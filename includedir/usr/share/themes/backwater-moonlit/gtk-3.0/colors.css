@@ -1,0 +1,17 @@
+@define-color bg_normal #555;
+
+@define-color text_normal #ccc;
+
+@define-color selected_bg #567;
+@define-color firefox_selected #567;
+@define-color firefox_selected_text #ccc;
+
+@define-color scroll_bg @selected_bg;
+@define-color scroll_trough #495765;
+@define-color trough_bg @scroll_trough;
+
+@define-color wbg_normal #222;
+
+@define-color tooltip_color #664;
+
+@define-color link_color #589;
