@@ -1,0 +1,904 @@
+* {
+  -gtk-icon-style: regular; /* disable symbolic icons */
+  outline-color: currentColor;
+  outline-style: dashed;
+  outline-offset: -3px;
+  outline-width: 1px;
+  -gtk-outline-radius: 2px;
+}
+
+/* window background */
+/* ================= */
+dialog, window, .background {
+    color:@text_normal;
+    background:@bg_normal;
+}
+*:disabled {
+    color: shade(@bg_normal,0.4);
+    /*text-shadow: 1px 1px @bg_normal;*/
+    -gtk-icon-effect: dim;
+}
+
+/* normal text color for labels */
+/*label {
+    color:@text_normal;
+}*/
+
+/* menus & menuitems */
+/* ================= */
+menuitem {
+    padding:1px 6px 1px 6px;
+
+    color:@text_normal;
+    background:@bg_normal;
+    border:1px solid @bg_normal;
+}
+
+menuitem:hover {
+    color:@text_normal;
+    background:@selected_bg;
+    border:1.4px groove shade(@selected_bg,0.62);
+}
+
+menu, .menu {
+    padding:1px;
+    border:1.4px outset shade(@bg_normal,0.62);
+}
+
+/* toolbars, menubars, statusbars */
+/* ============================== */
+toolbar, menubar {
+    padding:2px;
+    border:1.4px outset shade(@bg_normal,0.62);
+    background: @bg_normal;
+}
+statusbar {
+    color: @text_normal;
+    border:1.4px inset shade(@bg_normal,0.62);
+}
+
+/* buttons */
+/* ======= */
+buttonbox.horizontal button {
+	margin: .2em .4em;
+}
+buttonbox.horizontal button:first-child {
+	margin-left: 0;
+}
+buttonbox.horizontal button:last-child {
+	margin-right: 0;
+}
+button, .button {
+    background: @bg_normal;
+    border: 1.4px outset shade(@bg_normal,0.62);
+    padding: 0.38em;
+}
+button:hover, .button:hover {
+    background:shade(@bg_normal,1.05);
+    border-color:shade(@bg_normal,0.62);
+}
+button:active, .button:active,
+button:active:hover, .button:active:hover,
+stackswitcher button:checked {
+    background-color:shade(@bg_normal,0.9);
+    border: 1.4px inset shade(@bg_normal,0.62);
+}
+button.toggle{
+    background-color:@bg_normal;
+    border: 1.4px outset shade(@bg_normal,0.62);
+}
+button.toggle:hover{
+    background-color:shade(@bg_normal,1.1);
+}
+button.toggle:checked{
+    background-color:shade(@bg_normal,0.9);
+    border: 1.4px inset shade(@bg_normal,0.5);
+}
+button:focus, .button:focus {
+    /*outline:1px dashed shade(@bg_normal,0.2);*/
+    outline:1px dashed currentColor;
+}
+button:disabled, .button:disabled {
+    background: shade(@bg_normal,0.9);
+    border-color: shade(@bg_normal,0.55);
+}
+button.link {
+    color: @link_color;
+    font-weight: bold;
+    border: none;
+}
+button.link > label {
+    text-decoration-line: underline;
+}
+
+/* toolbar button */
+toolbar button {
+    padding:0px;
+    border:none;
+}
+toolbar button.toggle{
+    background: @bg_normal;
+    border:1.4px outset shade(@bg_normal,0.62);
+}
+toolbar button:disabled {
+    background: shade(@bg_normal,0.9);
+    border:1px solid @bg_normal;
+}
+toolbar button:hover {
+    background:shade(@bg_normal,1.2);
+}
+toolbar button:active, toolbar button:checked {
+    background:@selected_bg;
+    border:1.4px inset shade(@selected_bg,0.62);
+}
+/* toolbar button end */
+stack button {
+    padding:2px;
+}
+button:checked {
+    font-weight:bold;
+}
+
+/* check & radio stuff */
+/* ==================  */
+/* = checks and radios inside dialogs = */
+radio, check {
+    min-width:12px;
+    min-height:12px;
+    margin:4px;
+
+    color: @text_normal;
+    background:@wbg_normal;
+    border:1.4px inset shade(@bg_normal,0.62);
+}
+radio{
+    border-radius:12px;
+}
+check:checked, radio:checked{
+    background:@selected_bg;
+    border-color:shade(@selected_bg,0.62);
+}
+*:disabled check, *:disabled radio{
+    background:shade(@bg_normal,0.9);
+    border-color:shade(@bg_normal,0.5);
+}
+*:disabled check:checked, *:disabled radio:checked{
+    background:shade(@bg_normal,0.62);
+    border-color shade(@bg_normal,0.5);
+}
+menuitem radio, menuitem check {
+    min-width:10px;
+    min-height:10px;
+    color:@text_normal;
+    background: @wbg_normal;
+    border:2px groove shade(@bg_normal,0.62);
+}
+menuitem radio{
+    border-radius:10px;
+}
+menuitem check:checked, menuitem radio:checked {
+    background:@selected_bg;
+    border-color:shade(@selected_bg,0.62);
+}
+menuitem:disabled check, menuitem:disabled radio {
+    border-color: shade(@bg_normal,0.62);
+}
+menuitem:disabled check:checked, menuitem:disabled radio:checked {
+    background:shade(@bg_normal,0.5);
+}
+check:indeterminated {
+    background:@wbg_normal;
+    border-color:shade(@bg_normal,0.7);
+}
+check:indeterminated:disabled {
+    background:shade(@bg_normal,0.62);
+}
+
+
+/* tab stuff */
+/* ========  */
+stack {
+    color:@text_normal;
+    background:@bg_normal;
+    border:1.4px outset shade(@bg_normal,0.62);
+}
+tab {
+    color:@text_normal;
+    /*background:shade(@selected_bg,0.85);*/
+    background: shade(@bg_normal,0.9);
+    padding:2px 4px 2px 4px;
+    border:1.4px outset shade(@bg_normal,0.5);
+}
+tab:checked {
+    color:@text_normal;
+    background: @bg_normal;
+    border:1.4px outset shade(@bg_normal,0.62);
+}
+
+header.top tab{
+    margin-top: 0.38em;
+    border-bottom:none;
+}
+header.bottom tab{
+    margin-bottom: 0.38em;
+    border-top:none;
+}
+header.left tab{
+    margin-left: 0.38em;
+    border-right:none;
+}
+header.right tab{
+    margin-right: 0.38em;
+    border-left:none;
+}
+
+header.top tab:checked {
+    border-bottom:none;
+    border-top-right-radius:5px;
+    border-top-left-radius:5px;
+    margin-bottom:-2px;
+    margin-top:0px;
+}
+header.bottom tab:checked {
+    border-top:none;
+    border-bottom-left-radius:5px;
+    border-bottom-right-radius:5px;
+    margin-top:-2px;
+    margin-bottom:0px;
+}
+header.left tab:checked {
+    border-right:none;
+    border-top-left-radius:5px;
+    border-bottom-left-radius:5px;
+    margin-right:-2px;
+    margin-left:0px;
+}
+header.right tab:checked {
+    border-left:none;
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;
+    margin-left:-2px;
+    margin-right:0px;
+}
+tab button {
+    background: shade(@bg_normal,0.9);
+    border:none;
+    border-left:1.4px groove shade(@bg_normal,0.62);
+}
+tab:checked button {
+    background: @bg_normal;
+    border:none;
+    border-left:1.4px groove shade(@bg_normal,0.7);
+}
+/* end of tab stuff */
+
+
+
+/* view, entry, sidebar stuff */
+/* ========================== */
+.view, .sidebar {
+    color:@text_normal;
+    background:@wbg_normal;
+}
+.view:selected, .sidebar:selected {
+    color: @text_normal;
+    background: @selected_bg;
+    border: 1.4px groove shade(@selected_bg,0.62);
+}
+.view text {
+    color: @text_normal;
+    background: @wbg_normal;
+}
+.view text:selection {
+    color: @text_normal;
+    background: @selected_bg;
+}
+.view text:selected  { /* Firefox text highlight color + active tab top-border */
+    background: @firefox_selected;
+    color: @firefox_selected_text;
+}
+
+entry {
+ color: @text_normal;
+ background: @wbg_normal;
+ border: 2px groove shade(@bg_normal,0.62);
+ padding: 1px 1px 1px 1px;
+}
+entry selection {
+ color: @text_normal;
+ background: @selected_bg;
+}
+entry:disabled{
+    background:shade(@bg_normal,1.1);
+}
+.entry:selected,
+.entry:selected:focused {
+    background: @selected_bg;
+    color: @text_normal;
+}
+.entry:disabled{
+    background:shade(@bg_normal,1.1);
+}
+textview selection {
+    background: @selected_bg;
+    color: @text_normal;
+}
+
+textview {
+    background: @wbg_normal;
+    color: @text_normal;
+}
+
+selection {
+    background: @selected_bg;
+    color: @text_normal;
+}
+/* sidebar stuff */
+   .sidebar label {
+    margin: 2px 2px 2px 2px;
+}
+.sidebar image {
+    margin: 3px 3px 3px 3px;
+}
+.sidebar separator {
+    background: shade(@bg_normal,0.62);
+    min-width:1px;
+    min-height:1px;
+}
+.sidebar row:selected, .sidebar row:selected label {
+    color:@text_normal;
+    background:@selected_bg;
+}
+
+/* end of view, entry, sidebar stuff */
+
+
+
+/* separator stuff */
+/* =============== */
+separator {
+    margin: 1px 1px 1px 1px;
+    background: @bg_normal;
+}
+menu separator {
+    color: shade(@bg_normal,0.62);
+    /*border-color: shade(@bg_normal,0.7);
+    border-width: 1px 1px 0px 0px;
+    border-style: solid;*/
+    border: 1px outset shade(@bg_normal,0.7);
+}
+toolbar separator {
+    margin: 4px 4px 4px 4px;
+    min-width: 1px;
+    /*min-height: 1px;*/
+    background: shade(@bg_normal,0.62);
+}
+/* end of separator stuff */
+
+
+
+/* scrollbar stuff */
+/* =============== */
+scrollbar {
+    -GtkScrollbar-has-backward-stepper: true;
+    -GtkScrollbar-has-forward-stepper: true;
+    /*-GtkRange-slider-width: 20;
+    -GtkRange-slider-height: 20;
+    -GtkRange-stepper-size: 20;*/
+}
+/*scrollbar button:active:hover,*/
+scrollbar button,
+scrollbar .button{
+	background: @scroll_bg;
+    border:1.4px outset shade(@scroll_bg,0.62);
+	color: @text_normal;
+    /* ============================================================= */
+    /* Firefox obeys these dimensions but other GTK applications do not
+     * Solution: Set widthxheight here for Firefox and set padding:2px
+     *           for each scrollbar.* button.* below.*/
+    /* */ min-height: 12px;
+    /* */ min-width: 12px;
+    /* */ max-height:12px;
+    /* */ max-width:12px;
+    /* */ height:12px;
+    /* */ width:12px;
+    /* ============================================================= */
+    padding:0px; /* Required padding:0px for Firefox */
+}
+scrollbar button:hover,
+scrollbar .button:hover{
+    background: shade(@scroll_bg,1.1);
+    border-color: shade(@scroll_bg,0.62);
+}
+scrollbar button:active,
+scrollbar button:active:hover,
+scrollbar .button:active,
+scrollbar .button:active:hover{
+    background: shade(@scroll_bg,0.8);
+    border-color: shade(@scroll_bg,0.62);
+}
+scrollbar button:disabled,
+scrollbar .button:disabled{
+    background: shade(@scroll_bg,0.9);
+    border-color: shade(@scroll_bg,0.5);
+}
+scrollbar slider {
+    background: @scroll_bg;
+    /* Setting the border here to 1.4px makes the scrollbar appear too wide in Firefox for some reason
+       Also GTK3 does not seem to support outlines (or at least testing it here yeilded no resulsts)
+       Therefore the only option left is to use a box-shadow with 1px border as a temporary workaround */
+    border:1.4px outset shade(@scroll_bg,0.62);
+    /*box-shadow: inset 1px 1px 0px 0px shade(@scroll_bg,1.1), inset -1px -1px 0px 0px shade(@scroll_bg,0.8);*/
+    min-width:11px;
+    min-height:11px;
+    margin:0px;
+}
+scrollbar slider:hover {
+    /*background: @scroll_bg_light;*/
+    background: shade(@scroll_bg,1.1);
+    /*border-color: @scroll_bg_darker;*/
+    border-color: shade(@scroll_bg,0.62);
+}
+scrollbar.vertical slider {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url("../img/scrollbar_thumb.png");
+    min-height: 0.5rem;
+    min-width: 0.75rem;
+    padding: 2px;
+}
+scrollbar.horizontal slider{
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url("../img/scrollbar_thumb.png");
+    min-height: 0.75rem;
+    min-width: 0.5rem;
+    padding: 2px;
+}
+scrollbar.vertical button.up {
+    /*-gtk-icon-source: url("../img/arrow-up.png");*/
+    -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
+    min-width: 0.75rem;
+    min-height:0.75rem;
+    padding: 2px;
+}
+scrollbar.vertical button.down {
+    /*-gtk-icon-source: url("../img/arrow-down.png");*/
+    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+    min-width: 0.75rem;
+    min-height:0.75rem;
+    padding: 2px;
+}
+scrollbar.horizontal button.up {
+    /*-gtk-icon-source: url("../img/arrow-left.png");*/
+    -gtk-icon-source: -gtk-icontheme("pan-start-symbolic");
+    min-width: 0.75rem;
+    min-height:0.75rem;
+    padding: 2px;
+}
+scrollbar.horizontal button.down {
+    /*-gtk-icon-source: url("../img/arrow-right.png");*/
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+    min-width: 0.75rem;
+    min-height:0.75rem;
+    padding: 2px;
+}
+
+scrollbar trough {
+    background: @scroll_trough;
+    /*border:1.4px inset shade(@scroll_trough,0.8);
+    border-right:none;
+    border-bottom:none;*/
+    border:none;
+}
+/* end of scrollbar stuff */
+
+
+/* scale stuff */
+/* =========== */
+scale.vertical trough {
+    background: shade(@bg_normal,1.1);
+    border:1.4px inset shade(@trough_bg,0.8);
+    padding:10px 0px 10px 0px;
+}
+scale.horizontal trough {
+    background: shade(@bg_normal,1.1);
+    border:1.4px inset shade(@trough_bg,0.8);
+    padding:0px 10px 0px 10px;
+}
+scale.vertical slider {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url("../img/scrollbar_thumb.png");
+    background: @selected_bg;
+    border:2px ridge shade(@bg_normal,0.62);
+    padding:8px 4px 8px 4px;
+}
+scale.horizontal slider {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url("../img/scrollbar_thumb.png");
+    background: @selected_bg;
+    border:2px ridge shade(@bg_normal,0.62);
+    padding:4px 8px 4px 8px;
+}
+scale slider:hover {
+    background: shade(@selected_bg,1.1);
+    border-color: shade(@bg_normal,0.7);
+}
+/* for scales with marks */
+scale.horizontal mark {
+    background: shade(@bg_normal,0.62);
+    min-height:4px;
+    min-width:1px;
+}
+scale.vertical mark {
+    background: shade(@bg_normal,0.62);
+    min-height:1px;
+    min-width:4px;
+}
+/* end of scale stuff */
+
+
+/* client side decorations */
+/* ======================= */
+headerbar {
+    color:@text_normal;
+    background:@bg_normal;
+}
+headerbar:backdrop {
+    color:@text_normal;
+    background:@bg_light;
+}
+/* end of client side decorations */
+
+
+/* arrows */
+/* ====== */
+/* (the little arrows that you see on menu items that have sub menus.) */
+/* set the minimum height and width values for the arrows */
+menu menuitem arrow,
+.menu menuitem arrow,
+.context-menu menuitem arrow {
+    min-height: 16px;
+    min-width: 16px;
+}
+/* now set the appropriate icons */
+menu menuitem arrow:dir(ltr),
+.menu menuitem arrow:dir(ltr),
+.context-menu menuitem arrow:dir(ltr) {
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+    margin-left: 10px;
+}
+menu menuitem arrow:dir(rtl),
+.menu menuitem arrow:dir(rtl),
+.context-menu menuitem arrow:dir(rtl) {
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
+    margin-left: 10px;
+}
+/* end of arrows */
+
+
+/* progressbar */
+/* =========== */
+progressbar.vertical trough {
+    background:@trough_bg;
+    border:1.4px inset shade(@trough_bg,0.62);
+    min-width:12px;
+}
+progressbar.horizontal trough {
+    background:@trough_bg;
+    border:1.4px inset shade(@trough_bg,0.62);
+    min-height:12px;
+}
+progressbar.vertical progress{
+    background: shade(@selected_bg,1.0);
+    border:1.4px outset shade(@selected_bg,0.62);
+    min-width:10px;
+}
+progressbar.horizontal progress{
+    background: shade(@selected_bg,1.0);
+    border:1.4px outset shade(@selected_bg,0.62);
+    min-height:10px;
+}
+treeview.view.progressbar {
+    background: shade(@selected_bg,1.0);
+    min-height: 14px;
+    border:1.4px outset shade(@selected_bg,0.5);
+
+
+    /*border-left: 1px solid shade(@bg_dark,1.4);
+    border-top: 1px solid shade(@bg_dark,1.4);
+    border-right: 1.4px solid @text_normal;
+    border-bottom: 1.4px solid @text_normal;*/
+}
+
+/* switch */
+/* ****** */
+switch {
+    background:@bg_normal;
+    border:1.4px inset shade(@bg_normal,0.62);
+}
+switch slider {
+    background:@bg_normal;
+    border:1.4px outset shade(@bg_normal,0.62);
+    margin:2px;
+}
+switch:checked {
+    background:@selected_bg;
+}
+
+treeview.view.trough,
+treeview.view.trough:selected {
+    color: @text_normal;
+    min-height: 18px;
+
+    background: shade(@scroll_bg,0.8);
+    border:1px inset shade(@scroll_bg,0.5);
+    /*border-right:none;
+    border-bottom:none;*/
+
+    /*background: @bg_dark;
+    border-left: 1px solid @bg_dark;
+    border-top: 1px solid  @bg_dark;
+    border-right: 1px solid @bg_normal;
+    border-bottom: 1px solid @bg_normal;*/
+}
+/* end of progressbar*/
+
+/* Mouse click and drag selection rectangle */
+/* which took me over an hour to find because it has a fucking stupid name like 'rubberband' or something */
+/* special thanks to the gnome project for wasting my time and fucking everything up for the past 9 years. */
+/* assholes*/
+.rubberband, rubberband, flowbox rubberband, treeview.view rubberband, .content-view rubberband, .content-view .rubberband, .view .rubberband {
+  border: 1px solid @selected_bg;
+  background-color: alpha(@selected_bg, 0.25);
+}
+
+/**********************************************/
+/* XFCE tweaks */
+/**********************************************/
+
+XfdesktopIconView.view {
+  color: alpha(@selected_bg, 0.25);
+  background-color: transparent;
+}
+
+XfdesktopIconView.label {
+  color: @text_color;
+}
+
+XfdesktopIconView.view:active {
+  border: 1px solid @selected_bg;
+  background-color: alpha(@selected_bg, 0.25);
+}
+
+/* tooltips */
+/* ======== */
+tooltip,
+tooltip.background  {
+	background-color:@tooltip_color;
+	border:1px solid shade(@bg_normal,0.7);
+	color:@text_normal;
+}
+tooltip *, .tooltip * {
+	background-color: transparent;
+}
+
+/* calendar */
+/* ======== */
+calendar {
+    background: @wbg_normal;
+    border: 1px inset shade(@bg_normal,0.62);
+}
+calendar .button,
+calendar .header {
+    color: @text_normal;
+    background: shade(@bg_normal,1.2);
+}
+calendar .button:disabled {
+    color: shade(@bg_normal,0.5);
+}
+calendar .highlight {
+    color: @text_normal;
+    background: shade(@bg_normal,1.2);
+}
+calendar:selected {
+    color: @text_normal;
+    background: @selected_bg;
+}
+/* end of calendar */
+
+
+/* window borders for csd windows */
+/* ============================== */
+decoration {
+    background: @bg_normal;
+    border-color: shade(@bg_normal,0.62);
+    border-style: outset;
+    border-width: 1px;
+     /* this is used for the resize cursor area */
+    margin: 4px;
+}
+decoration:backdrop {
+    background: shade(@bg_normal,1.1);
+    border-color: shade(@bg_normal,0.5);
+}
+/* end of window borders for csd windows */
+
+
+/* frames */
+/* ====== */
+frame {
+    border: 2.4px groove shade(@bg_normal,0.62);
+    padding: 5px;
+    margin-top: 0.5em;
+}
+frame > label {
+    background-color: @bg_normal;
+    margin-top: -1em;
+}
+statusbar frame {
+    border-width: 0px;
+    padding: 0px;
+}
+viewport {
+    border:1px solid shade(@bg_normal,0.62);
+}
+/* end of frames */
+
+
+/* popover */
+popover {
+    border-color: shade(@bg_normal,0.62);
+    border-style:solid;
+    border-width:1px;
+}
+popover separator {
+    margin: 4px;
+    min-width:1px;
+    min-height:1px;
+    background: shade(@bg_normal,0.62);
+}
+/* end of popover */
+
+
+/* infobars */
+infobar {
+    border-width:1px;
+    border-style:outset;
+    border-color: shade(@bg_normal,0.62);
+}
+infobar.error {
+    color:black;
+    background: #ff7777;
+    border-color:shade(#ff7777,0.62);
+}
+/* end of infobars*/
+
+
+/* stack sidebars */
+stacksidebar viewport {
+    border-width:1px;
+    border-style:solid;
+    border-color: shade(@bg_normal,0.62);
+    background:@wbg_normal;
+}
+stacksidebar row {
+    padding: 3px;
+    background: @wbg_normal;
+}
+stacksidebar row:selected {
+    color: @text_normal;
+    background: @selected_bg;
+}
+stacksidebar row:selected label {
+    color: @text_normal;
+}
+/* end of stack sidebars */
+
+
+/* 'assistant' sidebar */
+/* this is something that visually looks the same as the 'stack sidebar' but for some reason it has to be treated completely differently. */
+assistant .sidebar label {
+    padding: 4px 2px 4px 2px;
+}
+assistant .sidebar label.highlight {
+    background: @selected_bg;
+    color:@text_normal;
+}
+assistant .sidebar {
+    border-width:1px;
+    border-style:solid;
+    border-color: shade(@bg_normal,0.62);
+}
+/* end of 'assistant' sidebar */
+
+
+/* expander */
+expander arrow {
+    color:@text_normal;
+    min-width:16px;
+    min-height:16px;
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic");
+} expander arrow:dir(rtl) {
+    -gtk-icon-source: -gtk-icontheme("pan-end-symbolic-rtl");
+}
+expander arrow:checked {
+    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+}
+expander .frame {
+    border-width: 1px;
+    border-color: shade(@bg_normal,0.62);
+    border-style: solid;
+}
+/* expander */
+
+
+/* combobox arrow */
+/* maybe later replace this with a block that works with all arrows everywhere */
+combobox arrow {
+    min-width:16px;
+    min-height:16px;
+    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
+}
+combobox button:first-child arrow {
+    border-left: 2px groove shade(@bg_normal,0.5);
+    padding-left: 3px;
+}
+/* end combobox arrow */
+
+
+/* modelbutton stuff */
+modelbutton {
+    padding: 2px;
+}
+modelbutton:hover {
+    background: shade(@bg_normal,1.2);
+}
+modelbutton:active {
+    background: shade(@bg_normal,1.1);
+}
+/* end modelbutton stuff */
+
+
+
+/* levelbar */
+/* ======== */
+levelbar trough {
+    background: shade(@bg_normal,1.1);
+    border-color: shade(@bg_normal,0.5);
+    border-width: 1px;
+    border-style: inset;
+    padding: 2px;
+}
+levelbar .filled {
+    background: @selected_bg;
+    border-color: share(@selected_bg,0.62);
+    border-style: solid;
+    border-width: 1px;
+    padding: 2px;
+}
+/* end of levelbar */
+
+
+/*********************
+ * Spinner Animation *
+ *********************/
+@keyframes spin {
+	to { -gtk-icon-transform: rotate(1turn); }
+}
+spinner {
+    color: @bg_normal;
+	background-color: transparent;
+	opacity: 0;
+}
+spinner:checked {
+    color: @text_normal;
+	opacity: 1;
+	animation: spin 1s linear infinite;
+}
+
+/*stack:first-child{
+    background: @wbg_normal;
+}*/

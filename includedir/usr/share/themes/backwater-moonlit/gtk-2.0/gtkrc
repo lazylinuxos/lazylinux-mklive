@@ -1,0 +1,150 @@
+###############################################
+# Backwater Gtk2 theme (Based on OneStepBack) #
+# ison: July-2018                             #
+###############################################
+
+########################################
+# Color definitions
+########################################
+
+gtk-color-scheme = "white_color:#222
+prelight_color:#777
+lighter_color:#666
+base_color:#555
+dark_color:#333
+black_color:#ccc
+darker_color:#222
+evendarker_color:#000
+highlight_color:#456
+selected_color:#384654
+tooltip_bg_color:#664
+"
+
+########################################
+# Styles
+########################################
+
+style "default" {
+
+    base[NORMAL]        = @white_color
+    text[NORMAL]        = @black_color
+    bg[NORMAL]          = @base_color
+    fg[NORMAL]          = @black_color
+
+    base[PRELIGHT]      = @white_color
+    text[PRELIGHT]      = @black_color
+    bg[PRELIGHT]        = @lighter_color
+    fg[PRELIGHT]        = @black_color
+
+    base[SELECTED]      = @highlight_color
+    text[SELECTED]      = @black_color
+    bg[SELECTED]        = @highlight_color
+    fg[SELECTED]        = @black_color
+
+    base[ACTIVE]        = @highlight_color
+    text[ACTIVE]        = @black_color
+    bg[ACTIVE]          = @highlight_color
+    fg[ACTIVE]          = @darker_color
+
+    base[INSENSITIVE]   = @dark_color
+    text[INSENSITIVE]   = @darker_color
+    bg[INSENSITIVE]     = @base_color
+    fg[INSENSITIVE]     = @evendarker_color
+
+    GtkWidget::focus-line-width = 0
+    GtkScrollbar::min-slider-length = 30
+
+    GtkScrollbar::has_backward_stepper = 1
+    GtkScrollbar::has_forward_stepper = 1
+    GtkScrollbar::has_secondary_forward_stepper = 0
+    GtkScrollbar::has_secondary_backward_stepper = 0
+
+}
+
+style "scalebar-scrollbar" {
+
+    bg[NORMAL]          = @highlight_color
+    fg[NORMAL]          = @black_color
+
+    bg[PRELIGHT]        = @selected_color
+
+    bg[ACTIVE]          = @dark_color
+
+    bg[INSENSITIVE]     = @highlight_color
+
+}
+
+style "progressbar" {
+
+    bg[NORMAL]          = @selected_color
+    fg[NORMAL]          = @black_color
+
+    bg[PRELIGHT]        = @highlight_color
+    fg[PRELIGHT]        = @black_color
+
+}
+
+style "menuitem" {
+
+    text[NORMAL]        = @black_color
+    bg[NORMAL]          = @dark_color
+    fg[NORMAL]          = @black_color
+
+    text[PRELIGHT]      = @white_color
+    bg[PRELIGHT]        = @highlight_color
+    fg[PRELIGHT]        = @black_color
+
+}
+
+style "check-radio" {
+
+    base[NORMAL]        = @highlight_color
+    fg[NORMAL]          = @darker_color
+
+    base[PRELIGHT]      = @selected_color
+    bg[PRELIGHT]        = @base_color
+
+    base[INSENSITIVE]   = @lighter_color
+    text[INSENSITIVE]   = @darker_color
+    fg[INSENSITIVE]     = @darker_color
+}
+
+style "menubar" {
+
+    fg[PRELIGHT]        = @black_color
+
+}
+
+style "paned" {
+
+    bg[PRELIGHT]        = @lighter_color
+
+}
+
+style "gimp-loadingbar" {
+
+    bg[PRELIGHT]        = @selected_color
+
+}
+
+style "gnome-color-chooser-tooltips" {
+    bg[NORMAL]          = @tooltip_bg_color
+    fg[NORMAL]          = @black_color
+}
+
+########################################
+# Widgets
+########################################
+
+widget "gtk-tooltip*" style "gnome-color-chooser-tooltips"
+
+class "*" style "default"
+widget_class "*Scale*" style "scalebar-scrollbar"
+widget_class "*Scrollbar*" style "scalebar-scrollbar"
+widget_class "*ProgressBar*" style "progressbar"
+widget_class "*MenuItem*" style "menuitem"
+widget_class "*MenuBar*" style "menubar"
+widget_class "*Paned*" style "paned"
+class "GtkCheck*" style "check-radio"
+class "GtkRadio*" style "check-radio"
+widget_class "*Gimp*Paned*Bar*" style "gimp-loadingbar"

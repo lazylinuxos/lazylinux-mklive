@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Backwater-Moonlit
+Comment=Simple theme with dull borders
+Version=v0.4
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Backwater-Moonlit

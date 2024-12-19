@@ -8,5 +8,5 @@ onlyDisplayVisible=true
 noWindowsListIfSingle=false
 indicatorColor=rgb(97,97,97)
 inactiveColor=rgb(138,138,138)
-pinned=/usr/share/applications/io.github.cboxdoerfer.FSearch.desktop;/usr/share/applications/thunar.desktop;/usr/share/applications/xfce4-terminal.desktop;/usr/share/applications/firefox.desktop;/usr/share/applications/code-oss.desktop;
+pinned=/usr/share/applications/io.github.cboxdoerfer.FSearch.desktop;/usr/share/applications/thunar.desktop;/usr/share/applications/xfce4-terminal.desktop;/usr/share/applications/zen-browser.desktop;/usr/share/applications/brave-browser.desktop;/usr/share/applications/code-oss.desktop;
 keyComboActive=true
