@@ -98,7 +98,7 @@ build_variant() {
         ;;
         xfce)
             PKGS="$PKGS $XORG_PKGS $REC_PKGS $DEV_PKGS $GUI_PKGS $TUI_PKGS $LANG_PKGS $CUSTOM_PKGS lightdm lightdm-gtk3-greeter lightdm-gtk-greeter-settings xfce4 xfce4-pulseaudio-plugin xfce4-plugins xfce4-docklike-plugin thunar-archive-plugin galculator-gtk3 gnome-themes-standard gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2"
-            SERVICES="$SERVICES dbus elogind lightdm NetworkManager polkitd podman docker containerd tlp cupsd cups-browsed bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
+            SERVICES="$SERVICES dbus elogind lightdm NetworkManager polkitd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
             LIGHTDM_SESSION=xfce
         ;;
         mate)
