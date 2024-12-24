@@ -1,6 +1,4 @@
-#!/bin/sh
-#
-# vim: set ts=4 sw=4 et:
+#!/bin/bash
 #
 #-
 # Copyright (c) 2009-2015 Juan Romero Pardines.
@@ -26,12 +24,14 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #-
-trap 'error_out $? $LINENO' INT TERM 0
 umask 022
 
-readonly REQUIRED_PKGS="base-files libgcc dash coreutils sed tar gawk syslinux grub-i386-efi grub-x86_64-efi squashfs-tools xorriso"
+. ./lib.sh
+
+readonly REQUIRED_PKGS="base-files libgcc dash coreutils sed tar gawk syslinux grub-i386-efi grub-x86_64-efi memtest86+ squashfs-tools xorriso"
 readonly INITRAMFS_PKGS="binutils xz device-mapper dhclient dracut-network openresolv"
 readonly PROGNAME=$(basename "$0")
+declare -a INCLUDE_DIRS=()
 
 info_msg() {
     printf "\033[1m$@\n\033[m"
@@ -51,45 +51,54 @@ mount_pseudofs() {
     done
 }
 umount_pseudofs() {
-    umount -R -f "$ROOTFS"/sys >/dev/null 2>&1
-    umount -R -f "$ROOTFS"/dev >/dev/null 2>&1
-    umount -R -f "$ROOTFS"/proc >/dev/null 2>&1
+	for f in sys dev proc; do
+		if [ -d "$ROOTFS/$f" ] && ! umount -R -f "$ROOTFS/$f"; then
+			info_msg "ERROR: failed to unmount $ROOTFS/$f/"
+			return 1
+		fi
+	done
 }
 error_out() {
-    umount_pseudofs
-    [ -d "$BUILDDIR" -a -z "$KEEP_BUILDDIR" ] && rm -rf "$BUILDDIR"
-    exit "${1:=0}"
+	trap - INT TERM 0
+    umount_pseudofs || exit "${1:-0}"
+    [ -d "$BUILDDIR" ] && [ -z "$KEEP_BUILDDIR" ] && rm -rf --one-file-system "$BUILDDIR"
+    exit "${1:-0}"
 }
 
 usage() {
-    cat <<_EOF
-Usage: $PROGNAME [options]
+	cat <<-EOH
+	Usage: $PROGNAME [options]
 
-Options:
- -a <xbps-arch>     Set XBPS_ARCH (do not use it unless you know what it is)
- -b <system-pkg>    Set an alternative base-system package (defaults to base-system).
- -r <repo-url>      Use this XBPS repository (may be specified multiple times).
- -c <cachedir>      Use this XBPS cache directory (a subdirectory of current 
-directory if unset).
- -k <keymap>        Default keymap to use (us if unset)
- -l <locale>        Default locale to use (en_US.UTF-8 if unset).
- -i <lz4|gzip|bzip2|xz> Compression type for the initramfs image (xz if unset).
- -s <gzip|lzo|xz>     Compression type for the squashfs image (xz if unset)
- -o <file>          Output file name for the ISO image (auto if unset).
- -p "pkg pkgN ..."  Install additional packages into the ISO image.
- -R "pkg pkgN ..."  Remove preinstalled packages
- -I <includedir>    Include directory structure under given path into rootfs
- -S "service serviceN ..." Services to enable
+	Generates a basic live ISO image of LazyLinux. This ISO image can be written
+	to a CD/DVD-ROM or any USB stick.
 
- -C "cmdline args"  Add additional kernel command line arguments.
- -T "title"         Modify the bootloader title.
- -v linux<version>  Install a custom Linux version on ISO image (linux meta-package if unset).
- -K                 Do not remove builddir.
-
-The $PROGNAME script generates a live image of the Void Linux distribution.
-This ISO image can be written to a CD/DVD-ROM or any USB stick.
-_EOF
-    exit 1
+	To generate a more complete live ISO image, use build-x86-images.sh.
+	
+	OPTIONS
+	 -a <arch>          Set XBPS_ARCH in the ISO image
+	 -b <system-pkg>    Set an alternative base package (default: base-system)
+	 -r <repo>          Use this XBPS repository. May be specified multiple times
+	 -c <cachedir>      Use this XBPS cache directory (default: ./xbps-cachedir-<arch>)
+	 -k <keymap>        Default keymap to use (default: us)
+	 -l <locale>        Default locale to use (default: en_US.UTF-8)
+	 -i <lz4|gzip|bzip2|xz>
+	                    Compression type for the initramfs image (default: xz)
+	 -s <gzip|lzo|xz>   Compression type for the squashfs image (default: xz)
+	 -o <file>          Output file name for the ISO image (default: automatic)
+	 -p "<pkg> ..."     Install additional packages in the ISO image
+	 -g "<pkg> ..."     Ignore packages when building the ISO image
+	 -I <includedir>    Include directory structure under given path in the ROOTFS
+	 -S "<service> ..." Enable services in the ISO image
+	 -e <shell>         Default shell of the root user (must be absolute path).
+	                    Set the live.shell kernel argument to change the default shell of anon.
+	 -C "<arg> ..."     Add additional kernel command line arguments
+	 -T <title>         Modify the bootloader title (default: LazyLinux)
+	 -v linux<version>  Install a custom Linux version on ISO image (default: linux metapackage).
+	                    Also accepts linux metapackages (linux-mainline, linux-lts).
+	 -K                 Do not remove builddir
+	 -h                 Show this help and exit
+	 -V                 Show version and exit
+	EOH
 }
 
 copy_void_keys() {
@@ -113,6 +122,17 @@ install_prereqs() {
     [ $? -ne 0 ] && die "Failed to install required software, exiting..."
 }
 
+post_install_packages() {
+    # Cleanup and remove useless stuff.
+    rm -rf "$ROOTFS"/var/cache/* "$ROOTFS"/run/* "$ROOTFS"/var/run/*
+
+    # boot failure if disks have raid logical volumes and this isn't loaded
+    for f in "$ROOTFS/usr/lib/modules/$KERNELVERSION/kernel/drivers/md/dm-raid.ko".*; do
+        echo "dm-raid" > "$ROOTFS"/etc/modules-load.d/dm-raid.conf
+        break
+    done
+}
+
 install_packages() {
     XBPS_ARCH=$BASE_ARCH "${XBPS_INSTALL_CMD}" -r "$ROOTFS" \
         ${XBPS_REPOSITORY} -c "$XBPS_CACHEDIR" -yn $PACKAGE_LIST $INITRAMFS_PKGS
@@ -131,23 +151,21 @@ install_packages() {
     if [ -f "$ROOTFS"/etc/default/libc-locales ]; then
         sed -e "s/\#\(${LOCALE}.*\)/\1/g" -i "$ROOTFS"/etc/default/libc-locales
     fi
+    if XBPS_ARCH=$BASE_ARCH "$XBPS_QUERY_CMD" -r "$ROOTFS" dkms >/dev/null 2>&1; then
+        # dkms modules alphabetically before dkms can't configure
+        # if dkms hasn't configured beforehand to create /var/lib/dkms
+        chroot "$ROOTFS" env -i xbps-reconfigure dkms
+    fi
     chroot "$ROOTFS" env -i xbps-reconfigure -a
 
-    if [ -x installer.sh ]; then
-        install -Dm755 installer.sh "$ROOTFS"/usr/sbin/lazy-installer
-    else
-        install -Dm755 /usr/sbin/lazy-installer "$ROOTFS"/usr/sbin/lazy-installer
-    fi
-    # Cleanup and remove useless stuff.
-    rm -rf "$ROOTFS"/var/cache/* "$ROOTFS"/run/* "$ROOTFS"/var/run/*
+    post_install_packages
 }
 
-remove_packages(){
-    mkdir -p "$ROOTFS"/etc/xbps.d
-    for f in ${RM_PACKAGES}; do
-        echo "ignorepkg=${f}" >> "$ROOTFS"/etc/xbps.d/10-ignore.conf
-        xbps-remove -r "$ROOTFS" -y ${f} >/dev/null 2>&1
-    done
+ignore_packages() {
+	mkdir -p "$ROOTFS"/etc/xbps.d
+	for pkg in $IGNORE_PKGS; do
+		echo "ignorepkg=$pkg" >> "$ROOTFS"/etc/xbps.d/mklive-ignore.conf
+	done
 }
 
 enable_services() {
@@ -160,8 +178,16 @@ enable_services() {
     done
 }
 
-copy_include_directory() {
-    find "$INCLUDE_DIRECTORY" -mindepth 1 -maxdepth 1 -exec cp -rfpPv {} "$ROOTFS"/ \;
+change_shell() {
+    chroot "$ROOTFS" chsh -s "$ROOT_SHELL" root
+    [ $? -ne 0 ] && die "Failed to change the shell for root"
+}
+
+copy_include_directories() {
+    for includedir in "${INCLUDE_DIRS[@]}"; do
+        info_msg "=> copying include directory '$includedir' ..."
+        find "$includedir" -mindepth 1 -maxdepth 1 -exec cp -rfpPv {} "$ROOTFS"/ \;
+    done
 }
 
 generate_initramfs() {
@@ -172,11 +198,6 @@ generate_initramfs() {
     chroot "$ROOTFS" env -i /usr/bin/dracut -N --"${INITRAMFS_COMPRESSION}" \
         --add-drivers "ahci" --force-add "vmklive autoinstaller" --omit systemd "/boot/initrd" $KERNELVERSION
     [ $? -ne 0 ] && die "Failed to generate the initramfs"
-
-        # Apply Plymouth theme
-        if [ -f "$ROOTFS/etc/plymouth/plymouthd.conf" ]; then
-            chroot "$ROOTFS" plymouth-set-default-theme -R lazylinux-logo
-        fi
 
     mv "$ROOTFS"/boot/initrd "$BOOT_DIR"
     cp "$ROOTFS"/boot/vmlinuz-$KERNELVERSION "$BOOT_DIR"/vmlinuz
@@ -202,6 +223,8 @@ generate_isolinux_boot() {
     cp -f "$SYSLINUX_DATADIR"/vesamenu.c32 "$ISOLINUX_DIR"
     cp -f "$SYSLINUX_DATADIR"/libutil.c32 "$ISOLINUX_DIR"
     cp -f "$SYSLINUX_DATADIR"/chain.c32 "$ISOLINUX_DIR"
+    cp -f "$SYSLINUX_DATADIR"/reboot.c32 "$ISOLINUX_DIR"
+    cp -f "$SYSLINUX_DATADIR"/poweroff.c32 "$ISOLINUX_DIR"
     cp -f isolinux/isolinux.cfg.in "$ISOLINUX_DIR"/isolinux.cfg
     cp -f ${SPLASH_IMAGE} "$ISOLINUX_DIR"
 
@@ -213,18 +236,21 @@ generate_isolinux_boot() {
         -e "s|@@BOOT_TITLE@@|${BOOT_TITLE}|" \
         -e "s|@@BOOT_CMDLINE@@|${BOOT_CMDLINE}|" \
         "$ISOLINUX_DIR"/isolinux.cfg
+
+    # include memtest86+
+    cp -f "$VOIDHOSTDIR"/boot/memtest86+/memtest.bin "$BOOT_DIR"
 }
 
 generate_grub_efi_boot() {
     cp -f grub/grub.cfg "$GRUB_DIR"
-    cp -f grub/grub_lazylinux.cfg.in "$GRUB_DIR"/grub_lazylinux.cfg
+    cp -f grub/grub_void.cfg.in "$GRUB_DIR"/grub_void.cfg
     sed -i  -e "s|@@SPLASHIMAGE@@|$(basename "${SPLASH_IMAGE}")|" \
         -e "s|@@KERNVER@@|${KERNELVERSION}|" \
         -e "s|@@KEYMAP@@|${KEYMAP}|" \
         -e "s|@@ARCH@@|$BASE_ARCH|" \
         -e "s|@@BOOT_TITLE@@|${BOOT_TITLE}|" \
         -e "s|@@BOOT_CMDLINE@@|${BOOT_CMDLINE}|" \
-        -e "s|@@LOCALE@@|${LOCALE}|" "$GRUB_DIR"/grub_lazylinux.cfg
+        -e "s|@@LOCALE@@|${LOCALE}|" "$GRUB_DIR"/grub_void.cfg
     mkdir -p "$GRUB_DIR"/fonts
     cp -f "$GRUB_DATADIR"/unicode.pf2 "$GRUB_DIR"/fonts
 
@@ -265,10 +291,13 @@ generate_grub_efi_boot() {
     umount "$GRUB_EFI_TMPDIR"
     losetup --detach "${LOOP_DEVICE}"
     rm -rf "$GRUB_EFI_TMPDIR"
+
+    # include memtest86+
+    cp -f "$VOIDHOSTDIR"/boot/memtest86+/memtest.efi "$BOOT_DIR"
 }
 
 generate_squashfs() {
-    umount_pseudofs
+    umount_pseudofs || exit 1
 
     # Find out required size for the rootfs and create an ext3fs image off it.
     ROOTFS_SIZE=$(du --apparent-size -sm "$ROOTFS"|awk '{print $1}')
@@ -307,28 +336,30 @@ generate_iso_image() {
 #
 # main()
 #
-while getopts "a:b:r:c:C:T:Kk:l:i:I:S:s:o:p:R:v:h" opt; do
-    case $opt in
-        a) BASE_ARCH="$OPTARG";;
-        b) BASE_SYSTEM_PKG="$OPTARG";;
-        r) XBPS_REPOSITORY="--repository=$OPTARG $XBPS_REPOSITORY";;
-        c) XBPS_CACHEDIR="$OPTARG";;
-        K) readonly KEEP_BUILDDIR=1;;
-        k) KEYMAP="$OPTARG";;
-        l) LOCALE="$OPTARG";;
-        i) INITRAMFS_COMPRESSION="$OPTARG";;
-        I) INCLUDE_DIRECTORY="$OPTARG";;
-        S) SERVICE_LIST="$SERVICE_LIST $OPTARG";;
-        s) SQUASHFS_COMPRESSION="$OPTARG";;
-        o) OUTPUT_FILE="$OPTARG";;
-        p) PACKAGE_LIST="$PACKAGE_LIST $OPTARG";;
-        R) RM_PACKAGES="$OPTARG";;
-        C) BOOT_CMDLINE="$OPTARG";;
-        T) BOOT_TITLE="$OPTARG";;
-        v) LINUX_VERSION="$OPTARG";;
-        h) usage;;
-	*) usage;;
-    esac
+while getopts "a:b:r:c:C:T:Kk:l:i:I:S:e:s:o:p:g:v:Vh" opt; do
+	case $opt in
+		a) BASE_ARCH="$OPTARG";;
+		b) BASE_SYSTEM_PKG="$OPTARG";;
+		r) XBPS_REPOSITORY="--repository=$OPTARG $XBPS_REPOSITORY";;
+		c) XBPS_CACHEDIR="$OPTARG";;
+		g) IGNORE_PKGS="$IGNORE_PKGS $OPTARG" ;;
+		K) readonly KEEP_BUILDDIR=1;;
+		k) KEYMAP="$OPTARG";;
+		l) LOCALE="$OPTARG";;
+		i) INITRAMFS_COMPRESSION="$OPTARG";;
+		I) INCLUDE_DIRS+=("$OPTARG");;
+		S) SERVICE_LIST="$SERVICE_LIST $OPTARG";;
+		e) ROOT_SHELL="$OPTARG";;
+		s) SQUASHFS_COMPRESSION="$OPTARG";;
+		o) OUTPUT_FILE="$OPTARG";;
+		p) PACKAGE_LIST="$PACKAGE_LIST $OPTARG";;
+		C) BOOT_CMDLINE="$OPTARG";;
+		T) BOOT_TITLE="$OPTARG";;
+		v) LINUX_VERSION="$OPTARG";;
+		V) version; exit 0;;
+		h) usage; exit 0;;
+		*) usage >&2; exit 1;;
+	esac
 done
 shift $((OPTIND - 1))
 XBPS_REPOSITORY="$XBPS_REPOSITORY --repository=https://repo-default.voidlinux.org/current --repository=https://repo-default.voidlinux.org/current/musl"
@@ -348,6 +379,7 @@ ARCH=$(xbps-uhelper arch)
 : ${SQUASHFS_COMPRESSION:=xz}
 : ${BASE_SYSTEM_PKG:=base-system}
 : ${BOOT_TITLE:="LazyLinux"}
+: ${LINUX_VERSION:=linux}
 
 case $BASE_ARCH in
     x86_64*|i686*) ;;
@@ -356,12 +388,13 @@ esac
 
 # Required packages in the image for a working system.
 PACKAGE_LIST="$BASE_SYSTEM_PKG $PACKAGE_LIST"
-RM_PACKAGES="$RM_PACKAGES"
 
 # Check for root permissions.
 if [ "$(id -u)" -ne 0 ]; then
     die "Must be run as root, exiting..."
 fi
+
+trap 'error_out $? $LINENO' INT TERM 0
 
 if [ -n "$ROOTDIR" ]; then
     BUILDDIR=$(mktemp --tmpdir="$ROOTDIR" -d)
@@ -377,7 +410,9 @@ ISOLINUX_DIR="$BOOT_DIR/isolinux"
 GRUB_DIR="$BOOT_DIR/grub"
 CURRENT_STEP=0
 STEP_COUNT=10
-[ -n "${INCLUDE_DIRECTORY}" ] && STEP_COUNT=$((STEP_COUNT+1))
+[ "${#INCLUDE_DIRS[@]}" -gt 0 ] && STEP_COUNT=$((STEP_COUNT+1))
+[ -n "${IGNORE_PKGS}" ] && STEP_COUNT=$((STEP_COUNT+1))
+[ -n "$ROOT_SHELL" ] && STEP_COUNT=$((STEP_COUNT+1))
 
 : ${SYSLINUX_DATADIR:="$VOIDHOSTDIR"/usr/lib/syslinux}
 : ${GRUB_DATADIR:="$VOIDHOSTDIR"/usr/share/grub}
@@ -399,18 +434,28 @@ XBPS_ARCH=$ARCH $XBPS_INSTALL_CMD -r "$VOIDHOSTDIR" ${XBPS_REPOSITORY} -S
 
 # Get linux version for ISO
 # If linux version option specified use
-if [ -n "$LINUX_VERSION" ]; then
-    if ! echo "$LINUX_VERSION" | grep "linux[0-9._]\+"; then
-        die "-v option must be in format linux<version>"
-    fi
+shopt -s extglob
+case "$LINUX_VERSION" in
+    linux+([0-9.]))
+        IGNORE_PKGS+=" linux"
+        PACKAGE_LIST+=" $LINUX_VERSION linux-base"
+        ;;
+    linux-@(mainline|lts))
+        IGNORE_PKGS+=" linux"
+        PACKAGE_LIST+=" $LINUX_VERSION"
+        LINUX_VERSION="$(XBPS_ARCH=$BASE_ARCH $XBPS_QUERY_CMD -r "$ROOTFS" ${XBPS_REPOSITORY:=-R} -x "$LINUX_VERSION" | grep 'linux[0-9._]\+')"
+        ;;
+    linux)
+        PACKAGE_LIST+=" linux"
+        LINUX_VERSION="$(XBPS_ARCH=$BASE_ARCH $XBPS_QUERY_CMD -r "$ROOTFS" ${XBPS_REPOSITORY:=-R} -x linux | grep 'linux[0-9._]\+')"
+        ;;
+    *)
+        die "-v option must be in format linux<version> or linux-<series>"
+        ;;
+esac
+shopt -u extglob
 
-    _linux_series="$LINUX_VERSION"
-    PACKAGE_LIST="$PACKAGE_LIST $LINUX_VERSION"
-else # Otherwise find latest stable version from linux meta-package
-    _linux_series=$(XBPS_ARCH=$BASE_ARCH $XBPS_QUERY_CMD -r "$ROOTFS" ${XBPS_REPOSITORY:=-R} -x linux | grep 'linux[0-9._]\+')
-fi
-
-_kver=$(XBPS_ARCH=$BASE_ARCH $XBPS_QUERY_CMD -r "$ROOTFS" ${XBPS_REPOSITORY:=-R} -p pkgver ${_linux_series})
+_kver="$(XBPS_ARCH=$BASE_ARCH $XBPS_QUERY_CMD -r "$ROOTFS" ${XBPS_REPOSITORY:=-R} -p pkgver $LINUX_VERSION)"
 KERNELVERSION=$($XBPS_UHELPER_CMD getpkgversion ${_kver})
 
 if [ "$?" -ne "0" ]; then
@@ -426,19 +471,26 @@ mkdir -p "$ROOTFS"/etc
 [ -s data/motd ] && cp data/motd "$ROOTFS"/etc
 [ -s data/issue ] && cp data/issue "$ROOTFS"/etc
 
+if [ -n "$IGNORE_PKGS" ]; then
+	print_step "Ignoring packages in the rootfs: ${IGNORE_PKGS} ..."
+	ignore_packages
+fi
+
 print_step "Installing void pkgs into the rootfs: ${PACKAGE_LIST} ..."
 install_packages
-
-print_step "Removing preinstalled pkgs from the rootfs: ${RM_PACKAGES} ..."
-remove_packages
 
 : ${DEFAULT_SERVICE_LIST:=agetty-tty1 agetty-tty2 agetty-tty3 agetty-tty4 agetty-tty5 agetty-tty6 udevd}
 print_step "Enabling services: ${SERVICE_LIST} ..."
 enable_services ${DEFAULT_SERVICE_LIST} ${SERVICE_LIST}
 
-if [ -n "${INCLUDE_DIRECTORY}" ];then
-    print_step "Copying directory structure into the rootfs: ${INCLUDE_DIRECTORY} ..."
-    copy_include_directory
+if [ -n "$ROOT_SHELL" ]; then
+    print_step "Changing the root shell ..."
+    change_shell
+fi
+
+if [ "${#INCLUDE_DIRS[@]}" -gt 0 ];then
+    print_step "Copying directory structures into the rootfs ..."
+    copy_include_directories
 fi
 
 print_step "Generating initramfs image ($INITRAMFS_COMPRESSION)..."

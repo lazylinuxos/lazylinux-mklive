@@ -36,6 +36,7 @@ USERLOGIN_DONE=
 USERPASSWORD_DONE=
 USERNAME_DONE=
 USERGROUPS_DONE=
+USERACCOUNT_DONE=
 BOOTLOADER_DONE=
 PARTITIONS_DONE=
 NETWORK_DONE=
@@ -95,7 +96,7 @@ WIDGET_SIZE="10 70"
 DIALOG() {
     rm -f $ANSWER
     dialog --colors --keep-tite --no-shadow --no-mouse \
-        --backtitle "${BOLD}${WHITE}LazyLinux installation -- https://www.voidlinux.org (@@MKLIVE_VERSION@@)${RESET}" \
+        --backtitle "${BOLD}${WHITE}Void Linux installation -- https://www.voidlinux.org (@@MKLIVE_VERSION@@)${RESET}" \
         --cancel-label "Back" --aspect 20 "$@" 2>$ANSWER
     return $?
 }
@@ -103,7 +104,7 @@ DIALOG() {
 INFOBOX() {
     # Note: dialog --infobox and --keep-tite don't work together
     dialog --colors --no-shadow --no-mouse \
-        --backtitle "${BOLD}${WHITE}LazyLinux installation -- https://www.voidlinux.org (@@MKLIVE_VERSION@@)${RESET}" \
+        --backtitle "${BOLD}${WHITE}Void Linux installation -- https://www.voidlinux.org (@@MKLIVE_VERSION@@)${RESET}" \
         --title "${TITLE}" --aspect 20 --infobox "$@"
 }
 
@@ -359,6 +360,15 @@ show_disks() {
     done
 }
 
+get_partfs() {
+    # Get fs type from configuration if available. This ensures
+    # that the user is shown the proper fs type if they install the system.
+    local part="$1"
+    local default="${2:-none}"
+    local fstype=$(grep "MOUNTPOINT ${part}" "$CONF_FILE"|awk '{print $3}')
+    echo "${fstype:-$default}"
+}
+
 show_partitions() {
     local dev fstype fssize p part
 
@@ -376,7 +386,7 @@ show_partitions() {
                 [ "$fstype" = "LVM2_member" ] && continue
                 fssize=$(lsblk -nr /dev/$part|awk '{print $4}'|head -1)
                 echo "/dev/$part"
-                echo "size:${fssize:-unknown};fstype:${fstype:-none}"
+                echo "size:${fssize:-unknown};fstype:$(get_partfs "/dev/$part")"
             fi
         done
     done
@@ -390,7 +400,7 @@ show_partitions() {
         fstype=$(lsblk -nfr $p|awk '{print $2}'|head -1)
         fssize=$(lsblk -nr $p|awk '{print $4}'|head -1)
         echo "${p}"
-        echo "size:${fssize:-unknown};fstype:${fstype:-none}"
+        echo "size:${fssize:-unknown};fstype:$(get_partfs "$p")"
     done
     # Software raid (md)
     for p in $(ls -d /dev/md* 2>/dev/null|grep '[0-9]'); do
@@ -401,7 +411,7 @@ show_partitions() {
             [ "$fstype" = "LVM2_member" ] && continue
             fssize=$(lsblk -nr /dev/$part|awk '{print $4}')
             echo "$p"
-            echo "size:${fssize:-unknown};fstype:${fstype:-none}"
+            echo "size:${fssize:-unknown};fstype:$(get_partfs "$p")"
         fi
     done
     # cciss(4) devices
@@ -411,13 +421,13 @@ show_partitions() {
         [ "$fstype" = "LVM2_member" ] && continue
         fssize=$(lsblk -nr /dev/cciss/$part|awk '{print $4}')
         echo "/dev/cciss/$part"
-        echo "size:${fssize:-unknown};fstype:${fstype:-none}"
+        echo "size:${fssize:-unknown};fstype:$(get_partfs "/dev/cciss/$part")"
     done
     if [ -e /sbin/lvs ]; then
         # LVM
         lvs --noheadings|while read lvname vgname perms size; do
             echo "/dev/mapper/${vgname}-${lvname}"
-            echo "size:${size};fstype:lvm"
+            echo "size:${size};fstype:$(get_partfs "/dev/mapper/${vgname}-${lvname}" lvm)"
         done
     fi
 }
@@ -478,6 +488,7 @@ menu_filesystems() {
             echo "MOUNTPOINT $dev $1 $2 $3 $4" >>$CONF_FILE
         fi
     done
+    FILESYSTEMS_DONE=1
 }
 
 menu_partitions() {
@@ -495,17 +506,19 @@ menu_partitions() {
 
             DIALOG --title "Modify Partition Table on $device" --msgbox "\n
 ${BOLD}${software} will be executed in disk $device.${RESET}\n\n
-For BIOS systems, MBR or GPT partition tables are supported.\n
-To use GPT on PC BIOS systems an empty partition of 1MB must be added\n
-at the first 2GB of the disk with the TOGGLE \`bios_grub' enabled.\n
+For BIOS systems, MBR or GPT partition tables are supported. To use GPT\n
+on PC BIOS systems, an empty partition of 1MB must be added at the first\n
+2GB of the disk with the partition type \`BIOS Boot'.\n
 ${BOLD}NOTE: you don't need this on EFI systems.${RESET}\n\n
-For EFI systems GPT is mandatory and a FAT32 partition with at least\n
-100MB must be created with the TOGGLE \`boot', this will be used as\n
-EFI System Partition. This partition must have mountpoint as \`/boot/efi'.\n\n
-At least 1 partition is required for the rootfs (/).\n
-For swap, RAM*2 must be really enough. For / 600MB are required.\n\n
+For EFI systems, GPT is mandatory and a FAT32 partition with at least 100MB\n
+must be created with the partition type \`EFI System'. This will be used as\n
+the EFI System Partition. This partition must have the mountpoint \`/boot/efi'.\n\n
+At least 1 partition is required for the rootfs (/). For this partition,\n
+at least 2GB is required, but more is recommended. The rootfs partition\n
+should have the partition type \`Linux Filesystem'. For swap, RAM*2\n
+should be enough and the partition type \`Linux swap' should be used.\n\n
 ${BOLD}WARNING: /usr is not supported as a separate partition.${RESET}\n
-${RESET}\n" 18 80
+${RESET}\n" 23 80
             if [ $? -eq 0 ]; then
                 while true; do
                     clear; $software $device; PARTITIONS_DONE=1
@@ -694,7 +707,7 @@ menu_useraccount() {
     while true; do
         _preset=$(get_option USERNAME)
         [ -z "$_preset" ] && _preset="Void User"
-        DIALOG --inputbox "Enter a user name for login '$(get_option USERLOGIN)' :" \
+        DIALOG --inputbox "Enter a display name for login '$(get_option USERLOGIN)' :" \
             ${INPUTSIZE} "$_preset"
         if [ $? -eq 0 ]; then
             set_option USERNAME "$(cat $ANSWER)"
@@ -733,7 +746,7 @@ menu_useraccount() {
         fi
     done
 
-    _groups="wheel,audio,video,floppy,cdrom,optical,kvm,xbuilder"
+    _groups="wheel,audio,video,floppy,cdrom,optical,kvm,users,xbuilder"
     while true; do
         _desc="Select group membership for login '$(get_option USERLOGIN)':"
         for _group in $(cat /etc/group); do
@@ -746,7 +759,7 @@ menu_useraccount() {
                 _status=on
             fi
             # ignore the groups of root, existing users, and package groups
-            if [[ "${_gid}" -ge 1000 || "${_group}" = "_"* || "${_group}" = "root" ]]; then
+            if [[ "${_gid}" -ge 1000 || "${_group}" = "_"* || "${_group}" =~ ^(root|nogroup|chrony|dbus|lightdm|polkitd)$ ]]; then
                 continue
             fi
             if [ -z "${_checklist}" ]; then
@@ -767,10 +780,7 @@ menu_useraccount() {
 }
 
 set_useraccount() {
-    [ -z "$USERLOGIN_DONE" ] && return
-    [ -z "$USERPASSWORD_DONE" ] && return
-    [ -z "$USERNAME_DONE" ] && return
-    [ -z "$USERGROUPS_DONE" ] && return
+    [ -z "$USERACCOUNT_DONE" ] && return
     chroot $TARGETDIR useradd -m -G "$(get_option USERGROUPS)" \
         -c "$(get_option USERNAME)" "$(get_option USERLOGIN)"
     echo "$(get_option USERLOGIN):$(get_option USERPASSWORD)" | \
@@ -816,22 +826,28 @@ set_bootloader() {
     chroot $TARGETDIR grub-install $grub_args $dev >$LOG 2>&1
     if [ $? -ne 0 ]; then
         DIALOG --msgbox "${BOLD}${RED}ERROR:${RESET} \
-        failed to install GRUB to $dev!\nCheck $LOG for errors." ${MSGBOXSIZE}
+failed to install GRUB to $dev!\nCheck $LOG for errors." ${MSGBOXSIZE}
         DIE 1
     fi
     echo "Running grub-mkconfig on $TARGETDIR..." >$LOG
     chroot $TARGETDIR grub-mkconfig -o /boot/grub/grub.cfg >$LOG 2>&1
     if [ $? -ne 0 ]; then
         DIALOG --msgbox "${BOLD}${RED}ERROR${RESET}: \
-        failed to run grub-mkconfig!\nCheck $LOG for errors." ${MSGBOXSIZE}
+failed to run grub-mkconfig!\nCheck $LOG for errors." ${MSGBOXSIZE}
         DIE 1
     fi
 }
 
 test_network() {
+    # Reset the global variable to ensure that network is accessible for this test.
+    NETWORK_DONE=
+
     rm -f otime && \
         xbps-uhelper fetch https://repo-default.voidlinux.org/current/otime >$LOG 2>&1
-    if [ $? -eq 0 ]; then
+    local status=$?
+    rm -f otime
+
+    if [ "$status" -eq 0 ]; then
         DIALOG --msgbox "Network is working properly!" ${MSGBOXSIZE}
         NETWORK_DONE=1
         return 1
@@ -987,6 +1003,17 @@ menu_network() {
         else
             configure_net $dev
         fi
+    fi
+}
+
+validate_useraccount() {
+    # don't check that USERNAME has been set because it can be empty
+    local USERLOGIN=$(get_option USERLOGIN)
+    local USERPASSWORD=$(get_option USERPASSWORD)
+    local USERGROUPS=$(get_option USERGROUPS)
+
+    if [ -n "$USERLOGIN" ] && [ -n "$USERPASSWORD" ] && [ -n "$USERGROUPS" ]; then
+        USERACCOUNT_DONE=1
     fi
 }
 
@@ -1194,14 +1221,16 @@ copy_rootfs() {
 install_packages() {
     local _grub= _syspkg=
 
-    if [ -n "$EFI_SYSTEM" ]; then
-        if [ $EFI_FW_BITS -eq 32 ]; then
-            _grub="grub-i386-efi"
+    if [ "$(get_option BOOTLOADER)" != none ]; then
+        if [ -n "$EFI_SYSTEM" ]; then
+            if [ $EFI_FW_BITS -eq 32 ]; then
+                _grub="grub-i386-efi"
+            else
+                _grub="grub-x86_64-efi"
+            fi
         else
-            _grub="grub-x86_64-efi"
+            _grub="grub"
         fi
-    else
-        _grub="grub"
     fi
 
     _syspkg="base-system"
@@ -1225,7 +1254,11 @@ install_packages() {
         DIE 1
     fi
     xbps-reconfigure -r $TARGETDIR -f base-files >/dev/null 2>&1
-    chroot $TARGETDIR xbps-reconfigure -a
+    stdbuf -oL chroot $TARGETDIR xbps-reconfigure -a 2>&1 | \
+        DIALOG --title "Configuring base system packages..." --programbox 24 80
+    if [ $? -ne 0 ]; then
+        DIE 1
+    fi
 }
 
 enable_service() {
@@ -1256,6 +1289,16 @@ please do so before starting the installation.${RESET}" ${MSGBOXSIZE}
         return 1
     fi
 
+    # Validate useraccount. All parameters must be set (name, password, login name, groups).
+    validate_useraccount
+
+    if [ -z "$USERACCOUNT_DONE" ]; then
+        DIALOG --yesno "${BOLD}The user account is not set up properly.${RESET}\n\n
+${BOLD}${RED}WARNING: no user will be created. You will only be able to login \
+with the root user in your new system.${RESET}\n\n
+${BOLD}Do you want to continue?${RESET}" 10 60 || return
+    fi
+
     DIALOG --yesno "${BOLD}The following operations will be executed:${RESET}\n\n
 ${BOLD}${TARGETFS}${RESET}\n
 ${BOLD}${RED}WARNING: data on partitions will be COMPLETELY DESTROYED for new \
@@ -1266,6 +1309,7 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
     # Create and mount filesystems
     create_filesystems
 
+    SOURCE_DONE="$(get_option SOURCE)"
     # If source not set use defaults.
     if [ "$(get_option SOURCE)" = "local" -o -z "$SOURCE_DONE" ]; then
         copy_rootfs
@@ -1288,7 +1332,21 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
         chroot $TARGETDIR dracut --no-hostonly --add-drivers "ahci" --force >>$LOG 2>&1
         INFOBOX "Removing temporary packages from target ..." 4 60
         echo "Removing temporary packages from target ..." >$LOG
-        xbps-remove -r $TARGETDIR -Ry dialog xtools-minimal xmirror >>$LOG 2>&1
+        TO_REMOVE="dialog xtools-minimal xmirror"
+        # only remove espeakup and brltty if it wasn't enabled in the live environment
+        if ! [ -e "/var/service/espeakup" ]; then
+            TO_REMOVE+=" espeakup"
+        fi
+        if ! [ -e "/var/service/brltty" ]; then
+            TO_REMOVE+=" brltty"
+        fi
+        if [ "$(get_option BOOTLOADER)" = none ]; then
+            TO_REMOVE+=" grub-x86_64-efi grub-i386-efi grub"
+        fi
+        # uninstall separately to minimise errors
+        for pkg in $TO_REMOVE; do
+            xbps-remove -r $TARGETDIR -Ry "$pkg" >>$LOG 2>&1
+        done
         rmdir $TARGETDIR/mnt/target
     else
         # mount required fs
@@ -1319,8 +1377,9 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
     # Enable plymouth
     if [ -f $TARGETDIR/etc/plymouth/plymouthd.conf ]; then
         chroot $TARGETDIR plymouth-set-default-theme -R lazylinux-logo >>$LOG 2>&1
-    fi 
+    fi
 
+    NETWORK_DONE="$(get_option NETWORK)"
     # network settings for target
     if [ -n "$NETWORK_DONE" ]; then
         local net="$(get_option NETWORK)"
@@ -1379,7 +1438,7 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
     umount_filesystems
 
     # installed successfully.
-    DIALOG --yesno "${BOLD}LazyLinux has been installed successfully!${RESET}\n
+    DIALOG --yesno "${BOLD}Void Linux has been installed successfully!${RESET}\n
 Do you want to reboot the system?" ${YESNOSIZE}
     if [ $? -eq 0 ]; then
         shutdown -r now
@@ -1399,7 +1458,9 @@ menu_source() {
         "Local") src="local";;
         "Network") src="net";
             if [ -z "$NETWORK_DONE" ]; then
-                menu_network;
+                if test_network; then
+                    menu_network
+                fi
             fi;;
         *) return 1;;
     esac
@@ -1421,7 +1482,7 @@ menu() {
         AFTER_HOSTNAME="Timezone"
         DIALOG --default-item $DEFITEM \
             --extra-button --extra-label "Settings" \
-            --title " LazyLinux installation menu " \
+            --title " Void Linux installation menu " \
             --menu "$MENULABEL" 10 70 0 \
             "Keyboard" "Set system keyboard" \
             "Network" "Set up the network" \
@@ -1440,7 +1501,7 @@ menu() {
         AFTER_HOSTNAME="Locale"
         DIALOG --default-item $DEFITEM \
             --extra-button --extra-label "Settings" \
-            --title " LazyLinux installation menu " \
+            --title " Void Linux installation menu " \
             --menu "$MENULABEL" 10 70 0 \
             "Keyboard" "Set system keyboard" \
             "Network" "Set up the network" \
@@ -1477,7 +1538,7 @@ menu() {
         "Locale") menu_locale && [ -n "$LOCALE_DONE" ] && DEFITEM="Timezone";;
         "Timezone") menu_timezone && [ -n "$TIMEZONE_DONE" ] && DEFITEM="RootPassword";;
         "RootPassword") menu_rootpassword && [ -n "$ROOTPASSWORD_DONE" ] && DEFITEM="UserAccount";;
-        "UserAccount") menu_useraccount && [ -n "$USERNAME_DONE" ] && [ -n "$USERPASSWORD_DONE" ] \
+        "UserAccount") menu_useraccount && [ -n "$USERLOGIN_DONE" ] && [ -n "$USERPASSWORD_DONE" ] \
                && DEFITEM="BootLoader";;
         "BootLoader") menu_bootloader && [ -n "$BOOTLOADER_DONE" ] && DEFITEM="Partition";;
         "Partition") menu_partitions && [ -n "$PARTITIONS_DONE" ] && DEFITEM="Filesystems";;
@@ -1502,7 +1563,7 @@ fi
 # main()
 #
 DIALOG --title "${BOLD}${RED} Enter the void ... ${RESET}" --msgbox "\n
-Welcome to the LazyLinux installation. A simple and minimal \
+Welcome to the Void Linux installation. A simple and minimal \
 Linux distribution made from scratch and built from the source package tree \
 available for XBPS, a new alternative binary package system.\n\n
 The installation should be pretty straightforward. If you are in trouble \

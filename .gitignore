@@ -1,4 +1,3 @@
-*.sh
 *.img
 *.xz
 *.iso
@@ -11,3 +10,8 @@ stamps*
 !dracut/*/*.sh
 !packer/scripts/*.sh
 !includedir/usr/local/share/.genmon-plugin/*.sh
+void-live-*/
+distdir-*/
+release/
+packer/cloud-*/
+packer/vagrant-*/
