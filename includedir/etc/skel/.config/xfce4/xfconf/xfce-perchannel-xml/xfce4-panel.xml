@@ -213,10 +213,38 @@
     <property name="plugin-15" type="string" value="separator">
       <property name="style" type="uint" value="2"/>
     </property>
-    <property name="plugin-2" type="string" value="genmon"/>
-    <property name="plugin-17" type="string" value="genmon"/>
-    <property name="plugin-18" type="string" value="genmon"/>
-    <property name="plugin-19" type="string" value="genmon"/>
+    <property name="plugin-2" type="string" value="genmon">
+      <property name="command" type="string" value="/usr/local/share/.genmon-plugin/memory-panel.sh"/>
+      <property name="use-label" type="bool" value="false"/>
+      <property name="text" type="string" value="(genmon)"/>
+      <property name="update-period" type="int" value="30000"/>
+      <property name="enable-single-row" type="bool" value="true"/>
+      <property name="font" type="string" value="Inter 10"/>
+    </property>
+    <property name="plugin-17" type="string" value="genmon">
+      <property name="command" type="string" value="/usr/local/share/.genmon-plugin/network-panel.sh"/>
+      <property name="use-label" type="bool" value="false"/>
+      <property name="text" type="string" value="(genmon)"/>
+      <property name="update-period" type="int" value="30000"/>
+      <property name="enable-single-row" type="bool" value="true"/>
+      <property name="font" type="string" value="Inter 10"/>
+    </property>
+    <property name="plugin-18" type="string" value="genmon">
+      <property name="command" type="string" value="/usr/local/share/.genmon-plugin/disk-panel.sh"/>
+      <property name="use-label" type="bool" value="false"/>
+      <property name="text" type="string" value="(genmon)"/>
+      <property name="update-period" type="int" value="30000"/>
+      <property name="enable-single-row" type="bool" value="true"/>
+      <property name="font" type="string" value="Inter 10"/>
+    </property>
+    <property name="plugin-19" type="string" value="genmon">
+      <property name="command" type="string" value="/usr/local/share/.genmon-plugin/cpu-panel.sh"/>
+      <property name="use-label" type="bool" value="false"/>
+      <property name="text" type="string" value="(genmon)"/>
+      <property name="update-period" type="int" value="30000"/>
+      <property name="enable-single-row" type="bool" value="true"/>
+      <property name="font" type="string" value="Inter 10"/>
+    </property>
     <property name="plugin-20" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
