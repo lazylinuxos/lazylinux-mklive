@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
-	<icon>accessories-thesaurus</icon>
+	<icon>documentation</icon>
 	<name>Paste as file</name>
 	<submenu></submenu>
 	<unique-id>1698334942181508-1</unique-id>
@@ -57,7 +57,7 @@
 	<text-files/>
 </action>
 <action>
-	<icon>visualstudiocode</icon>
+	<icon>vscode</icon>
 	<name>Open in VSCode</name>
 	<submenu></submenu>
 	<unique-id>1674585917141495-1</unique-id>
