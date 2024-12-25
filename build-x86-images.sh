@@ -97,7 +97,7 @@ build_variant() {
             LIGHTDM_SESSION=enlightenment
         ;;
         xfce)
-            PKGS="$PKGS $XORG_PKGS $REC_PKGS $DEV_PKGS $GUI_PKGS $TUI_PKGS $LANG_PKGS $CUSTOM_PKGS lightdm lightdm-gtk3-greeter lightdm-gtk-greeter-settings xfce4 xfce4-pulseaudio-plugin xfce4-plugins xfce4-docklike-plugin thunar-archive-plugin galculator-gtk3 gnome-themes-standard gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2"
+            PKGS="$PKGS $XORG_PKGS $REC_PKGS $DEV_PKGS $GUI_PKGS $TUI_PKGS $LANG_PKGS $CUSTOM_PKGS lightdm lightdm-gtk3-greeter lightdm-gtk-greeter-settings xfce4 xfce4-plugins xfce4-docklike-plugin thunar-archive-plugin galculator-gtk3 gnome-themes-standard gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2"
             SERVICES="$SERVICES dbus elogind lightdm NetworkManager polkitd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
             LIGHTDM_SESSION=xfce
         ;;
@@ -148,7 +148,7 @@ EOF
         setup_pipewire
     fi
 
-    ./mklive.sh -a "$ARCH" -o "$IMG" -v "linux6.1" -T "LazyLinux" -p "$PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -g "$PKGS_TO_REMOVE" ${REPO} "$@"
+    ./mklive.sh -a "$ARCH" -o "$IMG" -v "linux6.1" -T "LazyLinux" -p "$PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_REMOVE" ${REPO} "$@"
 
 	cleanup
 }
