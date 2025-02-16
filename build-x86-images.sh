@@ -76,10 +76,10 @@ build_variant() {
     A11Y_PKGS="espeakup void-live-audio brltty"
     PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse xtools-minimal xmirror chrony $A11Y_PKGS $GRUB_PKGS"
     XORG_PKGS="xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio alsa-utils apulse alsa-ucm-conf sof-firmware orca"
-    REC_PKGS="void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree smbclient samba superd binutils xcolor xclip xsel xarchiver xreader xz zip unzip 7zip-unrar zstd xkill xdg-user-dirs xdg-user-dirs-gtk socklog-void preload xkblayout-state curl wget git gptfdisk mtools mlocate ntfs-3g fuse-exfat bash-completion linux-headers ffmpeg mesa-vdpau mesa-vaapi webkit2gtk hostapd cronie snooze bluez blueman cups cups-pk-helper cups-filters foomatic-db foomatic-db-engine system-config-printer tlp tlp-rdw powertop NetworkManager-openvpn NetworkManager-openconnect NetworkManager-strongswan NetworkManager-l2tp NetworkManager-pptp flatpak"
+    REC_PKGS="void-repo-nonfree void-repo-multilib void-repo-multilib-nonfree smbclient samba superd binutils xcolor xclip xsel xarchiver xreader xz zip unzip 7zip 7zip-unrar zstd xkill xdg-user-dirs xdg-user-dirs-gtk socklog-void preload xkblayout-state curl wget git gptfdisk mtools mlocate ntfs-3g fuse-exfat bash-completion linux-headers ffmpeg mesa-vdpau mesa-vaapi webkit2gtk hostapd cronie snooze bluez blueman cups cups-pk-helper cups-filters foomatic-db foomatic-db-engine system-config-printer tlp tlp-rdw powertop NetworkManager-openvpn NetworkManager-openconnect NetworkManager-strongswan NetworkManager-l2tp NetworkManager-pptp flatpak"
     DEV_PKGS="base-devel docker docker-buildx nix cargo go nodejs autoconf automake bison m4 make libtool flex meson ninja optipng sassc sqlite-devel gtk+3-devel glib-devel gcc pkg-config make qrencode-devel libpng-devel libX11-devel libXft-devel libXcursor-devel libXrandr-devel libXinerama-devel libXi-devel python3-pip qt5 python3-PyQt5-dbus python3-setproctitle python3-devel"
     GUI_PKGS="linux-wifi-hotspot thunar-media-tags-plugin kitty barrier barrier-gui redshift-gtk wireshark imhex virt-manager qemu libvirt bridge-utils onboard gufw mugshot octoxbps hardinfo ghostwriter gparted obs keepassxc syncthing syncthingtray deadbeef gpodder liferea cherrytree plymouth thunderbird simple-scan bleachbit dbeaver fsearch qdirstat imagewriter qbittorrent handbrake inkscape flameshot telegram-desktop remmina gimp vlc timeshift vscode halloy dino dconf-editor libreoffice-writer libreoffice-calc libreoffice-impress libreoffice-draw libreoffice-math libreoffice-base libreoffice-gnome"
-    TUI_PKGS="podman hddtemp lm_sensors zellij xmirror nano vim btop vsv topgrade yazi hblock fish-shell fastfetch fzf zoxide bat ripgrep exa dust Clipboard lazygit lazydocker helix rofi openfortivpn zbar tesseract-ocr tesseract-ocr-eng tesseract-ocr-hye tesseract-ocr-rus tesseract-ocr-script-Armenian"
+    TUI_PKGS="podman hddtemp lm_sensors zellij xmirror nano vim btop vsv topgrade yazi ImageMagick poppler fd file jq hblock fish-shell fastfetch fzf zoxide bat ripgrep exa dust Clipboard lazygit lazydocker helix rofi openfortivpn zbar tesseract-ocr tesseract-ocr-eng tesseract-ocr-hye tesseract-ocr-rus tesseract-ocr-script-Armenian"
     LANG_PKGS="libreoffice-i18n-en-US libreoffice-i18n-ru thunderbird-i18n-en-US thunderbird-i18n-hy-AM thunderbird-i18n-ru"
     CUSTOM_PKGS="distrobox zen-browser brave-browser cortile neohtop webapp-manager yaak thunar-shares-plugin podman-desktop muCommander"
     PKGS_TO_REMOVE="parole"
@@ -148,7 +148,7 @@ EOF
         setup_pipewire
     fi
 
-    ./mklive.sh -a "$ARCH" -o "$IMG" -v "linux6.6" -T "LazyLinux" -p "$PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_REMOVE" ${REPO} "$@"
+    ./mklive.sh -a "$ARCH" -o "$IMG" -v "linux6.1" -T "LazyLinux" -p "$PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_REMOVE" ${REPO} "$@"
 
 	cleanup
 }
