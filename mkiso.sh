@@ -16,13 +16,12 @@ usage() {
 	Usage: $PROGNAME [options ...] [-- mklive options ...]
 
 	Wrapper script around mklive.sh for several standard flavors of live images.
-	Adds void-installer and other helpful utilities to the generated images.
+	Adds lazy-installer and other helpful utilities to the generated images.
 
 	OPTIONS
-	 -a <arch>     Set architecture (or platform) in the image
+	 -a <arch>     Set XBPS_ARCH in the image
 	 -b <variant>  One of base, enlightenment, xfce, mate, cinnamon, gnome, kde,
 	               lxde, lxqt, or xfce-wayland (default: base). May be specified multiple times
-	               to build multiple variants
 	 -d <date>     Override the datestamp on the generated image (YYYYMMDD format)
 	 -t <arch-date-variant>
 	               Equivalent to setting -a, -b, and -d
@@ -61,7 +60,7 @@ include_installer() {
         MKLIVE_VERSION="$(PROGNAME='' version)"
         installer=$(mktemp)
         sed "s/@@MKLIVE_VERSION@@/${MKLIVE_VERSION}/" installer.sh > "$installer"
-        install -Dm755 "$installer" "$INCLUDEDIR"/usr/bin/void-installer
+        install -Dm755 "$installer" "$INCLUDEDIR"/usr/bin/lazy-installer
         rm "$installer"
     else
         echo installer.sh not found >&2
@@ -90,7 +89,7 @@ setup_pipewire() {
 build_variant() {
     variant="$1"
     shift
-    IMG=void-live-${ARCH}-${DATE}-${variant}.iso
+    IMG=lazylinux-live-${ARCH}-${DATE}-${variant}.iso
 
     # el-cheapo installer is unsupported on arm because arm doesn't install a kernel by default
     # and to work around that would add too much complexity to it
@@ -127,8 +126,10 @@ build_variant() {
     PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse xtools-minimal xmirror chrony tmux $A11Y_PKGS $GRUB_PKGS"
     FONTS="font-misc-misc terminus-font dejavu-fonts-ttf"
     WAYLAND_PKGS="$GFX_WL_PKGS $FONTS orca"
-    XORG_PKGS="$GFX_PKGS $FONTS xorg-minimal xorg-input-drivers setxkbmap xauth orca"
-    SERVICES="sshd chronyd"
+    XORG_PKGS="xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio alsa-utils apulse alsa-ucm-conf sof-firmware orca"
+    CUSTOM_PKGS="$(grep '^[^#].' lazy.packages)"
+    PKGS_TO_IGNORE="parole"
+    SERVICES="sshd chronyd libvirtd virtlockd virtlogd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
 
     LIGHTDM_SESSION=''
 
@@ -142,7 +143,7 @@ build_variant() {
             LIGHTDM_SESSION=enlightenment
         ;;
         xfce*)
-            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter xfce4 gnome-themes-standard gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox xfce4-pulseaudio-plugin"
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter xfce4 gnome-themes-standard gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 xfce4-pulseaudio-plugin"
             SERVICES="$SERVICES dbus lightdm NetworkManager polkitd"
             LIGHTDM_SESSION=xfce
 
@@ -198,16 +199,15 @@ EOF
         include_installer
     else
         mkdir -p "$INCLUDEDIR"/usr/bin
-        printf "#!/bin/sh\necho 'void-installer is not supported on this live image'\n" > "$INCLUDEDIR"/usr/bin/void-installer
-        chmod 755 "$INCLUDEDIR"/usr/bin/void-installer
+        printf "#!/bin/sh\necho 'lazy-installer is not supported on this live image'\n" > "$INCLUDEDIR"/usr/bin/lazy-installer
+        chmod 755 "$INCLUDEDIR"/usr/bin/lazy-installer
     fi
 
     if [ "$variant" != base ]; then
         setup_pipewire
     fi
 
-    ./mklive.sh -a "$TARGET_ARCH" -o "$IMG" -p "$PKGS" -S "$SERVICES" -I "$INCLUDEDIR" \
-        ${KERNEL_PKG:+-v $KERNEL_PKG} ${REPO} "$@"
+    ./mklive.sh -a "$TARGET_ARCH" -o "$IMG" -v "linux7.0" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" ${REPO} "$@"
 
 	cleanup
 }
