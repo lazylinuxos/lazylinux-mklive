@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -eu
 
@@ -16,12 +16,12 @@ usage() {
 	Usage: $PROGNAME [options ...] [-- mklive options ...]
 
 	Wrapper script around mklive.sh for several standard flavors of live images.
-	Adds lazy-installer and other helpful utilities to the generated images.
+	Adds void-installer and other helpful utilities to the generated images.
 
 	OPTIONS
-	 -a <arch>     Set XBPS_ARCH in the image
+	 -a <arch>     Set architecture (or platform) in the image
 	 -b <variant>  One of base, enlightenment, xfce, mate, cinnamon, gnome, kde,
-	               lxde, or lxqt (default: base). May be specified multiple times
+	               lxde, lxqt, or xfce-wayland (default: base). May be specified multiple times
 	               to build multiple variants
 	 -d <date>     Override the datestamp on the generated image (YYYYMMDD format)
 	 -t <arch-date-variant>
@@ -56,8 +56,27 @@ cleanup() {
     rm -rf "$INCLUDEDIR"
 }
 
+include_installer() {
+    if [ -x installer.sh ]; then
+        MKLIVE_VERSION="$(PROGNAME='' version)"
+        installer=$(mktemp)
+        sed "s/@@MKLIVE_VERSION@@/${MKLIVE_VERSION}/" installer.sh > "$installer"
+        install -Dm755 "$installer" "$INCLUDEDIR"/usr/bin/void-installer
+        rm "$installer"
+    else
+        echo installer.sh not found >&2
+        exit 1
+    fi
+}
+
 setup_pipewire() {
     PKGS="$PKGS pipewire alsa-pipewire"
+    case "$ARCH" in
+        asahi*)
+            PKGS="$PKGS asahi-audio"
+            SERVICES="$SERVICES speakersafetyd"
+            ;;
+    esac
     mkdir -p "$INCLUDEDIR"/etc/xdg/autostart
     ln -sf /usr/share/applications/pipewire.desktop "$INCLUDEDIR"/etc/xdg/autostart/
     mkdir -p "$INCLUDEDIR"/etc/pipewire/pipewire.conf.d
@@ -72,13 +91,48 @@ build_variant() {
     variant="$1"
     shift
     IMG=lazylinux-live-${ARCH}-${DATE}-${variant}.iso
-    GRUB_PKGS="grub-i386-efi grub-x86_64-efi"
+
+    # el-cheapo installer is unsupported on arm because arm doesn't install a kernel by default
+    # and to work around that would add too much complexity to it
+    # thus everyone should just do a chroot install anyways
+    WANT_INSTALLER=no
+    case "$ARCH" in
+        x86_64*|i686*)
+            GRUB_PKGS="grub-i386-efi grub-x86_64-efi"
+            GFX_PKGS="xorg-video-drivers"
+            GFX_WL_PKGS="mesa-dri"
+            WANT_INSTALLER=yes
+            KERNEL_PKG="linux6.13"
+            TARGET_ARCH="$ARCH"
+            ;;
+        aarch64*)
+            GRUB_PKGS="grub-arm64-efi"
+            GFX_PKGS="xorg-video-drivers"
+            GFX_WL_PKGS="mesa-dri"
+            TARGET_ARCH="$ARCH"
+            ;;
+        asahi*)
+            GRUB_PKGS="asahi-base asahi-scripts grub-arm64-efi"
+            GFX_PKGS="mesa-asahi-dri"
+            GFX_WL_PKGS="mesa-asahi-dri"
+            KERNEL_PKG="linux-asahi"
+            TARGET_ARCH="aarch64${ARCH#asahi}"
+            if [ "$variant" = xfce ]; then
+                info_msg "xfce is not supported on asahi, switching to xfce-wayland"
+                variant="xfce-wayland"
+            fi
+            ;;
+    esac
+
     A11Y_PKGS="espeakup void-live-audio brltty"
-    PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse xtools-minimal xmirror chrony $A11Y_PKGS $GRUB_PKGS"
-    XORG_PKGS="xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio alsa-utils apulse alsa-ucm-conf sof-firmware orca"
+    PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse xtools-minimal xmirror chrony tmux $A11Y_PKGS $GRUB_PKGS"
+    FONTS="font-misc-misc terminus-font dejavu-fonts-ttf"
+    WAYLAND_PKGS="$GFX_WL_PKGS $FONTS orca"
+    XORG_PKGS="$GFX_PKGS $FONTS xorg-minimal xorg-input-drivers setxkbmap xauth orca"
     CUSTOM_PKGS="$(grep '^[^#].' lazy.packages)"
     PKGS_TO_IGNORE="parole"
     SERVICES="sshd chronyd libvirtd virtlockd virtlogd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
+
 
     LIGHTDM_SESSION=''
 
@@ -87,22 +141,27 @@ build_variant() {
             SERVICES="$SERVICES dhcpcd wpa_supplicant acpid"
         ;;
         enlightenment)
-            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk3-greeter enlightenment terminology udisks2 firefox"
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter enlightenment terminology udisks2 firefox"
             SERVICES="$SERVICES acpid dhcpcd wpa_supplicant lightdm dbus polkitd"
             LIGHTDM_SESSION=enlightenment
         ;;
-        xfce)
-            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk3-greeter lightdm-gtk-greeter-settings xfce4 xfce4-plugins xfce4-docklike-plugin thunar-archive-plugin galculator-gtk3 gnome-themes-standard gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2"
+        xfce*)
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter xfce4 gnome-themes-standard gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 xfce4-pulseaudio-plugin"
             SERVICES="$SERVICES dbus lightdm NetworkManager polkitd"
             LIGHTDM_SESSION=xfce
+
+            if [ "$variant" == "xfce-wayland" ]; then
+                PKGS="$PKGS $WAYLAND_PKGS labwc"
+                LIGHTDM_SESSION="xfce-wayland"
+            fi
         ;;
         mate)
-            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk3-greeter mate mate-extra gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter mate mate-extra gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
             SERVICES="$SERVICES dbus lightdm NetworkManager polkitd"
             LIGHTDM_SESSION=mate
         ;;
         cinnamon)
-            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk3-greeter cinnamon gnome-keyring colord gnome-terminal gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter cinnamon gnome-keyring colord gnome-terminal gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
             SERVICES="$SERVICES dbus lightdm NetworkManager polkitd"
             LIGHTDM_SESSION=cinnamon
         ;;
@@ -115,7 +174,7 @@ build_variant() {
             SERVICES="$SERVICES dbus NetworkManager sddm"
         ;;
         lxde)
-            PKGS="$PKGS $XORG_PKGS lxde lightdm lightdm-gtk3-greeter gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
+            PKGS="$PKGS $XORG_PKGS lxde lightdm lightdm-gtk-greeter gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
             SERVICES="$SERVICES acpid dbus dhcpcd wpa_supplicant lightdm polkitd"
             LIGHTDM_SESSION=LXDE
         ;;
@@ -139,11 +198,20 @@ indicators = ~host;~spacer;~clock;~spacer;~layout;~session;~a11y;~power
 EOF
     fi
 
+    if [ "$WANT_INSTALLER" = yes ]; then
+        include_installer
+    else
+        mkdir -p "$INCLUDEDIR"/usr/bin
+        printf "#!/bin/sh\necho 'void-installer is not supported on this live image'\n" > "$INCLUDEDIR"/usr/bin/void-installer
+        chmod 755 "$INCLUDEDIR"/usr/bin/void-installer
+    fi
+
     if [ "$variant" != base ]; then
         setup_pipewire
     fi
 
-    ./mklive.sh -a "$ARCH" -o "$IMG" -v "linux6.1" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" ${REPO} "$@"
+    ./mklive.sh -a "$TARGET_ARCH" -o "$IMG" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
+        ${KERNEL_PKG:+-v $KERNEL_PKG} ${REPO} "$@"
 
 	cleanup
 }
@@ -153,22 +221,8 @@ if [ ! -x mklive.sh ]; then
     exit 1
 fi
 
-# if [ -x installer.sh ]; then
-#     MKLIVE_VERSION="$(PROGNAME='' version)"
-#     installer=$(mktemp)
-#     sed "s/@@MKLIVE_VERSION@@/${MKLIVE_VERSION}/" installer.sh > "$installer"
-#     install -Dm755 "$installer" "$INCLUDEDIR"/usr/bin/lazy-installer
-#     rm "$installer"
-# else
-#     echo installer.sh not found >&2
-#     exit 1
-# fi
-
 if [ -n "$TRIPLET" ]; then
-    VARIANT="${TRIPLET##*-}"
-    REST="${TRIPLET%-*}"
-    DATE="${REST##*-}"
-    ARCH="${REST%-*}"
+    IFS=: read -r ARCH DATE VARIANT _ < <( echo "$TRIPLET" | sed -Ee 's/^(.+)-([0-9rc]+)-(.+)$/\1:\2:\3/' )
     build_variant "$VARIANT" "$@"
 else
     for image in $IMAGES; do

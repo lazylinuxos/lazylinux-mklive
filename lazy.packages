@@ -17,6 +17,15 @@
     snooze
     superd
     xmirror
+    noto-fonts-emoji
+    noto-fonts-ttf
+    noto-fonts-ttf-extra
+    alsa-plugins-pulseaudio
+    alsa-utils
+    apulse
+    alsa-ucm-conf
+    sof-firmware
+
 
 # NETWORKING
     NetworkManager
@@ -233,6 +242,12 @@
     libreoffice-math
     libreoffice-base
     libreoffice-gnome
+    xfce4-plugins
+    xfce4-docklike-plugin
+    thunar-archive-plugin
+    galculator-gtk3
+    lightdm-gtk-greeter-settings
+    
 
 # LAZY REPO PACKAGES
     distrobox

@@ -50,6 +50,7 @@ if [ ! -f $CONF_FILE ]; then
     touch -f $CONF_FILE
 fi
 ANSWER=$(mktemp -t vinstall-XXXXXXXX || exit 1)
+TARGET_SERVICES=$(mktemp -t vinstall-sv-XXXXXXXX || exit 1)
 TARGET_FSTAB=$(mktemp -t vinstall-fstab-XXXXXXXX || exit 1)
 
 trap "DIE" INT TERM QUIT
@@ -112,7 +113,7 @@ DIE() {
     rval=$1
     [ -z "$rval" ] && rval=0
     clear
-    rm -f $ANSWER $TARGET_FSTAB
+    rm -f $ANSWER $TARGET_FSTAB $TARGET_SERVICES
     # reenable printk
     if [ -w /proc/sys/kernel/printk ]; then
         echo 4 >/proc/sys/kernel/printk
@@ -122,14 +123,14 @@ DIE() {
 }
 
 set_option() {
-    if grep -Eq "^${1}.*" $CONF_FILE; then
-        sed -i -e "/^${1}.*/d" $CONF_FILE
+    if grep -Eq "^${1} .*" $CONF_FILE; then
+        sed -i -e "/^${1} .*/d" $CONF_FILE
     fi
     echo "${1} ${2}" >>$CONF_FILE
 }
 
 get_option() {
-    echo $(grep -E "^${1}.*" $CONF_FILE|sed -e "s|${1}||")
+    grep -E "^${1} .*" $CONF_FILE | sed -e "s|^${1} ||"
 }
 
 # ISO-639 language names for locales
@@ -365,7 +366,7 @@ get_partfs() {
     # that the user is shown the proper fs type if they install the system.
     local part="$1"
     local default="${2:-none}"
-    local fstype=$(grep "MOUNTPOINT ${part}" "$CONF_FILE"|awk '{print $3}')
+    local fstype=$(grep "MOUNTPOINT ${part} " "$CONF_FILE"|awk '{print $3}')
     echo "${fstype:-$default}"
 }
 
@@ -481,9 +482,9 @@ menu_filesystems() {
             local bdev=$(basename $dev)
             local ddev=$(basename $(dirname $dev))
             if [ "$ddev" != "dev" ]; then
-                sed -i -e "/^MOUNTPOINT \/dev\/${ddev}\/${bdev}.*/d" $CONF_FILE
+                sed -i -e "/^MOUNTPOINT \/dev\/${ddev}\/${bdev} .*/d" $CONF_FILE
             else
-                sed -i -e "/^MOUNTPOINT \/dev\/${bdev}.*/d" $CONF_FILE
+                sed -i -e "/^MOUNTPOINT \/dev\/${bdev} .*/d" $CONF_FILE
             fi
             echo "MOUNTPOINT $dev $1 $2 $3 $4" >>$CONF_FILE
         fi
@@ -1023,7 +1024,7 @@ validate_filesystems() {
     local bootdev=$(get_option BOOTLOADER)
 
     unset TARGETFS
-    mnts=$(grep -E '^MOUNTPOINT.*' $CONF_FILE)
+    mnts=$(grep -E '^MOUNTPOINT .*' $CONF_FILE)
     set -- ${mnts}
     while [ $# -ne 0 ]; do
         fmt=""
@@ -1066,7 +1067,7 @@ as FAT32, mountpoint /boot/efi and at least with 100MB of size." ${MSGBOXSIZE}
 create_filesystems() {
     local mnts dev mntpt fstype fspassno mkfs size rv uuid
 
-    mnts=$(grep -E '^MOUNTPOINT.*' $CONF_FILE | sort -k 5)
+    mnts=$(grep -E '^MOUNTPOINT .*' $CONF_FILE | sort -k 5)
     set -- ${mnts}
     while [ $# -ne 0 ]; do
         dev=$2; fstype=$3; mntpt="$5"; mkfs=$6
@@ -1136,7 +1137,7 @@ failed to mount $dev on ${mntpt}! check $LOG for errors." ${MSGBOXSIZE}
     done
 
     # mount all filesystems in target rootfs
-    mnts=$(grep -E '^MOUNTPOINT.*' $CONF_FILE | sort -k 5)
+    mnts=$(grep -E '^MOUNTPOINT .*' $CONF_FILE | sort -k 5)
     set -- ${mnts}
     while [ $# -ne 0 ]; do
         dev=$2; fstype=$3; mntpt="$5"
@@ -1170,7 +1171,7 @@ mount_filesystems() {
 }
 
 umount_filesystems() {
-    local mnts="$(grep -E '^MOUNTPOINT.*swap.*$' $CONF_FILE | sort -r -k 5)"
+    local mnts="$(grep -E '^MOUNTPOINT .* swap .*$' $CONF_FILE | sort -r -k 5)"
     set -- ${mnts}
     while [ $# -ne 0 ]; do
         local dev=$2; local fstype=$3
@@ -1261,8 +1262,44 @@ install_packages() {
     fi
 }
 
+menu_services() {
+    local sv _status _checklist=""
+    # filter out services that probably shouldn't be messed with
+    local sv_ignore='^(agetty-(tty[1-9]|generic|serial|console)|udevd|sulogin)$'
+    find $TARGETDIR/etc/runit/runsvdir/default -mindepth 1 -maxdepth 1 -xtype d -printf '%f\n' | \
+        grep -Ev "$sv_ignore" | sort -u > "$TARGET_SERVICES"
+    while true; do
+        while read -r sv; do
+            if [ -n "$sv" ]; then
+                if grep -qx "$sv" "$TARGET_SERVICES" 2>/dev/null; then
+                    _status=on
+                else
+                    _status=off
+                fi
+                _checklist+=" ${sv} ${sv} ${_status}"
+            fi
+        done < <(find $TARGETDIR/etc/sv -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | grep -Ev "$sv_ignore" | sort -u)
+        DIALOG --no-tags --checklist "Select services to enable:" 20 60 18 ${_checklist}
+        if [ $? -eq 0 ]; then
+            comm -13 "$TARGET_SERVICES" <(cat "$ANSWER" | tr ' ' '\n') | while read -r sv; do
+                enable_service "$sv"
+            done
+            comm -23 "$TARGET_SERVICES" <(cat "$ANSWER" | tr ' ' '\n') | while read -r sv; do
+                disable_service "$sv"
+            done
+            break
+        else
+            return
+        fi
+    done
+}
+
 enable_service() {
-    ln -sf /etc/sv/$1 $TARGETDIR/etc/runit/runsvdir/default/$1
+    ln -sf "/etc/sv/$1" "$TARGETDIR/etc/runit/runsvdir/default/$1"
+}
+
+disable_service() {
+    rm -f "$TARGETDIR/etc/runit/runsvdir/default/$1"
 }
 
 menu_install() {
@@ -1322,7 +1359,7 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
         # Remove live user.
         echo "Removing $USERNAME live user from targetdir ..." >$LOG
         chroot $TARGETDIR userdel -r $USERNAME >$LOG 2>&1
-        rm -f $TARGETDIR/etc/sudoers.d/99-void-live
+        rm -f $TARGETDIR/etc/sudoers.d/99-lazylinux-live
         sed -i "s,GETTY_ARGS=\"--noclear -a $USERNAME\",GETTY_ARGS=\"--noclear\",g" $TARGETDIR/etc/sv/agetty-tty1/conf
         TITLE="Check $LOG for details ..."
         INFOBOX "Rebuilding initramfs for target ..." 4 60
@@ -1391,7 +1428,7 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
         elif [ "$_type" = "dhcp" ]; then
             if $(echo $_dev|egrep -q "^wl.*" 2>/dev/null); then
                 cp /etc/wpa_supplicant/wpa_supplicant.conf $TARGETDIR/etc/wpa_supplicant
-                ln -sf /etc/sv/wpa_supplicant $TARGETDIR/etc/runit/runsvdir/default/wpa_supplicant
+                enable_service wpa_supplicant
             fi
             enable_service dhcpcd
         elif [ -n "$_dev" -a "$_type" = "static" ]; then
@@ -1421,7 +1458,7 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
     fi
 
     # clean up polkit rule - it's only useful in live systems
-    rm -f $TARGETDIR/etc/polkit-1/rules.d/void-live.rules
+    rm -f $TARGETDIR/etc/polkit-1/rules.d/lazylinux-live.rules
 
     # enable text console for grub if chosen
     if [ "$(get_option TEXTCONSOLE)" = "1" ]; then
@@ -1432,6 +1469,10 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
 
     # install bootloader.
     set_bootloader
+
+    # menu for enabling services
+    menu_services
+
     sync && sync && sync
 
     # unmount all filesystems.
@@ -1522,8 +1563,8 @@ menu() {
     if [ $? -eq 3 ]; then
         # Show settings
         cp $CONF_FILE /tmp/conf_hidden.$$;
-        sed -i "s/^ROOTPASSWORD.*/ROOTPASSWORD <-hidden->/" /tmp/conf_hidden.$$
-        sed -i "s/^USERPASSWORD.*/USERPASSWORD <-hidden->/" /tmp/conf_hidden.$$
+        sed -i "s/^ROOTPASSWORD .*/ROOTPASSWORD <-hidden->/" /tmp/conf_hidden.$$
+        sed -i "s/^USERPASSWORD .*/USERPASSWORD <-hidden->/" /tmp/conf_hidden.$$
         DIALOG --title "Saved settings for installation" --textbox /tmp/conf_hidden.$$ 14 60
         rm /tmp/conf_hidden.$$
         return
