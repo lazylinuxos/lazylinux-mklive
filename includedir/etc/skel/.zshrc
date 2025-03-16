@@ -1,0 +1,1 @@
+source /usr/share/lazy-zsh-config/lazy-config.zsh

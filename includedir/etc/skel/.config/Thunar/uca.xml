@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
-	<icon>documentation</icon>
+	<icon>document-new-from-template</icon>
 	<name>Paste as file</name>
 	<submenu></submenu>
 	<unique-id>1698334942181508-1</unique-id>
@@ -12,7 +12,7 @@
 	<directories/>
 </action>
 <action>
-	<icon>utilities-terminal</icon>
+	<icon>cm_runterm</icon>
 	<name>Open Terminal Here</name>
 	<submenu></submenu>
 	<unique-id>1673977573411025-1</unique-id>
@@ -24,7 +24,7 @@
 	<directories/>
 </action>
 <action>
-	<icon>gksu-root-terminal</icon>
+	<icon>utilities-terminal_su</icon>
 	<name>Open root terminal here</name>
 	<submenu></submenu>
 	<unique-id>1674396583008262-1</unique-id>
@@ -35,7 +35,7 @@
 	<directories/>
 </action>
 <action>
-	<icon>krusader_root</icon>
+	<icon>document-open-folder</icon>
 	<name>Open thunar as root here</name>
 	<submenu></submenu>
 	<unique-id>1674396626474046-2</unique-id>
@@ -46,7 +46,7 @@
 	<directories/>
 </action>
 <action>
-	<icon>regedit</icon>
+	<icon>edit</icon>
 	<name>Edit as root</name>
 	<submenu></submenu>
 	<unique-id>1674396716398802-3</unique-id>
@@ -57,14 +57,15 @@
 	<text-files/>
 </action>
 <action>
-	<icon>vscode</icon>
-	<name>Open in VSCode</name>
+	<icon>code-context</icon>
+	<name>Open in Zed</name>
 	<submenu></submenu>
 	<unique-id>1674585917141495-1</unique-id>
-	<command>code-oss %f</command>
+	<command>zed %f</command>
 	<description></description>
 	<range>*</range>
 	<patterns>*</patterns>
 	<directories/>
+	<text-files/>
 </action>
 </actions>
