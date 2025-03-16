@@ -159,7 +159,9 @@
     python3-setproctitle
     python3-devel
     python3-Pillow
-
+    zig
+    lua
+    
 # FILE SYSTEM
     exfat-utils
     fuse-exfat
@@ -189,7 +191,7 @@
 # GUI
     linux-wifi-hotspot
     thunar-media-tags-plugin
-    kitty
+    ghostty
     barrier
     barrier-gui
     redshift-gtk
@@ -231,7 +233,7 @@
     gimp
     vlc
     timeshift
-    vscode
+    zed
     halloy
     dino
     dconf-editor
@@ -247,7 +249,7 @@
     thunar-archive-plugin
     galculator-gtk3
     lightdm-gtk-greeter-settings
-    
+
 
 # LAZY REPO PACKAGES
     distrobox
@@ -260,3 +262,23 @@
     thunar-shares-plugin
     podman-desktop
     muCommander
+    termscp
+
+# LAZY THEMES AND ICONS
+    papirus-icon-theme
+    lazy-squared-theme
+    lazy-nordic-icons
+    lazy-backstep-theme
+    lazy-backstep-icons
+    lazy-catppuccin-tela-mix
+    lazy-fluent-grey
+    bluecurve
+
+# LAZY ZSH config
+    zsh
+    zsh-syntax-highlighting
+    zsh-autosuggestions
+    zsh-history-substring-search
+    zsh-theme-powerlevel10k
+    oh-my-zsh
+    lazy-zsh-config
