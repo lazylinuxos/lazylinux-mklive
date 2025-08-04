@@ -11,6 +11,7 @@
     "metrics": false,
     "diagnostics": false
   },
+  "use_system_path_prompts": false,
   "restore_on_startup": "last_session",
   "autosave": {
     "after_delay": {

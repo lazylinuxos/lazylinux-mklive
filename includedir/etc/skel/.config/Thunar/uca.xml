@@ -68,4 +68,19 @@
 	<directories/>
 	<text-files/>
 </action>
+<action>
+	<icon>com.github.artemanufrij.hashit</icon>
+	<name>Copy sha256sum</name>
+	<submenu></submenu>
+	<unique-id>1747852593409748-1</unique-id>
+	<command>cpsha256 %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
 </actions>

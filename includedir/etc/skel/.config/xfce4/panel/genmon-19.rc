@@ -2,5 +2,5 @@ Command=/usr/local/share/.genmon-plugin/memory-panel.sh
 UseLabel=0
 Text=(genmon)
 UpdatePeriod=30000
-Font=Inter 10
+Font=SF Pro Display Medium 11
 

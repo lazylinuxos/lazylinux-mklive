@@ -242,6 +242,7 @@
     lightdm-gtk-greeter-settings
 
 # LAZY REPO PACKAGES
+    xfce4-dynamic-workspaces
     distrobox
     zen-browser
     brave-browser
@@ -255,6 +256,7 @@
     termscp
 
 # LAZY THEMES AND ICONS
+    lazy-theme-config
     papirus-icon-theme
     lazy-squared-theme
     lazy-nordic-icons

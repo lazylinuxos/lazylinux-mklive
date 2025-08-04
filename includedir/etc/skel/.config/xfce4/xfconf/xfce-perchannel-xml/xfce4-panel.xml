@@ -130,41 +130,48 @@
       <property name="button-icon" type="string" value="/usr/share/pixmaps/LazyLinux_logo.png"/>
       <property name="show-button-title" type="bool" value="true"/>
       <property name="hover-switch-category" type="bool" value="true"/>
-      <property name="category-show-name" type="bool" value="false"/>
+      <property name="category-show-name" type="bool" value="true"/>
       <property name="favorites-in-recent" type="bool" value="true"/>
       <property name="position-search-alternate" type="bool" value="false"/>
       <property name="position-categories-alternate" type="bool" value="false"/>
-      <property name="position-categories-horizontal" type="bool" value="true"/>
-      <property name="menu-width" type="int" value="505"/>
-      <property name="menu-height" type="int" value="573"/>
+      <property name="position-categories-horizontal" type="bool" value="false"/>
+      <property name="menu-width" type="int" value="512"/>
+      <property name="menu-height" type="int" value="620"/>
       <property name="command-switchuser" type="string" value="dm-tool switch-to-greeter"/>
       <property name="show-command-restart" type="bool" value="true"/>
       <property name="show-command-shutdown" type="bool" value="true"/>
       <property name="favorites" type="array">
-        <value type="string" value="xfce4-file-manager.desktop"/>
         <value type="string" value="io.github.cboxdoerfer.FSearch.desktop"/>
         <value type="string" value="xfce4-terminal-emulator.desktop"/>
-        <value type="string" value="brave-browser.desktop"/>
-        <value type="string" value="thunderbird.desktop"/>
-        <value type="string" value="octoxbps.desktop"/>
-        <value type="string" value="zed.desktop"/>
-        <value type="string" value="org.remmina.Remmina.desktop"/>
+        <value type="string" value="xfce4-file-manager.desktop"/>
+        <value type="string" value="windterm.desktop"/>
         <value type="string" value="org.telegram.desktop.desktop"/>
-        <value type="string" value="org.bleachbit.BleachBit.desktop"/>
-        <value type="string" value="qdirstat.desktop"/>
+        <value type="string" value="org.squidowl.halloy.desktop"/>
+        <value type="string" value="thunderbird.desktop"/>
+        <value type="string" value="zed.desktop"/>
+        <value type="string" value="jetbrains-rider.desktop"/>
+        <value type="string" value="org.remmina.Remmina.desktop"/>
+        <value type="string" value="octoxbps.desktop"/>
+        <value type="string" value="mucommander-muCommander.desktop"/>
+        <value type="string" value="rocky8-firefox.desktop"/>
       </property>
       <property name="recent" type="array">
-        <value type="string" value="org.telegram.desktop.desktop"/>
-        <value type="string" value="btop.desktop"/>
-        <value type="string" value="org.gnome.DiskUtility.desktop"/>
-        <value type="string" value="qdirstat.desktop"/>
         <value type="string" value="xfce-keyboard-settings.desktop"/>
-        <value type="string" value="xfce-wm-settings.desktop"/>
         <value type="string" value="xfce-ui-settings.desktop"/>
-        <value type="string" value="org.remmina.Remmina.desktop"/>
-        <value type="string" value="xfce-mouse-settings.desktop"/>
+        <value type="string" value="mucommander-muCommander.desktop"/>
+        <value type="string" value="slack.desktop"/>
+        <value type="string" value="lightdm-gtk-greeter-settings.desktop"/>
+        <value type="string" value="org.telegram.desktop.desktop"/>
+        <value type="string" value="org.bluesabre.Mugshot.desktop"/>
+        <value type="string" value="org.qutebrowser.qutebrowser.desktop"/>
+        <value type="string" value="btop.desktop"/>
+        <value type="string" value="net.sourceforge.liferea.desktop"/>
       </property>
       <property name="position-profile-alternate" type="bool" value="true"/>
+      <property name="position-commands-alternate" type="bool" value="false"/>
+      <property name="view-mode" type="int" value="1"/>
+      <property name="category-icon-size" type="int" value="1"/>
+      <property name="menu-opacity" type="int" value="0"/>
     </property>
     <property name="clipman" type="empty">
       <property name="tweaks" type="empty">
@@ -219,7 +226,7 @@
       <property name="text" type="string" value="(genmon)"/>
       <property name="update-period" type="int" value="30000"/>
       <property name="enable-single-row" type="bool" value="true"/>
-      <property name="font" type="string" value="Inter 10"/>
+      <property name="font" type="string" value="SF Pro Display Medium 11"/>
     </property>
     <property name="plugin-17" type="string" value="genmon">
       <property name="command" type="string" value="/usr/local/share/.genmon-plugin/network-panel.sh"/>
@@ -227,7 +234,7 @@
       <property name="text" type="string" value="(genmon)"/>
       <property name="update-period" type="int" value="30000"/>
       <property name="enable-single-row" type="bool" value="true"/>
-      <property name="font" type="string" value="Inter 10"/>
+      <property name="font" type="string" value="SF Pro Display Medium 11"/>
     </property>
     <property name="plugin-18" type="string" value="genmon">
       <property name="command" type="string" value="/usr/local/share/.genmon-plugin/disk-panel.sh"/>
@@ -235,7 +242,7 @@
       <property name="text" type="string" value="(genmon)"/>
       <property name="update-period" type="int" value="30000"/>
       <property name="enable-single-row" type="bool" value="true"/>
-      <property name="font" type="string" value="Inter 10"/>
+      <property name="font" type="string" value="SF Pro Display Medium 11"/>
     </property>
     <property name="plugin-19" type="string" value="genmon">
       <property name="command" type="string" value="/usr/local/share/.genmon-plugin/cpu-panel.sh"/>
@@ -243,7 +250,7 @@
       <property name="text" type="string" value="(genmon)"/>
       <property name="update-period" type="int" value="30000"/>
       <property name="enable-single-row" type="bool" value="true"/>
-      <property name="font" type="string" value="Inter 10"/>
+      <property name="font" type="string" value="SF Pro Display Medium 11"/>
     </property>
     <property name="plugin-20" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
