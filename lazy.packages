@@ -1,12 +1,12 @@
 #GRUB
-	grub-btrfs
+    grub-btrfs
 
 #BASE PKGS
     dialog
     cryptsetup
     lvm2
     mdadm
-	libxcrypt-compat
+    libxcrypt-compat
     linux-headers
     ffmpeg
     mesa-vdpau
@@ -158,7 +158,7 @@
     fuse-exfat
     ntfs-3g
     gptfdisk
-	btrfs-progs
+    btrfs-progs
     smbclient
     samba
 
@@ -224,7 +224,6 @@
     gimp
     vlc
     timeshift
-    zed
     halloy
     dino
     dconf-editor
@@ -243,17 +242,20 @@
 
 # LAZY REPO PACKAGES
     xfce4-dynamic-workspaces
+    xfce4-applemenu-plugin
+    xfce4-launcher-plugin
     distrobox
-    zen-browser
-    brave-browser
+    zen-browser-bin
+    brave-bin
     cortile
-    neohtop
+    neohtop-bin
     webapp-manager
-    yaak
+    yaak-bin
     thunar-shares-plugin
-    podman-desktop
-    muCommander
-    termscp
+    podman-desktop-bin
+    muCommander-bin
+    termscp-bin
+    zed-bin
 
 # LAZY THEMES AND ICONS
     lazy-theme-config

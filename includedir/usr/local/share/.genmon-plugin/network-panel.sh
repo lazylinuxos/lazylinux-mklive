@@ -6,7 +6,7 @@ readonly DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 readonly ICON="${DIR}/icons/network/globe.svg"
 
 # Displays network interface dengan ipv4 (local)
-readonly TOOLTIP=$(ship --ipv4)
+readonly TOOLTIP=$(ship --ipv4 | awk 'NF>1' | sort -u)
 
 # Offline
 ip route | grep ^default &>/dev/null || \
@@ -36,7 +36,7 @@ function hasil_untuk_panel () {
   return 1
 }
 
-INTERFACES=( $(ship --ipv4 | awk '{ print $1 }') )
+INTERFACES=( $(ship --ipv4 | sort -u | awk '{ print $1 }') )
 
 TX=""
 
@@ -57,8 +57,8 @@ do
   CTX=$(awk '{print $0}' "/sys/class/net/${INTERFACE}/statistics/tx_bytes")
 
   BTX=$(( CTX - PTX ))
-  if [ "$i" -gt 0 ]; then
-      TX+=" | "
+  if [ -n "$TX" ]; then
+    TX+=" | "
   fi
   TX+=$(hasil_untuk_panel ${BTX})
 done
