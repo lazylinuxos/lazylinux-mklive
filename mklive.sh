@@ -55,12 +55,17 @@ mount_pseudofs() {
 }
 
 umount_pseudofs() {
-	for f in sys dev proc; do
-		if [ -d "$ROOTFS/$f" ] && ! umount -R -f "$ROOTFS/$f"; then
-			info_msg "ERROR: failed to unmount $ROOTFS/$f/"
-			return 1
-		fi
-	done
+    for f in sys dev proc; do
+        if [ -d "$ROOTFS/$f" ]; then
+            if ! umount -R -f "$ROOTFS/$f"; then
+                info_msg "Regular unmount failed for $ROOTFS/$f, trying lazy unmount..."
+                umount -l "$ROOTFS/$f" || {
+                    info_msg "ERROR: failed to unmount $ROOTFS/$f/"
+                    return 1
+                }
+            fi
+        fi
+    done
 }
 
 error_out() {
