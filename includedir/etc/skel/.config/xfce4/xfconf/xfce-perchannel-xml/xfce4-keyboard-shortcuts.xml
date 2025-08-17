@@ -50,7 +50,8 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;f" type="string" value="thunar"/>
       <property name="&lt;Super&gt;l" type="string" value="xfce4-screensaver-command --lock"/>
-      <property name="&lt;Alt&gt;F1" type="string" value="xfce4-popup-applicationsmenu"/>
+      <property name="&lt;Alt&gt;F5" type="string" value="xfce4-popup-applicationsmenu"/>
+      <property name="&lt;Alt&gt;F1" type="string" value="xfce4-popup-whiskermenu"/>
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Super&gt;e" type="string" value="thunar"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;Escape" type="string" value="xkill"/>
@@ -69,6 +70,7 @@
       <property name="&lt;Shift&gt;&lt;Super&gt;m" type="string" value="/usr/bin/magnus"/>
       <property name="&lt;Shift&gt;&lt;Super&gt;t" type="string" value="/usr/bin/cortile"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="xfce4-taskmanager"/>
+      <property name="&lt;Super&gt;a" type="string" value="skippy-xd –activate-window-picker"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
