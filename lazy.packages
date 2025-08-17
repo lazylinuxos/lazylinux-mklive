@@ -109,6 +109,9 @@
     tesseract-ocr-hye
     tesseract-ocr-rus
     tesseract-ocr-script-Armenian
+    wmctrl
+    xdotool
+    ksuperkey
 
 # PACKAGE MANAGEMENT
     vpm
@@ -154,6 +157,7 @@
     libXinerama-devel
     libXi-devel
     python3-pip
+    python3-xlib
     qt5
     python3-PyQt5-dbus
     python3-setproctitle
@@ -161,7 +165,7 @@
     python3-Pillow
     zig
     lua
-    
+
 # FILE SYSTEM
     exfat-utils
     fuse-exfat
@@ -266,6 +270,7 @@
     muCommander-bin
     termscp-bin
     zed-bin
+    skippy-xd-2025.08.03_2
 
 # LAZY THEMES AND ICONS
     lazy-theme-config
