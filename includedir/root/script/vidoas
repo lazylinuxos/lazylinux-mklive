@@ -1,0 +1,17 @@
+#!/bin/bash
+
+DOASDIR="/tmp/doas-$(date +%s)"
+mkdir $DOASDIR
+chmod 700 $DOASDIR
+DOASFILE="$DOASDIR/doas.conf"
+
+cp /etc/doas.conf $DOASFILE
+chmod 600 $DOASFILE
+
+vi $DOASFILE
+sync
+
+doas -C $DOASFILE && echo "valid config" && cp $DOASFILE /etc/doas.conf && chmod 400 /etc/doas.conf || echo "invalid config"
+sync
+
+rm -rf $DOASDIR
