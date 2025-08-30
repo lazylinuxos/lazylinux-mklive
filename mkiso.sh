@@ -102,7 +102,7 @@ build_variant() {
             GFX_PKGS="xorg-video-drivers"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
-            KERNEL_PKG="linux6.16"
+            KERNEL_PKG="linux-cachyos-lts"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)

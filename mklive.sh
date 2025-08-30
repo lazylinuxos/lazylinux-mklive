@@ -631,6 +631,14 @@ case "$LINUX_VERSION" in
         PACKAGE_LIST+=("$LINUX_VERSION")
         LINUX_VERSION="$(XBPS_ARCH=$TARGET_ARCH $XBPS_QUERY_CMD -r "$ROOTFS" ${XBPS_REPOSITORY:=-R} -x "$LINUX_VERSION" | grep 'linux[0-9._]\+')"
         ;;
+    linux-cachyos)
+        IGNORE_PKGS+=(linux)
+        PACKAGE_LIST+=(linux-cachyos linux-base)
+        ;;
+    linux-cachyos-lts)
+        IGNORE_PKGS+=(linux)
+        PACKAGE_LIST+=(linux-cachyos-lts linux-base)
+        ;;
     linux-asahi)
         IGNORE_PKGS+=(linux)
         PACKAGE_LIST+=(linux-asahi linux-base)
