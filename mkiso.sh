@@ -90,7 +90,7 @@ setup_pipewire() {
 build_variant() {
     variant="$1"
     shift
-    IMG=lazylinux-live-${ARCH}-${DATE}-${variant}.iso
+    #IMG=lazylinux-live-${ARCH}-${DATE}-${variant}.iso
 
     # el-cheapo installer is unsupported on arm because arm doesn't install a kernel by default
     # and to work around that would add too much complexity to it
@@ -102,7 +102,7 @@ build_variant() {
             GFX_PKGS="xorg-video-drivers"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
-            KERNEL_PKG="linux-cachyos-lts"
+            KERNEL_PKG="linux6.16-cachyos"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)
@@ -209,8 +209,8 @@ EOF
     if [ "$variant" != base ]; then
         setup_pipewire
     fi
-
-    ./mklive.sh -a "$TARGET_ARCH" -o "$IMG" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
+    # -o "$IMG" 
+    ./mklive.sh -a "$TARGET_ARCH" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
         ${KERNEL_PKG:+-v $KERNEL_PKG} ${REPO} "$@"
 
 	cleanup
