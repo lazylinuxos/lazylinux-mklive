@@ -646,13 +646,13 @@ case "$LINUX_VERSION" in
         PACKAGE_LIST+=("$LINUX_VERSION")
         LINUX_VERSION="$(XBPS_ARCH=$TARGET_ARCH $XBPS_QUERY_CMD -r "$ROOTFS" ${XBPS_REPOSITORY:=-R} -x "$LINUX_VERSION" | grep 'linux[0-9._]\+')"
         ;;
-    linux-cachyos)
+    linux6.16-cachyos)
         IGNORE_PKGS+=(linux)
-        PACKAGE_LIST+=(linux-cachyos linux-base)
+        PACKAGE_LIST+=(linux6.16-cachyos linux-base)
         ;;
-    linux-cachyos-lts)
+    linux6.12-cachyos)
         IGNORE_PKGS+=(linux)
-        PACKAGE_LIST+=(linux-cachyos-lts linux-base)
+        PACKAGE_LIST+=(linux6.12-cachyos linux-base)
         ;;
     linux-asahi)
         IGNORE_PKGS+=(linux)
@@ -673,6 +673,10 @@ KERNELVERSION=$($XBPS_UHELPER_CMD getpkgversion ${_kver})
 
 if [ "$LINUX_VERSION" = linux-asahi ]; then
     KERNELVERSION="${KERNELVERSION%%_*}-asahi_${KERNELVERSION##*_}"
+fi
+
+if [[ "$LINUX_VERSION" == *-cachyos* ]]; then
+    KERNELVERSION="${KERNELVERSION%%_*}-cachyos_${KERNELVERSION##*_}"
 fi
 
 if [ "$?" -ne "0" ]; then
