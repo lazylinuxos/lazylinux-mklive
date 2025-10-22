@@ -114,6 +114,7 @@
     wmctrl
     xdotool
     ksuperkey
+    gromit-mpx
 
 # PACKAGE MANAGEMENT
     vpm
@@ -254,6 +255,7 @@
     thunar-archive-plugin
     galculator-gtk3
     lightdm-gtk-greeter-settings
+    switcheroo
 
 
 # LAZY REPO PACKAGES
@@ -272,7 +274,7 @@
     muCommander-bin
     termscp-bin
     zed-bin
-    skippy-xd-2025.08.16_2
+    skippy-xd-2025.10.05_2
     fingwit
 
 # LAZY THEMES AND ICONS
