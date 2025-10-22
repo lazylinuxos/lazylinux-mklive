@@ -13,7 +13,7 @@
     ffmpeg
     mesa-vdpau
     mesa-vaapi
-    webkit2gtk
+    libwebkit2gtk41
     hostapd
     cronie
     snooze
@@ -212,7 +212,6 @@
     gufw
     mugshot
     octoxbps
-    hardinfo
     ghostwriter
     gparted
     obs
