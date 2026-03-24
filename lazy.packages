@@ -4,21 +4,17 @@
 #BASE PKGS
     opendoas
     doasedit
-    dialog
-    cryptsetup
-    lvm2
-    mdadm
     libxcrypt-compat
     linux-headers
     ffmpeg
     mesa-vdpau
     mesa-vaapi
+    mesa-dri
     libwebkit2gtk41
     hostapd
     cronie
     snooze
     superd
-    xmirror
     noto-fonts-emoji
     noto-fonts-ttf
     noto-fonts-ttf-extra
@@ -27,20 +23,23 @@
     apulse
     alsa-ucm-conf
     sof-firmware
-
+    brightnessctl
+    cava
+    cliphist
+    matugen
+    qt5ct
+    qt6ct
+    wl-clipboard
+    hyprpicker
+    xwayland-satellite
+    ibus
 
 # NETWORKING
     NetworkManager
-    NetworkManager-openvpn
-    NetworkManager-openconnect
-    NetworkManager-strongswan
-    NetworkManager-l2tp
-    NetworkManager-pptp
     ntp
 
 # BLUETOOTH
     bluez
-    blueman
 
 # PRINTER
     cups
@@ -56,10 +55,7 @@
     powertop
 
 # UTILITIES
-    wget
-    bash-completion
     xterm
-    btop
     binutils
     xcolor
     xclip
@@ -82,11 +78,8 @@
     wget
     mtools
     mlocate
-    bash-completion
     vsv
-    hddtemp
     lm_sensors
-    zellij
     yazi
     ImageMagick
     poppler
@@ -104,7 +97,6 @@
     dust
     Clipboard
     rofi
-    openfortivpn
     zbar
     tesseract-ocr
     tesseract-ocr-eng
@@ -113,8 +105,6 @@
     tesseract-ocr-script-Armenian
     wmctrl
     xdotool
-    ksuperkey
-    gromit-mpx
 
 # PACKAGE MANAGEMENT
     vpm
@@ -131,6 +121,8 @@
     docker-buildx
     lazygit
     lazydocker
+    lazyssh
+    lazysql
     podman
     go
     nodejs
@@ -177,18 +169,12 @@
     btrfs-progs
     smbclient
     samba
+    kiorg
 
 # TEXT EDITORS
     nano
     vim
     helix
-
-# LOCALIZATION
-    libreoffice-i18n-en-US
-    libreoffice-i18n-ru
-    thunderbird-i18n-en-US
-    thunderbird-i18n-hy-AM
-    thunderbird-i18n-ru
 
 # REPOSITORIES
     void-repo-nonfree
@@ -197,95 +183,44 @@
 
 # GUI
     linux-wifi-hotspot
-    thunar-media-tags-plugin
     ghostty
-    barrier
-    barrier-gui
-    redshift-gtk
-    wireshark
     imhex
-    virt-manager
-    qemu
     libvirt
     bridge-utils
-    onboard
-    gufw
-    mugshot
     octoxbps
     ghostwriter
-    gparted
-    obs
-    keepassxc
     syncthing
     syncthingtray
-    deadbeef
-    gpodder
-    liferea
-    cherrytree
     plymouth
-    thunderbird
-    simple-scan
-    bleachbit
-    dbeaver
     fsearch
-    qdirstat
-    imagewriter
     qbittorrent
     handbrake
-    inkscape
-    flameshot
     telegram-desktop
     remmina
     gimp
     vlc
-    timeshift
     halloy
     dino
     dconf-editor
-    libreoffice-writer
-    libreoffice-calc
-    libreoffice-impress
-    libreoffice-draw
-    libreoffice-math
-    libreoffice-base
-    libreoffice-gnome
-    xfce4-plugins
-    xfce4-docklike-plugin
-    thunar-archive-plugin
     galculator-gtk3
-    lightdm-gtk-greeter-settings
-    switcheroo
-
+    smile
 
 # LAZY REPO PACKAGES
-    xfce4-dynamic-workspaces
-    xfce4-applemenu-plugin
-    xfce4-launcher-plugin
     distrobox
     zen-browser-bin
     brave-bin
-    cortile
-    neohtop-bin
     webapp-manager
-    yaak-bin
-    thunar-shares-plugin
-    podman-desktop-bin
-    muCommander-bin
+    posting
     termscp-bin
-    zed-bin
-    skippy-xd-2025.10.05_2
-    fingwit
+    zed
+    wayscriber
+    wayscriber-configurator
 
 # LAZY THEMES AND ICONS
+    adw-gtk3-theme
     lazy-theme-config
     papirus-icon-theme
-    lazy-squared-theme
-    lazy-nordic-icons
-    lazy-backstep-theme
-    lazy-backstep-icons
     lazy-catppuccin-tela-mix
-    lazy-fluent-grey
-    bluecurve
 
 # LAZY ZSH config
     zsh

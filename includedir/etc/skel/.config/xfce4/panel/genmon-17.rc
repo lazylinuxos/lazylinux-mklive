@@ -1,6 +1,0 @@
-Command=/usr/local/share/.genmon-plugin/network-panel.sh
-UseLabel=0
-Text=Network
-UpdatePeriod=5000
-Font=SF Pro Display Medium 11
-

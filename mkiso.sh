@@ -102,7 +102,7 @@ build_variant() {
             GFX_PKGS="xorg-video-drivers"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
-            KERNEL_PKG="linux6.17"
+            KERNEL_PKG="linux6.18"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)
@@ -181,6 +181,10 @@ build_variant() {
         lxqt)
             PKGS="$PKGS $XORG_PKGS lxqt sddm gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
             SERVICES="$SERVICES dbus dhcpcd wpa_supplicant sddm polkitd"
+        ;;
+        niri)
+            PKGS="$PKGS $XORG_PKGS niri dms-shell dms-shell-niri dms-greeter dsearch gvfs-afc gvfs-mtp gvfs-smb udisks2"
+            SERVICES="$SERVICES dbus dhcpcd wpa_supplicant greetd polkitd"
         ;;
         *)
             >&2 echo "Unknown variant $variant"
