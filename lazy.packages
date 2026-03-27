@@ -1,7 +1,11 @@
 #GRUB
     grub-btrfs
+    lazy-grub
 
 #BASE PKGS
+    lazy-os-prober
+    lazy-runit
+    lazysvctl
     opendoas
     doasedit
     dialog
@@ -11,7 +15,6 @@
     libxcrypt-compat
     linux-headers
     ffmpeg
-    mesa-vdpau
     mesa-vaapi
     libwebkit2gtk41
     hostapd
@@ -19,6 +22,18 @@
     snooze
     superd
     xmirror
+<<<<<<< HEAD
+=======
+    noto-fonts-emoji
+    noto-fonts-ttf
+    noto-fonts-ttf-extra
+    alsa-plugins-pulseaudio
+    alsa-utils
+    apulse
+    alsa-ucm-conf
+    sof-firmware
+    crun
+>>>>>>> 3d7b3b049 (Add calamares and more customizations)
 
 # NETWORKING
     NetworkManager
@@ -231,7 +246,7 @@
     vlc
     timeshift
     halloy
-    dino
+    dinox
     dconf-editor
     libreoffice-writer
     libreoffice-calc
@@ -248,6 +263,7 @@
     switcheroo
 
 # LAZY REPO PACKAGES
+    calamares
     xfce4-dynamic-workspaces
     xfce4-applemenu-plugin
     xfce4-launcher-plugin
@@ -263,7 +279,7 @@
     muCommander-bin
     termscp-bin
     zed-bin
-    skippy-xd-2025.10.05_2
+    skippy-xd-2026.01.04_1
     fingwit
 
 # LAZY THEMES AND ICONS

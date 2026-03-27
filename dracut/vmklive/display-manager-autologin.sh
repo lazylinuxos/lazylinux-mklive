@@ -5,7 +5,7 @@
 type getarg >/dev/null 2>&1 || . /lib/dracut-lib.sh
 
 USERNAME=$(getarg live.user)
-[ -z "$USERNAME" ] && USERNAME=slacker
+[ -z "$USERNAME" ] && USERNAME=anon
 
 # Configure GDM autologin
 if [ -d ${NEWROOT}/etc/gdm ]; then

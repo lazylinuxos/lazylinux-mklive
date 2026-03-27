@@ -97,10 +97,11 @@ build_variant() {
     WANT_INSTALLER=no
     case "$ARCH" in
         x86_64*|i686*)
-            GRUB_PKGS="grub-i386-efi grub-x86_64-efi"
+            GRUB_PKGS="lazy-grub-i386-efi lazy-grub-x86_64-efi"
             GFX_PKGS="xorg-video-drivers xf86-video-intel"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
+            KERNEL_PKG="linux7.0"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)
@@ -211,7 +212,7 @@ EOF
     ./mklive.sh -a "$TARGET_ARCH" -o "$IMG" -v "linux7.0" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" ${REPO} "$@"
 =======
     # -o "$IMG" 
-    ./mklive.sh -a "$TARGET_ARCH" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
+    ./mklive.sh -a "$TARGET_ARCH" -C "live.autologin" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
         ${KERNEL_PKG:+-v $KERNEL_PKG} ${REPO} "$@"
 >>>>>>> 7c73c3726 (Add cachyos kernel)
 

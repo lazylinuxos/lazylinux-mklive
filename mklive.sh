@@ -28,8 +28,8 @@ umask 022
 
 . ./lib.sh
 
-REQUIRED_PKGS=(base-files libgcc dash coreutils sed tar gawk squashfs-tools xorriso)
-TARGET_PKGS=(base-files)
+REQUIRED_PKGS=(lazy-base-files libgcc dash coreutils sed tar gawk squashfs-tools xorriso)
+TARGET_PKGS=(lazy-base-files)
 INITRAMFS_PKGS=(binutils xz device-mapper dhclient dracut-network openresolv)
 PACKAGE_LIST=(jq)
 IGNORE_PKGS=()
@@ -50,22 +50,22 @@ print_step() {
 mount_pseudofs() {
     for f in sys dev proc; do
         mkdir -p "$ROOTFS"/$f
+<<<<<<< HEAD
         mount --rbind /$f "$ROOTFS"/$f --make-rslave
+=======
+        mount --rbind /$f "$ROOTFS"/$f
+        mount --make-rslave "$ROOTFS"/$f
+>>>>>>> 3d7b3b049 (Add calamares and more customizations)
     done
 }
 
 umount_pseudofs() {
-    for f in sys dev proc; do
-        if [ -d "$ROOTFS/$f" ]; then
-            if ! umount -R -f "$ROOTFS/$f"; then
-                info_msg "Regular unmount failed for $ROOTFS/$f, trying lazy unmount..."
-                umount -l "$ROOTFS/$f" || {
-                    info_msg "ERROR: failed to unmount $ROOTFS/$f/"
-                    return 1
-                }
-            fi
-        fi
-    done
+	for f in sys dev proc; do
+		if [ -d "$ROOTFS/$f" ] && ! umount -R -l "$ROOTFS/$f"; then
+			info_msg "ERROR: failed to unmount $ROOTFS/$f/"
+			return 1
+		fi
+	done
 }
 
 error_out() {
@@ -86,7 +86,7 @@ usage() {
 
 	OPTIONS
 	 -a <arch>          Set XBPS_ARCH in the ISO image
-	 -b <system-pkg>    Set an alternative base package (default: base-system)
+	 -b <system-pkg>    Set an alternative base package (default: lazy-base-system)
 	 -r <repo>          Use this XBPS repository. May be specified multiple times
 	 -c <cachedir>      Use this XBPS cache directory (default: ./xbps-cachedir-<arch>)
 	 -H <host_cachedir> Use this Host XBPS cache directory (default: ./xbps-cachedir-<host_arch>)
@@ -165,8 +165,8 @@ install_packages() {
         ${XBPS_REPOSITORY} -c "$XBPS_CACHEDIR" -y "${PACKAGE_LIST[@]}" "${INITRAMFS_PKGS[@]}"
     [ $? -ne 0 ] && die "Failed to install ${PACKAGE_LIST[*]} ${INITRAMFS_PKGS[*]}"
 
-    xbps-reconfigure -r "$ROOTFS" -f base-files >/dev/null 2>&1
-    chroot "$ROOTFS" env -i xbps-reconfigure -f base-files
+    xbps-reconfigure -r "$ROOTFS" -f lazy-base-files >/dev/null 2>&1
+    chroot "$ROOTFS" env -i xbps-reconfigure -f lazy-base-files
 
     # Enable choosen UTF-8 locale and generate it into the target rootfs.
     if [ -f "$ROOTFS"/etc/default/libc-locales ]; then
@@ -224,8 +224,18 @@ generate_initramfs() {
 
     copy_dracut_files "$ROOTFS"
     copy_autoinstaller_files "$ROOTFS"
+<<<<<<< HEAD
     chroot "$ROOTFS" env -i PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin" \
         /usr/bin/dracut -N --"${INITRAMFS_COMPRESSION}" \
+=======
+
+    # Enable plymouth
+    if [ -f $ROOTFS/etc/plymouth/plymouthd.conf ]; then
+        chroot $ROOTFS plymouth-set-default-theme -R lazylinux-logo
+    fi
+
+    chroot "$ROOTFS" env -i /usr/bin/dracut -N --"${INITRAMFS_COMPRESSION}" \
+>>>>>>> 3d7b3b049 (Add calamares and more customizations)
         --add-drivers "ahci" --force-add "vmklive autoinstaller" --omit systemd "/boot/initrd" $KERNELVERSION
     [ $? -ne 0 ] && die "Failed to generate the initramfs"
 
@@ -536,7 +546,8 @@ while getopts "a:b:r:H:c:C:T:Kk:l:i:I:S:e:s:o:p:g:v:P:x:Vh" opt; do
 	esac
 done
 shift $((OPTIND - 1))
-XBPS_REPOSITORY="$XBPS_REPOSITORY --repository=https://repo-default.voidlinux.org/current --repository=https://repo-default.voidlinux.org/current/musl --repository=https://repo-default.voidlinux.org/current/aarch64"
+
+XBPS_REPOSITORY="$XBPS_REPOSITORY --repository=https://github.com/lazylinuxos/lazy-repo/releases/latest/download --repository=https://repo-default.voidlinux.org/current --repository=https://repo-default.voidlinux.org/current/musl --repository=https://repo-default.voidlinux.org/current/aarch64"
 
 # Configure dracut to use overlayfs for the writable overlay.
 BOOT_CMDLINE="$BOOT_CMDLINE rd.live.overlay.overlayfs=1 "
@@ -551,8 +562,13 @@ HOST_ARCH=$(xbps-uhelper arch)
 : ${LOCALE:=en_US.UTF-8}
 : ${INITRAMFS_COMPRESSION:=xz}
 : ${SQUASHFS_COMPRESSION:=xz}
+<<<<<<< HEAD
 : ${BASE_SYSTEM_PKG:=base-system}
 : ${BOOT_TITLE:="Void Linux"}
+=======
+: ${BASE_SYSTEM_PKG:=lazy-base-system}
+: ${BOOT_TITLE:="LazyLinux"}
+>>>>>>> 3d7b3b049 (Add calamares and more customizations)
 : ${LINUX_VERSION:=linux}
 
 XBPS_TARGET_ARCH="$TARGET_ARCH" register_binfmt
@@ -646,9 +662,9 @@ case "$LINUX_VERSION" in
         PACKAGE_LIST+=("$LINUX_VERSION")
         LINUX_VERSION="$(XBPS_ARCH=$TARGET_ARCH $XBPS_QUERY_CMD -r "$ROOTFS" ${XBPS_REPOSITORY:=-R} -x "$LINUX_VERSION" | grep 'linux[0-9._]\+')"
         ;;
-    linux6.17-cachyos)
+    linux6.18-cachyos)
         IGNORE_PKGS+=(linux)
-        PACKAGE_LIST+=(linux6.17-cachyos linux-base)
+        PACKAGE_LIST+=(linux6.18-cachyos linux-base)
         ;;
     linux6.12-cachyos)
         IGNORE_PKGS+=(linux)

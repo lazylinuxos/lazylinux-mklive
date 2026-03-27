@@ -10,7 +10,7 @@
   <property name="color-bold-use-default" type="bool" value="false"/>
   <property name="color-palette" type="string" value="#252525;#ff9f95;#a6e22e;#fd971f;#435e87;#789ec6;#5e7175;#dbdcdc;#454545;#ff8d80;#b6e354;#fd971f;#587aa4;#46a4ff;#a3babf;#fdfdfd"/>
   <property name="dropdown-status-icon" type="bool" value="false"/>
-  <property name="font-name" type="string" value="JetBrainsMono Nerd Font Mono 14"/>
+  <property name="font-name" type="string" value="ShureTechMono Nerd Font Mono 14"/>
   <property name="misc-always-show-tabs" type="bool" value="false"/>
   <property name="misc-bell" type="bool" value="false"/>
   <property name="misc-bell-urgent" type="bool" value="false"/>

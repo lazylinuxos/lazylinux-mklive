@@ -167,6 +167,7 @@ iso639_language() {
     hr)  echo "Croatian" ;;
     hsb) echo "Upper Sorbian" ;;
     hu)  echo "Hungarian" ;;
+    hy)  echo "Armenian" ;;
     id)  echo "Indonesian" ;;
     is)  echo "Icelandic" ;;
     it)  echo "Italian" ;;
@@ -223,6 +224,7 @@ iso3166_country() {
     AD) echo "Andorra" ;;
     AE) echo "United Arab Emirates" ;;
     AL) echo "Albania" ;;
+    AM) echo "Armenia" ;;
     AR) echo "Argentina" ;;
     AT) echo "Austria" ;;
     AU) echo "Australia" ;;
@@ -500,6 +502,7 @@ menu_partitions() {
 
         DIALOG --title " Select the software for partitioning " \
             --menu "$MENULABEL" ${MENUSIZE} \
+            "gparted" "Graphical partitioner" \
             "cfdisk" "Easy to use" \
             "fdisk" "More advanced"
         if [ $? -eq 0 ]; then
@@ -1246,7 +1249,7 @@ install_packages() {
         fi
     fi
 
-    _syspkg="base-system"
+    _syspkg="lazy-base-system"
 
     mkdir -p $TARGETDIR/var/db/xbps/keys $TARGETDIR/usr/share
     cp -a /usr/share/xbps.d $TARGETDIR/usr/share/
@@ -1266,7 +1269,7 @@ install_packages() {
     if [ $? -ne 0 ]; then
         DIE 1
     fi
-    xbps-reconfigure -r $TARGETDIR -f base-files >/dev/null 2>&1
+    xbps-reconfigure -r $TARGETDIR -f lazy-base-files >/dev/null 2>&1
     stdbuf -oL chroot $TARGETDIR xbps-reconfigure -a 2>&1 | \
         DIALOG --title "Configuring base system packages..." --programbox 24 80
     if [ $? -ne 0 ]; then
@@ -1358,7 +1361,11 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
     # Create and mount filesystems
     create_filesystems
 
+<<<<<<< HEAD
     if find "$TARGETDIR" -xdev -mindepth 1 -maxdepth 1 -not -name 'lost+found' | read; then
+=======
+    if ! find "$TARGETDIR" -xdev -mindepth 1 -maxdepth 1 -not -name 'lost+found' | read; then
+>>>>>>> 3d7b3b049 (Add calamares and more customizations)
         DIALOG --msgbox "${BOLD}${RED}ERROR:${RESET} \
 Root partition not empty! Aborting..." ${MSGBOXSIZE}
         DIE 1

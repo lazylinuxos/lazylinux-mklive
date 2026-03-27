@@ -3,9 +3,9 @@
 Welcome to the LazyLinux (Void) Live system. Two users are available to log in:
 
 	- root:lazylinux
-	- slacker:lazylinux
+	- anon:lazylinux
 
-The `slacker` user additionally has `sudo(8)` permissions to run any command
+The `anon` user additionally has `sudo(8)` permissions to run any command
 without a password.
 
 To start the installation please type:

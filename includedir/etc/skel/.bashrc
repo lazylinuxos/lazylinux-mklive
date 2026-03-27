@@ -6,18 +6,18 @@
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
-if [ -f ~/.bash_aliases ]; then 
+if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases;
 fi
 
-if [ -f ~/.bash_functions ]; then 
+if [ -f ~/.bash_functions ]; then
     . ~/.bash_functions;
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 eval "$(oh-my-posh init bash --config ~/.poshthemes/tiwahu.omp.json)"
-eval "$(zoxide init bash)"
+# eval "$(zoxide init bash)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
