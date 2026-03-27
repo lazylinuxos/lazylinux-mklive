@@ -63,7 +63,7 @@ VAI_install_xbps_keys() {
 
 VAI_install_base_system() {
     # Install a base system
-    XBPS_ARCH="${XBPS_ARCH}" xbps-install -Sy -R "${xbpsrepository}" -r /mnt base-system grub
+    XBPS_ARCH="${XBPS_ARCH}" xbps-install -Sy -R "${xbpsrepository}" -r /mnt lazy-base-system lazy-grub
 
     # Install additional packages
     if [  -n "${pkgs}" ] ; then
@@ -197,7 +197,7 @@ VAI_configure_autoinstall() {
     timezone="America/Chicago"
     keymap="us"
     libclocale="en_US.UTF-8"
-    username="voidlinux"
+    username="lazylinux"
     end_action="shutdown"
     end_script="/bin/true"
 

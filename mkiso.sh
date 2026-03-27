@@ -61,7 +61,7 @@ include_installer() {
         MKLIVE_VERSION="$(PROGNAME='' version)"
         installer=$(mktemp)
         sed "s/@@MKLIVE_VERSION@@/${MKLIVE_VERSION}/" installer.sh > "$installer"
-        install -Dm755 "$installer" "$INCLUDEDIR"/usr/bin/void-installer
+        install -Dm755 "$installer" "$INCLUDEDIR"/usr/bin/lazy-installer
         rm "$installer"
     else
         echo installer.sh not found >&2
@@ -98,11 +98,11 @@ build_variant() {
     WANT_INSTALLER=no
     case "$ARCH" in
         x86_64*|i686*)
-            GRUB_PKGS="grub-i386-efi grub-x86_64-efi"
-            GFX_PKGS="xorg-video-drivers"
+            GRUB_PKGS="lazy-grub-i386-efi lazy-grub-x86_64-efi"
+            GFX_PKGS="xorg-video-drivers xf86-video-intel"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
-            KERNEL_PKG="linux6.17"
+            KERNEL_PKG="linux6.19"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)
@@ -202,15 +202,15 @@ EOF
         include_installer
     else
         mkdir -p "$INCLUDEDIR"/usr/bin
-        printf "#!/bin/sh\necho 'void-installer is not supported on this live image'\n" > "$INCLUDEDIR"/usr/bin/void-installer
-        chmod 755 "$INCLUDEDIR"/usr/bin/void-installer
+        printf "#!/bin/sh\necho 'lazy-installer is not supported on this live image'\n" > "$INCLUDEDIR"/usr/bin/lazy-installer
+        chmod 755 "$INCLUDEDIR"/usr/bin/lazy-installer
     fi
 
     if [ "$variant" != base ]; then
         setup_pipewire
     fi
     # -o "$IMG" 
-    ./mklive.sh -a "$TARGET_ARCH" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
+    ./mklive.sh -a "$TARGET_ARCH" -C "live.autologin" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
         ${KERNEL_PKG:+-v $KERNEL_PKG} ${REPO} "$@"
 
 	cleanup

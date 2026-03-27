@@ -5,7 +5,7 @@
 type getarg >/dev/null 2>&1 || . /lib/dracut-lib.sh
 
 USERNAME=$(getarg live.user)
-[ -z "$USERNAME" ] && USERNAME=slacker
+[ -z "$USERNAME" ] && USERNAME=anon
 
 # Configure GDM autologin
 if [ -d ${NEWROOT}/etc/gdm ]; then
@@ -25,11 +25,7 @@ fi
 if [ -x ${NEWROOT}/usr/bin/sddm ]; then
     cat > ${NEWROOT}/etc/sddm.conf <<_EOF
 [Autologin]
-<<<<<<< HEAD
-User=slacker
-=======
 User=${USERNAME}
->>>>>>> origin/master
 Session=plasma.desktop
 _EOF
 fi

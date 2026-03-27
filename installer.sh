@@ -167,6 +167,7 @@ iso639_language() {
     hr)  echo "Croatian" ;;
     hsb) echo "Upper Sorbian" ;;
     hu)  echo "Hungarian" ;;
+    hy)  echo "Armenian" ;;
     id)  echo "Indonesian" ;;
     is)  echo "Icelandic" ;;
     it)  echo "Italian" ;;
@@ -223,10 +224,11 @@ iso3166_country() {
     AD) echo "Andorra" ;;
     AE) echo "United Arab Emirates" ;;
     AL) echo "Albania" ;;
+    AM) echo "Armenia" ;;
     AR) echo "Argentina" ;;
     AT) echo "Austria" ;;
     AU) echo "Australia" ;;
-    BA) echo "Bonsia and Herzegovina" ;;
+    BA) echo "Bosnia and Herzegovina" ;;
     BE) echo "Belgium" ;;
     BG) echo "Bulgaria" ;;
     BH) echo "Bahrain" ;;
@@ -500,6 +502,7 @@ menu_partitions() {
 
         DIALOG --title " Select the software for partitioning " \
             --menu "$MENULABEL" ${MENUSIZE} \
+            "gparted" "Graphical partitioner" \
             "cfdisk" "Easy to use" \
             "fdisk" "More advanced"
         if [ $? -eq 0 ]; then
@@ -863,7 +866,7 @@ test_network() {
 configure_wifi() {
     local dev="$1" ssid enc pass _wpasupconf=/etc/wpa_supplicant/wpa_supplicant.conf
 
-    DIALOG --form "Wireless configuration for ${dev}\n(encryption type: wep or wpa)" 0 0 0 \
+    DIALOG --form "Wireless configuration for ${dev}\n(encryption type: wep, wpa, or sae)" 0 0 0 \
         "SSID:" 1 1 "" 1 16 30 0 \
         "Encryption:" 2 1 "" 2 16 4 3 \
         "Password:" 3 1 "" 3 16 63 0 || return 1
@@ -873,8 +876,8 @@ configure_wifi() {
     if [ -z "$ssid" ]; then
         DIALOG --msgbox "Invalid SSID." ${MSGBOXSIZE}
         return 1
-    elif [ -z "$enc" -o "$enc" != "wep" -a "$enc" != "wpa" ]; then
-        DIALOG --msgbox "Invalid encryption type (possible values: wep or wpa)." ${MSGBOXSIZE}
+    elif [ -z "$enc" ] || [[ "$enc" != "wep" && "$enc" != "wpa" && "$enc" != "sae" ]]; then
+        DIALOG --msgbox "Invalid encryption type (possible values: wep, wpa, or sae)." ${MSGBOXSIZE}
         return 1
     elif [ -z "$pass" ]; then
         DIALOG --msgbox "Invalid AP password." ${MSGBOXSIZE}
@@ -894,6 +897,15 @@ network={
   wep_key0="$pass"
   wep_tx_keyidx=0
   auth_alg=SHARED
+}
+EOF
+    elif [ "$enc" = "sae" ]; then
+        cat << EOF >> ${_wpasupconf}
+network={
+    ssid="$ssid"
+    key_mgmt=SAE
+    sae_password="$pass"
+    ieee80211w=2
 }
 EOF
     else
@@ -1067,6 +1079,9 @@ as FAT32, mountpoint /boot/efi and at least with 100MB of size." ${MSGBOXSIZE}
 create_filesystems() {
     local mnts dev mntpt fstype fspassno mkfs size rv uuid
 
+    # truncate to avoid doubling up
+    : >"$TARGET_FSTAB"
+
     mnts=$(grep -E '^MOUNTPOINT .*' $CONF_FILE | sort -k 5)
     set -- ${mnts}
     while [ $# -ne 0 ]; do
@@ -1234,7 +1249,7 @@ install_packages() {
         fi
     fi
 
-    _syspkg="base-system"
+    _syspkg="lazy-base-system"
 
     mkdir -p $TARGETDIR/var/db/xbps/keys $TARGETDIR/usr/share
     cp -a /usr/share/xbps.d $TARGETDIR/usr/share/
@@ -1254,7 +1269,7 @@ install_packages() {
     if [ $? -ne 0 ]; then
         DIE 1
     fi
-    xbps-reconfigure -r $TARGETDIR -f base-files >/dev/null 2>&1
+    xbps-reconfigure -r $TARGETDIR -f lazy-base-files >/dev/null 2>&1
     stdbuf -oL chroot $TARGETDIR xbps-reconfigure -a 2>&1 | \
         DIALOG --title "Configuring base system packages..." --programbox 24 80
     if [ $? -ne 0 ]; then
@@ -1345,6 +1360,12 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
 
     # Create and mount filesystems
     create_filesystems
+
+    if ! find "$TARGETDIR" -xdev -mindepth 1 -maxdepth 1 -not -name 'lost+found' | read; then
+        DIALOG --msgbox "${BOLD}${RED}ERROR:${RESET} \
+Root partition not empty! Aborting..." ${MSGBOXSIZE}
+        DIE 1
+    fi
 
     SOURCE_DONE="$(get_option SOURCE)"
     # If source not set use defaults.

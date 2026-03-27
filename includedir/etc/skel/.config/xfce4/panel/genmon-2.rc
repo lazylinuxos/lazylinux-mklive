@@ -2,5 +2,5 @@ Command=/usr/local/share/.genmon-plugin/cpu-panel.sh
 UseLabel=0
 Text=(genmon)
 UpdatePeriod=30000
-Font=SF Pro Display Medium 11
+Font=Share Tech 12
 
