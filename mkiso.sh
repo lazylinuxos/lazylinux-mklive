@@ -102,7 +102,6 @@ build_variant() {
             GFX_PKGS="xorg-video-drivers xf86-video-intel"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
-            KERNEL_PKG="linux6.19"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)
@@ -131,7 +130,7 @@ build_variant() {
     XORG_PKGS="$GFX_PKGS $FONTS xorg-minimal xorg-input-drivers setxkbmap xauth orca"
     CUSTOM_PKGS="$(grep '^[^#].' lazy.packages)"
     PKGS_TO_IGNORE="parole"
-    SERVICES="sshd chronyd libvirtd virtlockd virtlogd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
+    SERVICES="sshd chronyd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
 
 
     LIGHTDM_SESSION=''
@@ -209,8 +208,8 @@ EOF
     if [ "$variant" != base ]; then
         setup_pipewire
     fi
-    # -o "$IMG" 
-    ./mklive.sh -a "$TARGET_ARCH" -C "live.autologin" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
+    # -o "$IMG"
+    ./mklive.sh -a "$TARGET_ARCH" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
         ${KERNEL_PKG:+-v $KERNEL_PKG} ${REPO} "$@"
 
 	cleanup

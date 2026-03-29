@@ -6,8 +6,6 @@
     lazy-os-prober
     lazy-runit
     lazysvctl
-    opendoas
-    doasedit
     dialog
     cryptsetup
     lvm2
