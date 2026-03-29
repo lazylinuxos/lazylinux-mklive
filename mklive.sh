@@ -699,7 +699,11 @@ if [ "$?" -ne "0" ]; then
     die "Failed to find kernel package version"
 fi
 
+<<<<<<< HEAD
 : ${OUTPUT_FILE="void-live-${TARGET_ARCH}-${KERNELVERSION}-$(date -u +%Y%m%d).iso"}
+=======
+: ${OUTPUT_FILE="lazylinux-live-${TARGET_ARCH}-$(date -u +%Y%m%d)-xfce.iso"}
+>>>>>>> 49d83ca14 (add workflow to build image)
 
 print_step "Installing software to generate the image: ${REQUIRED_PKGS[*]} ..."
 install_prereqs "${REQUIRED_PKGS[@]}"

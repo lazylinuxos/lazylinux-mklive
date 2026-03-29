@@ -130,7 +130,7 @@ build_variant() {
     XORG_PKGS="xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio alsa-utils apulse alsa-ucm-conf sof-firmware orca"
     CUSTOM_PKGS="$(grep '^[^#].' lazy.packages)"
     PKGS_TO_IGNORE="parole"
-    SERVICES="sshd chronyd libvirtd virtlockd virtlogd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
+    SERVICES="sshd chronyd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
 
     LIGHTDM_SESSION=''
 
@@ -208,11 +208,16 @@ EOF
         setup_pipewire
     fi
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     ./mklive.sh -a "$TARGET_ARCH" -o "$IMG" -v "linux7.0" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" ${REPO} "$@"
 =======
     # -o "$IMG" 
     ./mklive.sh -a "$TARGET_ARCH" -C "live.autologin" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
+=======
+    # -o "$IMG"
+    ./mklive.sh -a "$TARGET_ARCH" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
+>>>>>>> 49d83ca14 (add workflow to build image)
         ${KERNEL_PKG:+-v $KERNEL_PKG} ${REPO} "$@"
 >>>>>>> 7c73c3726 (Add cachyos kernel)
 
