@@ -1,0 +1,98 @@
+name: Build LazyLinux Image
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+permissions:
+  contents: write
+
+jobs:
+  build-live-iso:
+    name: Build Live ISO (${{ matrix.de }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        de: [xfce]
+    container:
+      image: "ghcr.io/void-linux/void-mklive:20250116R1"
+      options: --privileged
+      volumes:
+        - /dev:/dev
+      env:
+        PATH: "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/sbin:/usr/local/bin:/tmp/bin"
+
+    steps:
+      - name: Prepare container
+        shell: sh
+        run: xbps-install -Syu xbps && xbps-install -yu
+
+      - name: Create output directory
+        run: |
+          mkdir -p /github/workspace/images
+
+      - name: Clone and checkout
+        uses: classabbyamp/treeless-checkout-action@v1
+
+      - name: Build live ISO
+        run: |
+          DATE=$(date +"%Y%m%d")
+          ./lazy-build.sh ${{ matrix.de }} /github/workspace/images/lazylinux-${{ matrix.de }}-${DATE}.iso
+
+      - name: Upload built ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: lazylinux-${{ matrix.de }}-iso
+          path: /github/workspace/images/*.iso
+          retention-days: 1
+
+  upload-to-sf:
+    needs: build-live-iso
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download built ISOs
+        uses: actions/download-artifact@v4
+        with:
+          pattern: lazylinux-*-iso
+          path: ./images/
+          merge-multiple: true
+
+      - name: Generate SHA256 checksums
+        working-directory: ./images
+        run: sha256sum *.iso > sha256sum.txt
+
+      - name: Sign checksums
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+          gpg --batch --yes --passphrase "$GPG_PASSPHRASE" \
+            --pinentry-mode loopback \
+            --detach-sign --armor ./images/sha256sum.txt
+          mv ./images/sha256sum.txt.asc ./images/sha256sum.txt.gpg
+
+      - name: Upload to SourceForge
+        env:
+          SF_SSH_KEY: ${{ secrets.SF_SSH_KEY }}
+        run: |
+          # Setup SSH key
+          mkdir -p ~/.ssh
+          echo "$SF_SSH_KEY" > ~/.ssh/sf_key
+          chmod 600 ~/.ssh/sf_key
+
+          # Add SourceForge to known hosts
+          ssh-keyscan frs.sourceforge.net >> ~/.ssh/known_hosts
+
+          # Upload ISOs via rsync
+          rsync -avP -e "ssh -i ~/.ssh/sf_key" \
+              ./images/*.iso \
+              nerdyslacker@frs.sourceforge.net:/home/frs/project/lazylinux/iso
