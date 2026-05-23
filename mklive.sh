@@ -50,12 +50,7 @@ print_step() {
 mount_pseudofs() {
     for f in sys dev proc; do
         mkdir -p "$ROOTFS"/$f
-<<<<<<< HEAD
         mount --rbind /$f "$ROOTFS"/$f --make-rslave
-=======
-        mount --rbind /$f "$ROOTFS"/$f
-        mount --make-rslave "$ROOTFS"/$f
->>>>>>> 3d7b3b049 (Add calamares and more customizations)
     done
 }
 
@@ -224,18 +219,14 @@ generate_initramfs() {
 
     copy_dracut_files "$ROOTFS"
     copy_autoinstaller_files "$ROOTFS"
-<<<<<<< HEAD
-    chroot "$ROOTFS" env -i PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin" \
-        /usr/bin/dracut -N --"${INITRAMFS_COMPRESSION}" \
-=======
 
     # Enable plymouth
     if [ -f $ROOTFS/etc/plymouth/plymouthd.conf ]; then
         chroot $ROOTFS plymouth-set-default-theme -R lazylinux-logo
     fi
 
-    chroot "$ROOTFS" env -i /usr/bin/dracut -N --"${INITRAMFS_COMPRESSION}" \
->>>>>>> 3d7b3b049 (Add calamares and more customizations)
+    chroot "$ROOTFS" env -i PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin" \
+        /usr/bin/dracut -N --"${INITRAMFS_COMPRESSION}" \
         --add-drivers "ahci" --force-add "vmklive autoinstaller" --omit systemd "/boot/initrd" $KERNELVERSION
     [ $? -ne 0 ] && die "Failed to generate the initramfs"
 
@@ -562,13 +553,8 @@ HOST_ARCH=$(xbps-uhelper arch)
 : ${LOCALE:=en_US.UTF-8}
 : ${INITRAMFS_COMPRESSION:=xz}
 : ${SQUASHFS_COMPRESSION:=xz}
-<<<<<<< HEAD
-: ${BASE_SYSTEM_PKG:=base-system}
-: ${BOOT_TITLE:="Void Linux"}
-=======
 : ${BASE_SYSTEM_PKG:=lazy-base-system}
 : ${BOOT_TITLE:="LazyLinux"}
->>>>>>> 3d7b3b049 (Add calamares and more customizations)
 : ${LINUX_VERSION:=linux}
 
 XBPS_TARGET_ARCH="$TARGET_ARCH" register_binfmt
@@ -699,11 +685,7 @@ if [ "$?" -ne "0" ]; then
     die "Failed to find kernel package version"
 fi
 
-<<<<<<< HEAD
-: ${OUTPUT_FILE="void-live-${TARGET_ARCH}-${KERNELVERSION}-$(date -u +%Y%m%d).iso"}
-=======
 : ${OUTPUT_FILE="lazylinux-live-${TARGET_ARCH}-$(date -u +%Y%m%d)-xfce.iso"}
->>>>>>> 49d83ca14 (add workflow to build image)
 
 print_step "Installing software to generate the image: ${REQUIRED_PKGS[*]} ..."
 install_prereqs "${REQUIRED_PKGS[@]}"

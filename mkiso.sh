@@ -207,19 +207,10 @@ EOF
     if [ "$variant" != base ]; then
         setup_pipewire
     fi
-<<<<<<< HEAD
-<<<<<<< HEAD
 
-    ./mklive.sh -a "$TARGET_ARCH" -o "$IMG" -v "linux7.0" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" ${REPO} "$@"
-=======
-    # -o "$IMG" 
-    ./mklive.sh -a "$TARGET_ARCH" -C "live.autologin" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
-=======
     # -o "$IMG"
     ./mklive.sh -a "$TARGET_ARCH" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
->>>>>>> 49d83ca14 (add workflow to build image)
         ${KERNEL_PKG:+-v $KERNEL_PKG} ${REPO} "$@"
->>>>>>> 7c73c3726 (Add cachyos kernel)
 
 	cleanup
 }

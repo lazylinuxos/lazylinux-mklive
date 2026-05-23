@@ -20,8 +20,6 @@
     snooze
     superd
     xmirror
-<<<<<<< HEAD
-=======
     noto-fonts-emoji
     noto-fonts-ttf
     noto-fonts-ttf-extra
@@ -31,7 +29,6 @@
     alsa-ucm-conf
     sof-firmware
     crun
->>>>>>> 3d7b3b049 (Add calamares and more customizations)
 
 # NETWORKING
     NetworkManager
@@ -243,6 +240,7 @@
     thunar-archive-plugin
     galculator-gtk3
     lightdm-gtk-greeter-settings
+
 
 # LAZY REPO PACKAGES
     calamares
