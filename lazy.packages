@@ -187,13 +187,6 @@
     vim
     helix
 
-# LOCALIZATION
-    libreoffice-i18n-en-US
-    libreoffice-i18n-ru
-    thunderbird-i18n-en-US
-    thunderbird-i18n-hy-AM
-    thunderbird-i18n-ru
-
 # REPOSITORIES
     void-repo-nonfree
     void-repo-multilib
@@ -227,7 +220,6 @@
     liferea
     cherrytree
     plymouth
-    thunderbird
     simple-scan
     bleachbit
     dbeaver
@@ -246,19 +238,11 @@
     halloy
     dinox
     dconf-editor
-    libreoffice-writer
-    libreoffice-calc
-    libreoffice-impress
-    libreoffice-draw
-    libreoffice-math
-    libreoffice-base
-    libreoffice-gnome
     xfce4-plugins
     xfce4-docklike-plugin
     thunar-archive-plugin
     galculator-gtk3
     lightdm-gtk-greeter-settings
-    switcheroo
 
 # LAZY REPO PACKAGES
     calamares
@@ -276,9 +260,14 @@
     podman-desktop-bin
     muCommander-bin
     termscp-bin
-    zed-bin
-    skippy-xd-2026.01.04_1
+    zed
+    skippy-xd-2026.05.24_1
     fingwit
+    aerion
+    superproductivity
+    rustdesk-bin
+    switcheroo
+    onlyoffice-bin
 
 # LAZY THEMES AND ICONS
     lazy-theme-config

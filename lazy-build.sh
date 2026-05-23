@@ -19,4 +19,4 @@ yes | ./mkiso.sh \
 >>>>>>> 49d83ca14 (add workflow to build image)
     -r https://github.com/lazylinuxos/lazy-repo/releases/latest/download \
     -r https://repo-default.voidlinux.org/current/nonfree \
-    -- -C "live.autologin" -v "linux6.19" -o "$path"
+    -- -C "live.autologin" -v "linux7.0" -o "$path"
