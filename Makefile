@@ -23,13 +23,13 @@ CLOUD_IMGS:=$(shell echo $(T_CLOUD_IMGS))
 PXE_ARCHS:=$(shell echo $(T_PXE_ARCHS))
 WSL_ARCHS:=$(shell echo $(T_WSL_ARCHS))
 
-ALL_LIVE_ISO=$(foreach arch,$(LIVE_ARCHS), $(foreach flavor,$(LIVE_FLAVORS),void-live-$(arch)-$(DATECODE)-$(flavor).iso))
-ALL_ROOTFS=$(foreach arch,$(ARCHS),void-$(arch)-ROOTFS-$(DATECODE).tar.xz)
-ALL_PLATFORMFS=$(foreach platform,$(PLATFORMS),void-$(platform)-PLATFORMFS-$(DATECODE).tar.xz)
-ALL_SBC_IMAGES=$(foreach platform,$(SBC_IMGS),void-$(platform)-$(DATECODE).img.xz)
-ALL_CLOUD_IMAGES=$(foreach cloud,$(CLOUD_IMGS),void-$(cloud)-$(DATECODE).tar.gz)
-ALL_PXE_ARCHS=$(foreach arch,$(PXE_ARCHS),void-$(arch)-NETBOOT-$(DATECODE).tar.gz)
-ALL_WSL=$(foreach arch,$(WSL_ARCHS),void-$(arch)-$(DATECODE).wsl)
+ALL_LIVE_ISO=$(foreach arch,$(LIVE_ARCHS), $(foreach flavor,$(LIVE_FLAVORS),lazylinux-live-$(arch)-$(DATECODE)-$(flavor).iso))
+ALL_ROOTFS=$(foreach arch,$(ARCHS),lazylinux-$(arch)-ROOTFS-$(DATECODE).tar.xz)
+ALL_PLATFORMFS=$(foreach platform,$(PLATFORMS),lazylinux-$(platform)-PLATFORMFS-$(DATECODE).tar.xz)
+ALL_SBC_IMAGES=$(foreach platform,$(SBC_IMGS),lazylinux-$(platform)-$(DATECODE).img.xz)
+ALL_CLOUD_IMAGES=$(foreach cloud,$(CLOUD_IMGS),lazylinux-$(cloud)-$(DATECODE).tar.gz)
+ALL_PXE_ARCHS=$(foreach arch,$(PXE_ARCHS),lazylinux-$(arch)-NETBOOT-$(DATECODE).tar.gz)
+ALL_WSL=$(foreach arch,$(WSL_ARCHS),lazylinux-$(arch)-$(DATECODE).wsl)
 
 SUDO := sudo
 
@@ -57,14 +57,14 @@ distdir-$(DATECODE):
 	mkdir -p distdir-$(DATECODE)
 
 dist: distdir-$(DATECODE)
-	mv void*$(DATECODE)* distdir-$(DATECODE)/
+	mv lazylinux*$(DATECODE)* distdir-$(DATECODE)/
 
 live-iso-all: $(ALL_LIVE_ISO)
 
 live-iso-all-print:
 	@echo $(ALL_LIVE_ISO) | sed "s: :\n:g"
 
-void-live-%.iso: mkiso.sh
+lazylinux-live-%.iso: mkiso.sh
 	@[ -n "${CI}" ] && printf "::group::\x1b[32mBuilding $@...\x1b[0m\n" || true
 	$(if $(findstring aarch64,$*), \
 		$(SUDO) ./mkiso.sh -r $(REPOSITORY) -t $* -- -P "$(LIVE_PLATFORMS)", \
@@ -76,7 +76,7 @@ rootfs-all: $(ALL_ROOTFS)
 rootfs-all-print:
 	@echo $(ALL_ROOTFS) | sed "s: :\n:g"
 
-void-%-ROOTFS-$(DATECODE).tar.xz: mkrootfs.sh
+lazylinux-%-ROOTFS-$(DATECODE).tar.xz: mkrootfs.sh
 	@[ -n "${CI}" ] && printf "::group::\x1b[32mBuilding $@...\x1b[0m\n" || true
 	$(SUDO) ./mkrootfs.sh $(XBPS_REPOSITORY) -x $(COMPRESSOR_THREADS) -o $@ $*
 	@[ -n "${CI}" ] && printf '::endgroup::\n' || true
@@ -87,9 +87,9 @@ platformfs-all-print:
 	@echo $(ALL_PLATFORMFS) | sed "s: :\n:g"
 
 .SECONDEXPANSION:
-void-%-PLATFORMFS-$(DATECODE).tar.xz: void-$$(shell ./lib.sh platform2arch %)-ROOTFS-$(DATECODE).tar.xz mkplatformfs.sh
+lazylinux-%-PLATFORMFS-$(DATECODE).tar.xz: lazylinux-$$(shell ./lib.sh platform2arch %)-ROOTFS-$(DATECODE).tar.xz mkplatformfs.sh
 	@[ -n "${CI}" ] && printf "::group::\x1b[32mBuilding $@...\x1b[0m\n" || true
-	$(SUDO) ./mkplatformfs.sh $(XBPS_REPOSITORY) -x $(COMPRESSOR_THREADS) -o $@ $* void-$(shell ./lib.sh platform2arch $*)-ROOTFS-$(DATECODE).tar.xz
+	$(SUDO) ./mkplatformfs.sh $(XBPS_REPOSITORY) -x $(COMPRESSOR_THREADS) -o $@ $* lazylinux-$(shell ./lib.sh platform2arch $*)-ROOTFS-$(DATECODE).tar.xz
 	@[ -n "${CI}" ] && printf '::endgroup::\n' || true
 
 images-all: platformfs-all images-all-sbc images-all-cloud
@@ -104,16 +104,16 @@ images-all-cloud: $(ALL_CLOUD_IMAGES)
 images-all-print:
 	@echo $(ALL_SBC_IMAGES) $(ALL_CLOUD_IMAGES) | sed "s: :\n:g"
 
-void-%-$(DATECODE).img.xz: void-%-PLATFORMFS-$(DATECODE).tar.xz mkimage.sh
+lazylinux-%-$(DATECODE).img.xz: lazylinux-%-PLATFORMFS-$(DATECODE).tar.xz mkimage.sh
 	@[ -n "${CI}" ] && printf "::group::\x1b[32mBuilding $@...\x1b[0m\n" || true
-	$(SUDO) ./mkimage.sh -x $(COMPRESSOR_THREADS) -o $(basename $@) void-$*-PLATFORMFS-$(DATECODE).tar.xz
+	$(SUDO) ./mkimage.sh -x $(COMPRESSOR_THREADS) -o $(basename $@) lazylinux-$*-PLATFORMFS-$(DATECODE).tar.xz
 	@[ -n "${CI}" ] && printf '::endgroup::\n' || true
 
 # Some of the images MUST be compressed with gzip rather than xz, this
 # rule services those images.
-void-%-$(DATECODE).tar.gz: void-%-PLATFORMFS-$(DATECODE).tar.xz mkimage.sh
+lazylinux-%-$(DATECODE).tar.gz: lazylinux-%-PLATFORMFS-$(DATECODE).tar.xz mkimage.sh
 	@[ -n "${CI}" ] && printf "::group::\x1b[32mBuilding $@...\x1b[0m\n" || true
-	$(SUDO) ./mkimage.sh -x $(COMPRESSOR_THREADS) void-$*-PLATFORMFS-$(DATECODE).tar.xz
+	$(SUDO) ./mkimage.sh -x $(COMPRESSOR_THREADS) lazylinux-$*-PLATFORMFS-$(DATECODE).tar.xz
 	@[ -n "${CI}" ] && printf '::endgroup::\n' || true
 
 pxe-all: $(ALL_PXE_ARCHS)
@@ -121,9 +121,9 @@ pxe-all: $(ALL_PXE_ARCHS)
 pxe-all-print:
 	@echo $(ALL_PXE_ARCHS) | sed "s: :\n:g"
 
-void-%-NETBOOT-$(DATECODE).tar.gz: void-%-ROOTFS-$(DATECODE).tar.xz mknet.sh
+lazylinux-%-NETBOOT-$(DATECODE).tar.gz: lazylinux-%-ROOTFS-$(DATECODE).tar.xz mknet.sh
 	@[ -n "${CI}" ] && printf "::group::\x1b[32mBuilding $@...\x1b[0m\n" || true
-	$(SUDO) ./mknet.sh void-$*-ROOTFS-$(DATECODE).tar.xz
+	$(SUDO) ./mknet.sh lazylinux-$*-ROOTFS-$(DATECODE).tar.xz
 	@[ -n "${CI}" ] && printf '::endgroup::\n' || true
 
 wsl-all: $(ALL_WSL)
@@ -131,7 +131,7 @@ wsl-all: $(ALL_WSL)
 wsl-all-print:
 	@echo $(ALL_WSL) | sed "s: :\n:g"
 
-void-%-$(DATECODE).wsl: mkrootfs.sh
+lazylinux-%-$(DATECODE).wsl: mkrootfs.sh
 	@[ -n "${CI}" ] && printf "::group::\x1b[32mBuilding $@...\x1b[0m\n" || true
 	$(SUDO) ./mkrootfs.sh $(XBPS_REPOSITORY) -x $(COMPRESSOR_THREADS) -b wsl-base -o $@ $*
 	@[ -n "${CI}" ] && printf '::endgroup::\n' || true

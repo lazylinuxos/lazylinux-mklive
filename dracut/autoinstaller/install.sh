@@ -1,22 +1,6 @@
 #!/bin/sh
 
-<<<<<<< HEAD
 type getargbool >/dev/null 2>&1 || . /lib/dracut-lib.sh
-=======
-set -e
-
-# These are for all you erroring dracuts out there
-# VAI_getarg() {
-# 	set +e
-# 	getarg "$@"
-# 	set -e
-# }
-# VAI_getargbool() {
-# 	set +e
-# 	getargbool "$@"
-# 	set -e
-# }
->>>>>>> e33a0628a (fixed autoinstaller issue)
 
 # These functions pulled from void's excellent mklive.sh
 VAI_info_msg() {
@@ -33,7 +17,7 @@ VAI_print_step() {
 VAI_welcome() {
     clear
     printf "=============================================================\n"
-    printf "================ Void Linux Auto-Installer ==================\n"
+    printf "================ Lazy Linux Auto-Installer ==================\n"
     printf "=============================================================\n"
 }
 
@@ -102,16 +86,12 @@ VAI_install_xbps_keys() {
 
 VAI_install_base_system() {
     # Install a base system
-<<<<<<< HEAD
-    _grub="grub"
+    _grub="lazy-grub"
     if [ -d /sys/firmware/efi ] ; then
-        _grub="${_grub} grub-x86_64-efi"
+        _grub="${_grub} lazy-grub-x86_64-efi"
     fi
 
-    XBPS_ARCH="${XBPS_ARCH}" xbps-install -Sy -R "${xbpsrepository}" -r /mnt base-system ${_grub}
-=======
-    XBPS_ARCH="${XBPS_ARCH}" xbps-install -Sy -R "${xbpsrepository}" -r /mnt lazy-base-system lazy-grub
->>>>>>> 3d7b3b049 (Add calamares and more customizations)
+    XBPS_ARCH="${XBPS_ARCH}" xbps-install -Sy -R "${xbpsrepository}" -r /mnt lazy-base-system ${_grub}
 
     # Install additional packages
     if [  -n "${pkgs}" ] ; then
@@ -261,13 +241,9 @@ VAI_configure_autoinstall() {
     esac
 
     # --------------- Pull config URL out of kernel cmdline -------------------------
-<<<<<<< HEAD
     set +e
     if getargbool 0 autourl ; then
         set -e
-=======
-    if getargbool 0 autourl ; then
->>>>>>> e33a0628a (fixed autoinstaller issue)
         xbps-uhelper fetch "$(getarg autourl)>/etc/autoinstall.cfg"
 
     else
@@ -348,10 +324,7 @@ VAI_main() {
 
 # If we are using the autoinstaller, launch it
 if getargbool 0 auto  ; then
-<<<<<<< HEAD
     set -e
-=======
->>>>>>> e33a0628a (fixed autoinstaller issue)
     VAI_main
     # Very important to release this before returning to dracut code
     set +e

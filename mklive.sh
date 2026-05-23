@@ -300,14 +300,14 @@ generate_grub_efi_boot() {
         cat << EOF >> "$GRUB_DIR"/grub_lazylinux.cfg
 menuentry "${entrytitle}" --id "${id}" ${hotkey:+--hotkey $hotkey} {
     set gfxpayload="keep"
-    linux (\${voidlive})/boot/${KERNEL_IMG} \\
-        root=live:CDLABEL=VOID_LIVE ro init=/sbin/init \\
+    linux (\${lazylinuxlive})/boot/${KERNEL_IMG} \\
+        root=live:CDLABEL=LazyLinux_LIVE ro init=/sbin/init \\
         rd.luks=0 rd.md=0 rd.dm=0 loglevel=4 gpt add_efi_memmap \\
         vconsole.unicode=1 vconsole.keymap=${KEYMAP} locale.LANG=${LOCALE} ${cmdline}
-    initrd (\${voidlive})/boot/initrd
+    initrd (\${lazylinuxlive})/boot/initrd
 EOF
         if [ -n "${dtb}" ]; then
-            printf '    devicetree (${voidlive})/boot/dtbs/%s\n' "${dtb}" >> "$GRUB_DIR"/grub_lazylinux.cfg
+            printf '    devicetree (${lazylinuxlive})/boot/dtbs/%s\n' "${dtb}" >> "$GRUB_DIR"/grub_lazylinux.cfg
         fi
         printf '}\n' >> "$GRUB_DIR"/grub_lazylinux.cfg
     }
@@ -355,12 +355,12 @@ EOF
     if [ "${grub_platform}" == "efi" ]; then
         menuentry "Run Memtest86+ (RAM test)" --id memtest {
             set gfxpayload="keep"
-            linux (${voidlive})/boot/memtest.efi
+            linux (${lazylinuxlive})/boot/memtest.efi
         }
     else
         menuentry "Run Memtest86+ (RAM test)" --id memtest {
             set gfxpayload="keep"
-            linux (${voidlive})/boot/memtest.bin
+            linux (${lazylinuxlive})/boot/memtest.bin
         }
     fi
 EOF
@@ -466,7 +466,7 @@ generate_iso_image() {
     XORRISO_ARGS=(
         -iso-level 3 -rock -joliet -joliet-long -max-iso9660-filenames -omit-period
         -omit-version-number -relaxed-filenames -allow-lowercase
-        -volid VOID_LIVE
+        -volid LazyLinux_LIVE
     )
 
     if [ "$IMAGE_TYPE" = hybrid ]; then
