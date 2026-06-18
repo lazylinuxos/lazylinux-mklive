@@ -180,6 +180,14 @@ build_variant() {
             PKGS="$PKGS $XORG_PKGS lxqt sddm gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
             SERVICES="$SERVICES dbus dhcpcd wpa_supplicant sddm polkitd"
         ;;
+        mango-noctalia)
+            PKGS="$PKGS $XORG_PKGS $WAYLAND_PKGS cliphist ImageMagick kitty mangowc mate-polkit matugen noctalia-cli noctalia-qs noctalia-shell qt5-wayland qt6-wayland swaybg wayland-devel wayland-protocols xdg-desktop-portal-wlr"
+            SERVICES="$SERVICES dbus elogind sddm NetworkManager polkitd power-profiles-daemon"
+            ;;
+        mango-dms)
+            PKGS="$PKGS $XORG_PKGS $WAYLAND_PKGS cliphist dms-shell dgop dsearch ImageMagick kitty mangowc mate-polkit matugen qt5-wayland qt6-wayland quickshell wayland-devel wayland-protocols xdg-desktop-portal-wlr"
+            SERVICES="$SERVICES dbus elogind sddm NetworkManager polkitd power-profiles-daemon"
+            ;;
         *)
             >&2 echo "Unknown variant $variant"
             exit 1

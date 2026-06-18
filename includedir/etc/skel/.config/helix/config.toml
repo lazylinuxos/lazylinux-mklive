@@ -1,4 +1,4 @@
-theme = "everforest_dark_transparent"
+theme = "catppuccin_mocha"
 
 [editor.statusline]
 mode.normal = "NORMAL"

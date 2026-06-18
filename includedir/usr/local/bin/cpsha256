@@ -1,3 +1,0 @@
-#!/bin/sh
-
-sha256sum $1 | cut -d " " -f 1 | tr -d " \t\n\r" | xclip -in -selection clipboard

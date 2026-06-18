@@ -1,3 +1,0 @@
-#!/bin/sh
-
-flameshot gui --raw | tesseract-ocr stdin stdout -l eng | xclip -in -selection clipboard

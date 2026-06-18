@@ -11,9 +11,9 @@
     lvm2
     mdadm
     libxcrypt-compat
-    linux-headers
     ffmpeg
     mesa-vaapi
+    mesa-dri
     libwebkit2gtk41
     hostapd
     cronie
@@ -24,28 +24,53 @@
     noto-fonts-ttf
     noto-fonts-ttf-extra
     alsa-plugins-pulseaudio
+    wireplumber
     alsa-utils
     apulse
     alsa-ucm-conf
     sof-firmware
     crun
+    acpi
+    alsa-tools
+    bc
+    brightnessctl
+    ca-certificates
+    cmus
+    ethtool
+    gettext
+    inxi
+    nerd-fonts-symbols-ttf
+    polkit
+    power-profiles-daemon
+    qt5ct
+    qt6ct
+    qt5-graphicaleffects
+    qt6-svg
+    qt6-declarative
+    qt5-quickcontrols2
+    unzip
+    usbutils
+    util-linux
+    xdg-utils
+    xf86-input-synaptics
+    xcalc
+    xinit
+    xorg
+    xorg-server
+    sddm
+    elogind
 
 # NETWORKING
     NetworkManager
-    NetworkManager-openvpn
-    NetworkManager-openconnect
-    NetworkManager-strongswan
-    NetworkManager-l2tp
-    NetworkManager-pptp
     ntp
 
 # BLUETOOTH
     bluez
-    blueman
 
 # PRINTER
     cups
     cups-pk-helper
+    cups-browsed
     cups-filters
     foomatic-db
     foomatic-db-engine
@@ -59,14 +84,8 @@
 # UTILITIES
     wget
     bash-completion
-    xterm
     btop
     binutils
-    xcolor
-    xclip
-    xsel
-    xarchiver
-    xreader
     xz
     zip
     unzip
@@ -78,12 +97,11 @@
     xdg-user-dirs-gtk
     socklog-void
     preload
-    xkblayout-state
     curl
     wget
     mtools
     mlocate
-    bash-completion
+    xarchiver
     vsv
     hddtemp
     lm_sensors
@@ -105,20 +123,25 @@
     dust
     Clipboard
     rofi
-    openfortivpn
     zbar
-    tesseract-ocr
-    tesseract-ocr-eng
-    tesseract-ocr-hye
-    tesseract-ocr-rus
-    tesseract-ocr-script-Armenian
     wmctrl
     xdotool
-    ksuperkey
-    gromit-mpx
+    udiskie
+    wl-clipboard
+    wlr-randr
+    qimgv
+    qtpass
+    mpv
+    feh
+    zathura
+    mupdf
+    zathura-pdf-mupdf
+    nwg-look
+    smartmontools
+    udiskie
+    ufw
 
 # PACKAGE MANAGEMENT
-    vpm
     topgrade
     flatpak
     nix
@@ -152,25 +175,9 @@
     gcc
     pkg-config
     make
-    qrencode-devel
-    libpng-devel
-    libX11-devel
-    libXft-devel
-    libXcursor-devel
-    libXrandr-devel
-    libXinerama-devel
-    libXi-devel
-    python3-pip
-    python3-xlib
-    qt5
-    python3-PyQt5-dbus
-    python3-setproctitle
-    python3-devel
-    python3-Pillow
-    zig
-    lua
 
 # FILE SYSTEM
+    pcmanfm
     exfat-utils
     fuse-exfat
     ntfs-3g
@@ -190,93 +197,40 @@
     void-repo-multilib-nonfree
 
 # GUI
-    linux-wifi-hotspot
-    thunar-media-tags-plugin
-    ghostty
-    barrier
-    barrier-gui
-    redshift-gtk
-    wireshark
-    imhex
-    virt-manager
-    qemu
-    libvirt
-    bridge-utils
-    onboard
-    gufw
-    mugshot
+    kitty
     octoxbps
     ghostwriter
-    gparted
     obs
-    keepassxc
     syncthing
-    syncthingtray
-    deadbeef
-    gpodder
-    liferea
-    cherrytree
     plymouth
     simple-scan
-    bleachbit
-    dbeaver
-    fsearch
-    qdirstat
-    imagewriter
-    qbittorrent
-    handbrake
-    inkscape
+    superseedr
     flameshot
     telegram-desktop
     remmina
-    gimp
     vlc
     timeshift
     halloy
     dinox
-    dconf-editor
-    xfce4-plugins
-    xfce4-docklike-plugin
-    thunar-archive-plugin
-    galculator-gtk3
-    lightdm-gtk-greeter-settings
-
+    qimgv
 
 # LAZY REPO PACKAGES
+    bulletty
     calamares
-    xfce4-dynamic-workspaces
-    xfce4-applemenu-plugin
-    xfce4-launcher-plugin
+    cliamp
     distrobox
     zen-browser-bin
     brave-bin
-    cortile
-    neohtop-bin
     webapp-manager
-    yaak-bin
-    thunar-shares-plugin
-    podman-desktop-bin
-    muCommander-bin
     termscp-bin
     zed
-    skippy-xd-2026.05.24_1
-    fingwit
-    aerion
-    superproductivity
-    rustdesk-bin
-    switcheroo
     onlyoffice-bin
+    ytsub
 
 # LAZY THEMES AND ICONS
     lazy-theme-config
     papirus-icon-theme
-    lazy-squared-theme
-    lazy-nordic-icons
-    lazy-backstep-theme
-    lazy-backstep-icons
     lazy-catppuccin-tela-mix
-    lazy-fluent-grey
-    bluecurve
 
 # LAZY ZSH config
     zsh

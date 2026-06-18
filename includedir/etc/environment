@@ -3,4 +3,4 @@
 #
 # Syntax: simple "KEY=VAL" pairs on separate lines
 #
-GTK_THEME=Reversal-Dark
+GTK_THEME=Catppuccin-Mocha-BL
