@@ -1,0 +1,16 @@
+/* Retro — rofi color variables. */
+
+* {
+    bg:          #160B00;
+    fg:          #DE7B1B;
+    accent:      #FF8E1F;
+    accent-2:    #FFAA44;
+    border:      #FF8E1F;
+    urgent:      #FFAA44;
+    selected-fg: #DE7B1B;
+    entry-fg:    #FFAA44;
+    prompt-fg:   #FF8E1F;
+    header:      #FF7F00;
+
+    background-color: @bg;
+}

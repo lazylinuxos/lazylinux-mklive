@@ -127,7 +127,7 @@ build_variant() {
     PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse xtools-minimal xmirror chrony tmux $A11Y_PKGS $GRUB_PKGS"
     FONTS="font-misc-misc terminus-font dejavu-fonts-ttf"
     WAYLAND_PKGS="$GFX_WL_PKGS $FONTS orca"
-    XORG_PKGS="xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio alsa-utils apulse alsa-ucm-conf sof-firmware orca"
+    XORG_PKGS="xlibre setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio alsa-utils apulse alsa-ucm-conf sof-firmware orca"
     CUSTOM_PKGS="$(grep '^[^#].' lazy.packages)"
     PKGS_TO_IGNORE="parole"
     SERVICES="sshd chronyd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
@@ -137,6 +137,11 @@ build_variant() {
     case $variant in
         base)
             SERVICES="$SERVICES dhcpcd wpa_supplicant acpid"
+        ;;
+        oxwm)
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter oxwm gvfs gvfs-afc gvfs-mtp gvfs-smb udisks2"
+            SERVICES="$SERVICES acpid dhcpcd elogind lightdm dbus NetworkManager polkitd power-profiles-daemon"
+            LIGHTDM_SESSION=oxwm
         ;;
         enlightenment)
             PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter enlightenment terminology udisks2 firefox"

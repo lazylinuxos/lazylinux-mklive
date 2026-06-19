@@ -1,0 +1,16 @@
+/* GitHub Dark — rofi color variables. */
+
+* {
+    bg:          #0d1117;
+    fg:          #d0d7de;
+    accent:      #D29922;
+    accent-2:    #39c5cf;
+    border:      #D29922;
+    urgent:      #D29922;
+    selected-fg: #d0d7de;
+    entry-fg:    #39c5cf;
+    prompt-fg:   #D29922;
+    header:      #b3e5fc;
+
+    background-color: @bg;
+}

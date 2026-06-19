@@ -1,0 +1,173 @@
+//     __  __                 __   ________  ___       _   __    __ 
+//    / / / /_  ______  _____/ /  /_  __/  |/  /      / | / /___/ /_
+//   / /_/ / / / / __ \/ ___/ /    / / / /|_/ /_____ /  |/ / _  / __/
+//  / __  / /_/ / /_/ / /  / /___ / / / /  / /_____ / /|  /  __/ /_  
+// /_/ /_/\__, / .___/_/  /_____//_/ /_/  /_/      /_/ |_/\___/\__/  
+//       /____/_/                                                   
+
+// Copyright © 2025-2026 Djalel Oukid (sniper1720)
+
+@theme "ltmnight"
+
+window {
+    background-color: @background;
+    border: 0;
+    border-color: @primary;
+    padding: 0;
+    width: 50%;
+    location: 0;
+    transparency: "real";
+}
+
+mainbox {
+    enabled: true;
+    spacing: 0em;
+    padding: 20px;
+    orientation: vertical;
+    children: [ inputbar, message, listview ];
+    background-color: transparent;
+}
+
+inputbar {
+    enabled: true;
+    spacing: 0;
+    padding: 0;
+    margin: 0 0 15px 0;
+
+    background-color: @primary-fixed;
+    border: 0;
+    border-radius: 0;
+
+    children: [ prompt, entry ];
+}
+
+prompt {
+    enabled: true;
+
+    padding: 12px;
+    expand: false;
+
+    background-color: @primary;
+    text-color: @ltmnight0;
+
+    str: "::";
+}
+
+entry {
+    enabled: true;
+
+    padding: 12px;
+    expand: true;
+
+    background-color: transparent;
+    text-color: @foreground;
+
+    caret-color: @primary;
+
+    placeholder: "Search...";
+    placeholder-color: @placeholder;
+}
+
+listview {
+    background-color: transparent;
+
+    border: 0;
+
+    padding: 0;
+
+    cycle: true;
+    layout: vertical;
+
+    spacing: 6px;
+
+    scrollbar: false;
+
+    columns: 1;
+
+    dynamic: true;
+    fixed-height: false;
+}
+
+element {
+    enabled: true;
+
+    padding: 8px 12px;
+    margin: 0;
+
+    background-color: @primary-fixed;
+    text-color: @foreground;
+
+    border: 0;
+    border-radius: 0;
+
+    orientation: horizontal;
+    children: [ element-text ];
+}
+
+element-icon {
+    background-color: transparent;
+    size: 0px;
+    margin: 0px;
+    enabled: false;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    highlight-color: @ltmnight6;
+    expand: true;
+    vertical-align: 0.5;
+    format: "{text}";
+}
+
+element selected {
+    background-color: @primary-fixed;
+
+    text-color: @primary;
+
+    border: 0px 0px 0px 4px;
+    border-color: @primary;
+}
+
+element active {
+    background-color: @primary-fixed;
+    text-color: @accent;
+}
+
+element urgent {
+    background-color: @primary-fixed;
+    text-color: @error;
+}
+
+scrollbar {
+    handle-color: @primary;
+    background-color: @primary-fixed;
+
+    width: 4px;
+
+    border-radius: 0;
+}
+
+case-indicator {
+    enabled: false;
+}
+
+message {
+    enabled: true;
+
+    margin: 0 0 15px 0;
+    padding: 12px;
+
+    background-color: @selection;
+
+    border: 1px;
+    border-radius: 0;
+    border-color: @primary;
+
+    children: [ textbox ];
+}
+
+textbox {
+    background-color: transparent;
+    text-color: @message-text;
+}

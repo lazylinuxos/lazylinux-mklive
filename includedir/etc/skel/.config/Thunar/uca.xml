@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
-	<icon>document-new-from-template</icon>
+	<icon>document-import</icon>
 	<name>Paste as file</name>
 	<submenu></submenu>
 	<unique-id>1698334942181508-1</unique-id>

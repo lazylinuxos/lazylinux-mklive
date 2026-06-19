@@ -1,0 +1,16 @@
+/* Catppuccin — rofi color variables. */
+
+* {
+    bg:          #232634;
+    fg:          #c6d0f5;
+    accent:      #e5c890;
+    accent-2:    #ef9f76;
+    border:      #e5c890;
+    urgent:      #e5c890;
+    selected-fg: #c6d0f5;
+    entry-fg:    #ef9f76;
+    prompt-fg:   #e5c890;
+    header:      #8caaee;
+
+    background-color: @bg;
+}

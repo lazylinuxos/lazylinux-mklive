@@ -11,7 +11,6 @@
     lvm2
     mdadm
     libxcrypt-compat
-    linux-headers
     ffmpeg
     mesa-vaapi
     libwebkit2gtk41
@@ -29,19 +28,15 @@
     alsa-ucm-conf
     sof-firmware
     crun
+    elogind
 
 # NETWORKING
     NetworkManager
-    NetworkManager-openvpn
-    NetworkManager-openconnect
-    NetworkManager-strongswan
-    NetworkManager-l2tp
-    NetworkManager-pptp
     ntp
 
 # BLUETOOTH
     bluez
-    blueman
+    bluetui
 
 # PRINTER
     cups
@@ -55,9 +50,13 @@
     tlp
     tlp-rdw
     powertop
+    tlpui
+    power-profiles-daemon
 
 # UTILITIES
-    wget
+    usbutils
+    util-linux
+    brightnessctl
     bash-completion
     xterm
     btop
@@ -67,6 +66,7 @@
     xsel
     xarchiver
     xreader
+    xdotool
     xz
     zip
     unzip
@@ -83,11 +83,8 @@
     wget
     mtools
     mlocate
-    bash-completion
-    vsv
     hddtemp
     lm_sensors
-    zellij
     yazi
     ImageMagick
     poppler
@@ -103,22 +100,76 @@
     ripgrep
     exa
     dust
-    Clipboard
     rofi
-    openfortivpn
     zbar
     tesseract-ocr
     tesseract-ocr-eng
     tesseract-ocr-hye
     tesseract-ocr-rus
     tesseract-ocr-script-Armenian
+    lxqt-policykit
+    picom
+    matugen
+    dnsmasq
+    qrencode
+    acpi
+    mpc
+    lazysql
+    lazyssh
+    tlpui
+    khal
+    bluetui
+    neovim
     wmctrl
-    xdotool
-    ksuperkey
-    gromit-mpx
+    wireplumber
+    cliamp
+    dunst
+    betterlockscreen
+    xset
+    xss-lock
+    playerctl
+    pulsemixer
+    pamixer
+    feh
+    nwg-look
+    xbindkeys
+    xvkbd
+    xinput
+    xbacklight
+    mpv
+    xsettingsd
+    qimgv
+    udiskie
+    kitty
+    qtpass
+    zathura
+    mupdf
+    zathura-pdf-mupdf
+    qt5ct
+    qt6ct
+    matugen
+    setxkbmap
+    clipmenu
+    libnotify
+    dbus-x11
+    ytsub
+    sesh
+    rura
+    pik
+    yatto
+    witr
+    bookokrat
+    mousepad
+    arandr
+    autorandr
+    azote
+    onboard
+    caffeine-ng
+    aerc
+    kimun-notes
+    netwatch
 
 # PACKAGE MANAGEMENT
-    vpm
     topgrade
     flatpak
     nix
@@ -182,101 +233,56 @@
 # TEXT EDITORS
     nano
     vim
-    helix
 
 # REPOSITORIES
     void-repo-nonfree
     void-repo-multilib
     void-repo-multilib-nonfree
+    xlibre-repo
+    blackhole-vl-repo
 
 # GUI
     linux-wifi-hotspot
+    Thunar
+    thunar-volman
+    thunar-archive-plugin
     thunar-media-tags-plugin
-    ghostty
-    barrier
-    barrier-gui
-    redshift-gtk
-    wireshark
+    kitty
     imhex
-    virt-manager
-    qemu
-    libvirt
-    bridge-utils
-    onboard
-    gufw
-    mugshot
     octoxbps
     ghostwriter
-    gparted
-    obs
-    keepassxc
     syncthing
     syncthingtray
-    deadbeef
-    gpodder
-    liferea
-    cherrytree
     plymouth
-    simple-scan
-    bleachbit
-    dbeaver
-    fsearch
-    qdirstat
-    imagewriter
-    qbittorrent
-    handbrake
-    inkscape
+    darya
+    superseedr
     flameshot
     telegram-desktop
     remmina
-    gimp
-    vlc
     timeshift
     halloy
     dinox
     dconf-editor
-    xfce4-plugins
-    xfce4-docklike-plugin
-    thunar-archive-plugin
-    galculator-gtk3
     lightdm-gtk-greeter-settings
 
 
 # LAZY REPO PACKAGES
     calamares
-    xfce4-dynamic-workspaces
-    xfce4-applemenu-plugin
-    xfce4-launcher-plugin
     distrobox
     zen-browser-bin
     brave-bin
-    cortile
-    neohtop-bin
     webapp-manager
-    yaak-bin
+    posting
     thunar-shares-plugin
-    podman-desktop-bin
-    muCommander-bin
     termscp-bin
     zed
-    skippy-xd-2026.05.24_1
-    fingwit
-    aerion
-    superproductivity
-    rustdesk-bin
-    switcheroo
     onlyoffice-bin
 
 # LAZY THEMES AND ICONS
     lazy-theme-config
     papirus-icon-theme
-    lazy-squared-theme
-    lazy-nordic-icons
-    lazy-backstep-theme
-    lazy-backstep-icons
     lazy-catppuccin-tela-mix
-    lazy-fluent-grey
-    bluecurve
+
 
 # LAZY ZSH config
     zsh
