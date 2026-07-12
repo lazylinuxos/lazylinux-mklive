@@ -116,6 +116,7 @@
     xdotool
     ksuperkey
     gromit-mpx
+    tailscale
 
 # PACKAGE MANAGEMENT
     vpm
@@ -192,7 +193,7 @@
 # GUI
     linux-wifi-hotspot
     thunar-media-tags-plugin
-    ghostty
+    kitty
     barrier
     barrier-gui
     redshift-gtk
@@ -215,7 +216,6 @@
     deadbeef
     gpodder
     liferea
-    cherrytree
     plymouth
     simple-scan
     bleachbit
@@ -240,7 +240,10 @@
     thunar-archive-plugin
     galculator-gtk3
     lightdm-gtk-greeter-settings
-
+    thunderbird
+    thunderbird-i18n-en-US
+    thunderbird-i18n-hy-AM
+    thunderbird-i18n-ru
 
 # LAZY REPO PACKAGES
     calamares
@@ -259,13 +262,17 @@
     muCommander-bin
     termscp-bin
     zed
-    skippy-xd-2026.05.24_1
+    skippy-xd-2026.06.24_1
     fingwit
-    aerion
     superproductivity
     rustdesk-bin
     switcheroo
     onlyoffice-bin
+    openvpn3
+    openvpn3-indicator-git
+    cattail
+    helixnotes
+
 
 # LAZY THEMES AND ICONS
     lazy-theme-config
