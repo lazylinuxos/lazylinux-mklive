@@ -36,7 +36,6 @@
 
 # BLUETOOTH
     bluez
-    bluetui
 
 # PRINTER
     cups
@@ -50,7 +49,6 @@
     tlp
     tlp-rdw
     powertop
-    tlpui
     power-profiles-daemon
 
 # UTILITIES
@@ -83,9 +81,7 @@
     wget
     mtools
     mlocate
-    hddtemp
     lm_sensors
-    yazi
     ImageMagick
     poppler
     fd
@@ -107,67 +103,12 @@
     tesseract-ocr-hye
     tesseract-ocr-rus
     tesseract-ocr-script-Armenian
-    lxqt-policykit
-    picom
-    matugen
-    dnsmasq
-    qrencode
     acpi
-    mpc
-    lazysql
-    lazyssh
-    tlpui
-    khal
-    bluetui
     neovim
-    wmctrl
-    wireplumber
-    cliamp
-    dunst
-    betterlockscreen
-    xset
-    xss-lock
-    playerctl
-    pulsemixer
-    pamixer
-    feh
-    nwg-look
-    xbindkeys
-    xvkbd
-    xinput
-    xbacklight
-    mpv
-    xsettingsd
-    qimgv
-    udiskie
-    kitty
+    vlc
+    gwenview
     qtpass
-    zathura
-    mupdf
-    zathura-pdf-mupdf
-    qt5ct
-    qt6ct
-    matugen
-    setxkbmap
-    clipmenu
-    libnotify
-    dbus-x11
-    ytsub
-    sesh
-    rura
-    pik
-    yatto
-    witr
-    bookokrat
-    mousepad
-    arandr
-    autorandr
-    azote
-    onboard
-    caffeine-ng
-    aerc
-    kimun-notes
-    netwatch
+
 
 # PACKAGE MANAGEMENT
     topgrade
@@ -242,11 +183,7 @@
     blackhole-vl-repo
 
 # GUI
-    linux-wifi-hotspot
-    Thunar
-    thunar-volman
-    thunar-archive-plugin
-    thunar-media-tags-plugin
+    ark
     kitty
     imhex
     octoxbps
@@ -254,32 +191,24 @@
     syncthing
     syncthingtray
     plymouth
-    darya
-    superseedr
-    flameshot
     telegram-desktop
     remmina
     timeshift
     halloy
     dinox
     dconf-editor
-    lightdm-gtk-greeter-settings
-
+    qbittorrent
+    qdirstat
 
 # LAZY REPO PACKAGES
     calamares
-    distrobox
-    zen-browser-bin
     brave-bin
-    webapp-manager
-    posting
-    thunar-shares-plugin
-    termscp-bin
     zed
     onlyoffice-bin
+    podman-desktop-bin
+    drawy
 
 # LAZY THEMES AND ICONS
-    lazy-theme-config
     papirus-icon-theme
     lazy-catppuccin-tela-mix
 
