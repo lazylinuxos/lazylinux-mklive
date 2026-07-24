@@ -1,0 +1,16 @@
+.tasklist button:checked {
+    border-bottom: 2px solid #616161;
+}
+   
+.flat,
+.toggle,
+.flat:hover,
+.toggle:hover {
+    padding: 4px;
+}
+
+.flat:checked,
+.toggle:checked {
+    border-bottom: 2px solid #616161;
+    padding: 4px;
+}

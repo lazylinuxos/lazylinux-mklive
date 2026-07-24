@@ -140,6 +140,7 @@
     smartmontools
     udiskie
     ufw
+    xsettingsd
 
 # PACKAGE MANAGEMENT
     topgrade
@@ -177,7 +178,12 @@
     make
 
 # FILE SYSTEM
-    pcmanfm
+    Thunar
+    thunar-archive-plugin
+    thunar-media-tags-plugin
+    thunar-shares-plugin
+    thunar-volman
+    xfce4-terminal
     exfat-utils
     fuse-exfat
     ntfs-3g
@@ -215,22 +221,25 @@
     qimgv
 
 # LAZY REPO PACKAGES
+    adw-gtk3-theme
     bulletty
     calamares
     cliamp
     distrobox
-    zen-browser-bin
-    brave-bin
-    webapp-manager
+    konform-browser-bin
+    brave-origin-bin
     termscp-bin
     zed
     onlyoffice-bin
     ytsub
+    dcal
+    matugen
 
 # LAZY THEMES AND ICONS
     lazy-theme-config
     papirus-icon-theme
     lazy-catppuccin-tela-mix
+    lazy-fluent-grey
 
 # LAZY ZSH config
     zsh
