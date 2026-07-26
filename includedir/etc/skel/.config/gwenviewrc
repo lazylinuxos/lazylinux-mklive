@@ -1,0 +1,12 @@
+[General]
+LastUsedVersion=210800
+
+[MainWindow]
+MenuBar=Disabled
+
+[Recent Files]
+File1[$e]=/usr/share/wallpapers/Sub-Arctic/contents/images/5120x2880.png
+Name1[$e]=5120x2880.png
+
+[SideBar]
+InformationSplitterSizes=0,0

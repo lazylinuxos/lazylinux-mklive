@@ -175,9 +175,9 @@ build_variant() {
         kde)
             PKGS="$PKGS $XORG_PKGS kde5 konsole firefox dolphin NetworkManager"
             SERVICES="$SERVICES dbus NetworkManager sddm"
-        ;;    
+        ;;
         sonicde)
-            PKGS="$PKGS $XORG_PKGS sonicde-meta konsole dolphin NetworkManager"
+            PKGS="$PKGS $XORG_PKGS sonicde-meta sonic-terminal sonic-ecco NetworkManager"
             SERVICES="$SERVICES dbus elogind NetworkManager sddm"
         ;;
         lxde)

@@ -180,6 +180,7 @@
     void-repo-multilib
     void-repo-multilib-nonfree
     xlibre-repo
+    sonicde-repo
     blackhole-vl-repo
 
 # GUI
@@ -188,30 +189,24 @@
     imhex
     octoxbps
     ghostwriter
-    syncthing
-    syncthingtray
     plymouth
     telegram-desktop
     remmina
     timeshift
     halloy
-    dinox
     dconf-editor
     qbittorrent
     qdirstat
+    kwrite
 
 # LAZY REPO PACKAGES
     calamares
-    brave-bin
-    zed
+    brave-origin-bin
+    konform-browser-bin
     onlyoffice-bin
     podman-desktop-bin
     drawy
-
-# LAZY THEMES AND ICONS
-    papirus-icon-theme
-    lazy-catppuccin-tela-mix
-
+    zed
 
 # LAZY ZSH config
     zsh
