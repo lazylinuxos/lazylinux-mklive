@@ -188,7 +188,13 @@
     fuse-exfat
     ntfs-3g
     gptfdisk
+    kpmcore
+    parted
+    libblkid
+    dosfstools
+    e2fsprogs
     btrfs-progs
+    xfsprogs
     smbclient
     samba
 
@@ -226,7 +232,7 @@
     calamares
     cliamp
     distrobox
-    konform-browser-bin
+    zen-browser-bin
     brave-origin-bin
     termscp-bin
     zed
@@ -234,6 +240,7 @@
     ytsub
     dcal
     matugen
+    mindwtr-bin
 
 # LAZY THEMES AND ICONS
     lazy-theme-config
