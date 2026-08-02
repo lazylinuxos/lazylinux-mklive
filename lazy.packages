@@ -179,7 +179,6 @@
     void-repo-nonfree
     void-repo-multilib
     void-repo-multilib-nonfree
-    xlibre-repo
     sonicde-repo
     blackhole-vl-repo
 

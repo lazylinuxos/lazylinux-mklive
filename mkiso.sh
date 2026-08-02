@@ -101,7 +101,7 @@ build_variant() {
             GFX_PKGS="xorg-video-drivers xf86-video-intel"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
-            KERNEL_PKG="linux7.0"
+            KERNEL_PKG="linux7.1"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)
@@ -127,7 +127,7 @@ build_variant() {
     PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse xtools-minimal xmirror chrony tmux $A11Y_PKGS $GRUB_PKGS"
     FONTS="font-misc-misc terminus-font dejavu-fonts-ttf"
     WAYLAND_PKGS="$GFX_WL_PKGS $FONTS orca"
-    XORG_PKGS="xlibre setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio alsa-utils apulse alsa-ucm-conf sof-firmware orca"
+    XORG_PKGS="xorg-minimal xorg-input-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio alsa-utils apulse alsa-ucm-conf sof-firmware orca"
     CUSTOM_PKGS="$(grep '^[^#].' lazy.packages)"
     PKGS_TO_IGNORE="xorg-server-common"
     SERVICES="sshd chronyd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
