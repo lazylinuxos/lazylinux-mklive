@@ -101,7 +101,7 @@ build_variant() {
             GFX_PKGS="xorg-video-drivers xf86-video-intel"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
-            KERNEL_PKG="linux7.0"
+            KERNEL_PKG="linux7.1"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)
@@ -181,7 +181,7 @@ build_variant() {
             SERVICES="$SERVICES dbus dhcpcd wpa_supplicant sddm polkitd"
         ;;
         mango-noctalia)
-            PKGS="$PKGS $XORG_PKGS $WAYLAND_PKGS cliphist ImageMagick kitty mangowc mate-polkit matugen noctalia-cli noctalia-qs noctalia-shell qt5-wayland qt6-wayland swaybg wayland-devel wayland-protocols xdg-desktop-portal-wlr"
+            PKGS="$PKGS $XORG_PKGS $WAYLAND_PKGS cliphist ImageMagick kitty mangowc mate-polkit matugen noctalia qt5-wayland qt6-wayland swaybg wayland-devel wayland-protocols xdg-desktop-portal-wlr"
             SERVICES="$SERVICES dbus elogind sddm NetworkManager polkitd power-profiles-daemon"
             ;;
         mango-dms)
