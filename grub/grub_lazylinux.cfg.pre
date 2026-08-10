@@ -31,6 +31,6 @@ timeout=15
 timeout_style=menu
 
 # GRUB init tune for accessibility
-play 600 988 1 1319 4
+# play 600 988 1 1319 4
 
 if [ cpuid -l ]; then

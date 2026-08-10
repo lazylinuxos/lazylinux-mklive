@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 
 <channel name="xfce4-panel" version="1.0">
   <property name="configver" type="int" value="2"/>
@@ -6,7 +6,7 @@
     <value type="int" value="1"/>
     <property name="dark-mode" type="bool" value="false"/>
     <property name="panel-1" type="empty">
-      <property name="position" type="string" value="p=6;x=960;y=17"/>
+      <property name="position" type="string" value="p=8;x=960;y=1063"/>
       <property name="length" type="uint" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
       <property name="icon-size" type="uint" value="16"/>
@@ -18,25 +18,26 @@
         <value type="int" value="10"/>
         <value type="int" value="3"/>
         <value type="int" value="5"/>
-        <value type="int" value="17"/>
-        <value type="int" value="21"/>
-        <value type="int" value="19"/>
-        <value type="int" value="22"/>
-        <value type="int" value="2"/>
-        <value type="int" value="24"/>
-        <value type="int" value="18"/>
-        <value type="int" value="20"/>
         <value type="int" value="8"/>
         <value type="int" value="7"/>
         <value type="int" value="6"/>
         <value type="int" value="14"/>
         <value type="int" value="9"/>
-        <value type="int" value="25"/>
         <value type="int" value="11"/>
         <value type="int" value="12"/>
         <value type="int" value="13"/>
         <value type="int" value="1"/>
       </property>
+      <property name="background-style" type="uint" value="0"/>
+      <property name="background-rgba" type="array">
+        <value type="double" value="0.75"/>
+        <value type="double" value="0.25"/>
+        <value type="double" value="0.25"/>
+        <value type="double" value="0"/>
+      </property>
+      <property name="enter-opacity" type="uint" value="90"/>
+      <property name="leave-opacity" type="uint" value="90"/>
+      <property name="mode" type="uint" value="0"/>
     </property>
   </property>
   <property name="plugins" type="empty">
@@ -55,10 +56,7 @@
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
         <value type="string" value="ethernet network connection “enp2s0” active"/>
-        <value type="string" value="hexchat"/>
         <value type="string" value="deadbeef"/>
-        <value type="string" value="teams"/>
-        <value type="string" value="slack"/>
         <value type="string" value="podman-desktop"/>
         <value type="string" value="onboard"/>
         <value type="string" value="liferea"/>
@@ -73,11 +71,7 @@
         <value type="string" value="cortile"/>
         <value type="string" value="1"/>
         <value type="string" value="chrome_status_icon_1"/>
-        <value type="string" value="Ripcord"/>
-        <value type="string" value="Slack1"/>
         <value type="string" value="obs"/>
-        <value type="string" value="teams-for-linux1"/>
-        <value type="string" value="KeePassXC"/>
         <value type="string" value="Syncthing Tray"/>
         <value type="string" value="octoxbps-notifier"/>
         <value type="string" value="flameshot"/>
@@ -105,9 +99,8 @@
     </property>
     <property name="plugin-12" type="string" value="clock">
       <property name="digital-layout" type="uint" value="3"/>
-      <property name="digital-time-font" type="string" value="Share Tech 12"/>
+      <property name="digital-time-font" type="string" value="SF Pro 11"/>
       <property name="digital-date-format" type="string" value="%a, %d %b %Y"/>
-      <property name="timezone" type="string" value="Asia/Yerevan"/>
       <property name="digital-time-format" type="string" value="%T"/>
     </property>
     <property name="plugin-13" type="string" value="separator">
@@ -117,7 +110,7 @@
     <property name="plugin-8" type="string" value="xkb">
       <property name="display-type" type="uint" value="0"/>
       <property name="group-policy" type="uint" value="0"/>
-      <property name="display-scale" type="uint" value="90"/>
+      <property name="display-scale" type="uint" value="84"/>
       <property name="display-name" type="uint" value="0"/>
     </property>
     <property name="plugin-14" type="string" value="pulseaudio">
@@ -144,26 +137,20 @@
         <value type="string" value="io.github.cboxdoerfer.FSearch.desktop"/>
         <value type="string" value="xfce4-terminal-emulator.desktop"/>
         <value type="string" value="xfce4-file-manager.desktop"/>
-        <value type="string" value="windterm.desktop"/>
         <value type="string" value="org.telegram.desktop.desktop"/>
         <value type="string" value="org.squidowl.halloy.desktop"/>
         <value type="string" value="thunderbird.desktop"/>
-        <value type="string" value="zed.desktop"/>
-        <value type="string" value="jetbrains-rider.desktop"/>
         <value type="string" value="org.remmina.Remmina.desktop"/>
         <value type="string" value="octoxbps.desktop"/>
         <value type="string" value="mucommander-muCommander.desktop"/>
-        <value type="string" value="rocky8-firefox.desktop"/>
       </property>
       <property name="recent" type="array">
         <value type="string" value="xfce-keyboard-settings.desktop"/>
         <value type="string" value="xfce-ui-settings.desktop"/>
         <value type="string" value="mucommander-muCommander.desktop"/>
-        <value type="string" value="slack.desktop"/>
         <value type="string" value="lightdm-gtk-greeter-settings.desktop"/>
         <value type="string" value="org.telegram.desktop.desktop"/>
         <value type="string" value="org.bluesabre.Mugshot.desktop"/>
-        <value type="string" value="org.qutebrowser.qutebrowser.desktop"/>
         <value type="string" value="btop.desktop"/>
         <value type="string" value="net.sourceforge.liferea.desktop"/>
       </property>
@@ -180,89 +167,10 @@
         <property name="never-confirm-history-clear" type="bool" value="false"/>
       </property>
     </property>
-    <property name="plugin-25" type="string" value="weather">
-      <property name="location" type="empty">
-        <property name="name" type="string" value="Yerevan, Armenia"/>
-        <property name="latitude" type="string" value="40.181700"/>
-        <property name="longitude" type="string" value="44.509900"/>
-      </property>
-      <property name="msl" type="int" value="995"/>
-      <property name="timezone" type="string" value="Asia/Yerevan"/>
-      <property name="offset" type="string" value="+04:00"/>
-      <property name="cache-max-age" type="int" value="172800"/>
-      <property name="power-saving" type="bool" value="true"/>
-      <property name="units" type="empty">
-        <property name="temperature" type="int" value="0"/>
-        <property name="pressure" type="int" value="0"/>
-        <property name="windspeed" type="int" value="0"/>
-        <property name="precipitation" type="int" value="0"/>
-        <property name="altitude" type="int" value="0"/>
-        <property name="apparent-temperature" type="int" value="0"/>
-      </property>
-      <property name="round" type="bool" value="true"/>
-      <property name="single-row" type="bool" value="true"/>
-      <property name="tooltip-style" type="int" value="1"/>
-      <property name="forecast" type="empty">
-        <property name="layout" type="int" value="1"/>
-        <property name="days" type="int" value="5"/>
-      </property>
-      <property name="theme-dir" type="string" value="/usr/share/xfce4/weather/icons/liquid-dark"/>
-      <property name="scrollbox" type="empty">
-        <property name="show" type="bool" value="true"/>
-        <property name="animate" type="bool" value="true"/>
-        <property name="lines" type="int" value="1"/>
-        <property name="color" type="string" value="rgba(0,0,0,0)"/>
-        <property name="use-color" type="bool" value="false"/>
-      </property>
-    </property>
     <property name="plugin-1" type="string" value="showdesktop"/>
     <property name="plugin-10" type="string" value="docklike"/>
     <property name="plugin-15" type="string" value="separator">
       <property name="style" type="uint" value="2"/>
-    </property>
-    <property name="plugin-2" type="string" value="genmon">
-      <property name="command" type="string" value="/usr/local/share/.genmon-plugin/memory-panel.sh"/>
-      <property name="use-label" type="bool" value="false"/>
-      <property name="text" type="string" value="(genmon)"/>
-      <property name="update-period" type="int" value="30000"/>
-      <property name="enable-single-row" type="bool" value="true"/>
-      <property name="font" type="string" value="Share Tech 12"/>
-    </property>
-    <property name="plugin-17" type="string" value="genmon">
-      <property name="command" type="string" value="/usr/local/share/.genmon-plugin/network-panel.sh"/>
-      <property name="use-label" type="bool" value="false"/>
-      <property name="text" type="string" value="(genmon)"/>
-      <property name="update-period" type="int" value="30000"/>
-      <property name="enable-single-row" type="bool" value="true"/>
-      <property name="font" type="string" value="Share Tech 12"/>
-    </property>
-    <property name="plugin-18" type="string" value="genmon">
-      <property name="command" type="string" value="/usr/local/share/.genmon-plugin/disk-panel.sh"/>
-      <property name="use-label" type="bool" value="false"/>
-      <property name="text" type="string" value="(genmon)"/>
-      <property name="update-period" type="int" value="30000"/>
-      <property name="enable-single-row" type="bool" value="true"/>
-      <property name="font" type="string" value="Share Tech 12"/>
-    </property>
-    <property name="plugin-19" type="string" value="genmon">
-      <property name="command" type="string" value="/usr/local/share/.genmon-plugin/cpu-panel.sh"/>
-      <property name="use-label" type="bool" value="false"/>
-      <property name="text" type="string" value="(genmon)"/>
-      <property name="update-period" type="int" value="30000"/>
-      <property name="enable-single-row" type="bool" value="true"/>
-      <property name="font" type="string" value="Share Tech 12"/>
-    </property>
-    <property name="plugin-20" type="string" value="separator">
-      <property name="style" type="uint" value="0"/>
-    </property>
-    <property name="plugin-21" type="string" value="separator">
-      <property name="style" type="uint" value="0"/>
-    </property>
-    <property name="plugin-22" type="string" value="separator">
-      <property name="style" type="uint" value="0"/>
-    </property>
-    <property name="plugin-24" type="string" value="separator">
-      <property name="style" type="uint" value="0"/>
     </property>
   </property>
 </channel>

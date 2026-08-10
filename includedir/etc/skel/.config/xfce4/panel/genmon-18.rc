@@ -2,5 +2,5 @@ Command=/usr/local/share/.genmon-plugin/disk-panel.sh
 UseLabel=0
 Text=(genmon)
 UpdatePeriod=30000
-Font=Share Tech 12
+Font=SF Pro 12
 

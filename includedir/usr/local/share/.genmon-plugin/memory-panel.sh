@@ -25,8 +25,8 @@ readonly SWP_FREE=$(free -b | awk '/^[Ss]wap/{$4 = $4 / 1073741824; printf "%.2f
 # Panel
 if [[ $(file -b "${ICON}") =~ PNG|SVG ]]; then
   INFO="<img>${ICON}</img>"
- if hash NeoHtop &> /dev/null; then
-    INFO+="<click>NeoHtop</click>"
+ if hash xfce4-taskmanager &> /dev/null; then
+    INFO+="<click>xfce4-taskmanager</click>"
   fi
   INFO+="<txt>"
 else
