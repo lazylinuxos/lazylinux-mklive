@@ -12,6 +12,9 @@
     mdadm
     libxcrypt-compat
     ffmpeg
+    mesa
+    mesa-dri
+    mesa-demos
     mesa-vaapi
     libwebkit2gtk41
     hostapd
@@ -36,6 +39,7 @@
 
 # BLUETOOTH
     bluez
+    libspa-bluetooth
 
 # PRINTER
     cups
@@ -57,13 +61,11 @@
     brightnessctl
     bash-completion
     xterm
-    btop
+    htop
     binutils
     xcolor
     xclip
     xsel
-    xarchiver
-    xreader
     xdotool
     xz
     zip
@@ -185,6 +187,7 @@
 
 # GUI
     ark
+    okular
     kitty
     imhex
     octoxbps
@@ -198,6 +201,8 @@
     qbittorrent
     qdirstat
     kwrite
+    isoimagewriter
+    drawy
 
 # LAZY REPO PACKAGES
     calamares
@@ -205,8 +210,8 @@
     konform-browser-bin
     onlyoffice-bin
     podman-desktop-bin
-    drawy
     zed
+    mindwtr-bin
 
 # LAZY ZSH config
     zsh

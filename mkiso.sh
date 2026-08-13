@@ -178,7 +178,7 @@ build_variant() {
         ;;
         sonicde)
             PKGS="$PKGS $XORG_PKGS sonicde-meta sonic-terminal sonic-ecco NetworkManager"
-            SERVICES="$SERVICES dbus elogind NetworkManager sddm"
+            SERVICES="$SERVICES dbus NetworkManager sddm"
         ;;
         lxde)
             PKGS="$PKGS $XORG_PKGS lxde lightdm lightdm-gtk-greeter gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
