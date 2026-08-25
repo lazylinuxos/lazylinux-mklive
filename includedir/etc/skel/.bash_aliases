@@ -10,7 +10,7 @@ alias upg='topgrade --disable git_repos'
 alias du='dust'
 alias grep='rg'
 alias cat='bat'
-alias ls='exa --icons'
+alias ls='eza --icons auto'
 ## XBPS
 alias xu='sudo xbps-install -u xbps && sudo xbps-install -Suv'
 alias xin='sudo xbps-install'

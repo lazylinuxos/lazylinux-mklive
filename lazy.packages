@@ -23,10 +23,10 @@
     noto-fonts-emoji
     noto-fonts-ttf
     noto-fonts-ttf-extra
-    alsa-plugins-pulseaudio
     wireplumber
+    pipewire
+    alsa-pipewire
     alsa-utils
-    apulse
     alsa-ucm-conf
     sof-firmware
     crun
@@ -59,6 +59,9 @@
     xorg-server
     sddm
     elogind
+    xdg-desktop-portal
+    libayatana-appindicator
+    libayatana-indicator
 
 # NETWORKING
     NetworkManager
@@ -119,7 +122,7 @@
     zoxide
     bat
     ripgrep
-    exa
+    eza
     dust
     Clipboard
     rofi
