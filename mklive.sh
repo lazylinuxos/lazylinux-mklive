@@ -441,14 +441,14 @@ EOF
 generate_squashfs() {
     umount_pseudofs || exit 1
 
-    # Find out required size for the rootfs and create an ext3fs image off it.
+    # Find out required size for the rootfs and create an rootfs image off it.
     ROOTFS_SIZE=$(du --apparent-size -sm "$ROOTFS"|awk '{print $1}')
     mkdir -p "$BUILDDIR/tmp/LiveOS"
     truncate -s "$((ROOTFS_SIZE+ROOTFS_SIZE))M" \
-	    "$BUILDDIR"/tmp/LiveOS/ext3fs.img >/dev/null 2>&1
+	    "$BUILDDIR"/tmp/LiveOS/rootfs.img >/dev/null 2>&1
     mkdir -p "$BUILDDIR/tmp-rootfs"
-    mkfs.ext3 -F -m1 "$BUILDDIR/tmp/LiveOS/ext3fs.img" >/dev/null 2>&1
-    mount -o loop "$BUILDDIR/tmp/LiveOS/ext3fs.img" "$BUILDDIR/tmp-rootfs"
+    mkfs.ext3 -F -m1 "$BUILDDIR/tmp/LiveOS/rootfs.img" >/dev/null 2>&1
+    mount -o loop "$BUILDDIR/tmp/LiveOS/rootfs.img" "$BUILDDIR/tmp-rootfs"
     cp -a "$ROOTFS"/* "$BUILDDIR"/tmp-rootfs/
     umount -f "$BUILDDIR/tmp-rootfs"
     mkdir -p "$IMAGEDIR/LiveOS"
@@ -541,7 +541,7 @@ shift $((OPTIND - 1))
 XBPS_REPOSITORY="$XBPS_REPOSITORY --repository=https://github.com/lazylinuxos/lazy-repo/releases/latest/download --repository=https://repo-default.voidlinux.org/current --repository=https://repo-default.voidlinux.org/current/musl --repository=https://repo-default.voidlinux.org/current/aarch64"
 
 # Configure dracut to use overlayfs for the writable overlay.
-BOOT_CMDLINE="$BOOT_CMDLINE rd.live.overlay.overlayfs=1 "
+BOOT_CMDLINE="$BOOT_CMDLINE rd.overlayfs=1 "
 
 HOST_ARCH=$(xbps-uhelper arch)
 

@@ -1,1 +1,40 @@
-/usr/share/themes/Catppuccin-Mocha-BL/gtk-4.0/gtk.css
+@import url('libadwaita.css');
+@import url('libadwaita-tweaks.css');
+/* >>> Anush Matugen (managed) >>> */
+@define-color accent_color #beafa7;
+@define-color accent_bg_color #beafa7;
+@define-color accent_fg_color #282828;
+@define-color window_bg_color #282828;
+@define-color window_fg_color #d2c5bc;
+@define-color view_bg_color #282828;
+@define-color view_fg_color #d2c5bc;
+@define-color headerbar_bg_color #383838;
+@define-color headerbar_fg_color #d2c5bc;
+@define-color popover_bg_color #383838;
+@define-color popover_fg_color #d2c5bc;
+@define-color card_bg_color #383838;
+@define-color card_fg_color #d2c5bc;
+@define-color borders #4e3e36;
+@define-color error_color #cb8a86;
+@define-color success_color #c4c3b6;
+selection { background-color: #beafa7; color: #282828; }
+/* <<< Anush Matugen (managed) <<< */
+/* >>> anush matugen (managed) >>> */
+@define-color accent_color #f4a974;
+@define-color accent_bg_color #f4a974;
+@define-color accent_fg_color #192333;
+@define-color window_bg_color #192333;
+@define-color window_fg_color #d2c5bc;
+@define-color view_bg_color #192333;
+@define-color view_fg_color #d2c5bc;
+@define-color headerbar_bg_color #233148;
+@define-color headerbar_fg_color #d2c5bc;
+@define-color popover_bg_color #233148;
+@define-color popover_fg_color #d2c5bc;
+@define-color card_bg_color #233148;
+@define-color card_fg_color #d2c5bc;
+@define-color borders #4b3d34;
+@define-color error_color #ed8c5e;
+@define-color success_color #49699d;
+selection { background-color: #f4a974; color: #192333; }
+/* <<< anush matugen (managed) <<< */

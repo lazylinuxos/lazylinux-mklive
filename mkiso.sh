@@ -101,7 +101,7 @@ build_variant() {
             GFX_PKGS="xorg-video-drivers xf86-video-intel"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
-            KERNEL_PKG="linux7.0"
+            KERNEL_PKG="linux7.2"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)
@@ -142,6 +142,11 @@ build_variant() {
             PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter oxwm gvfs gvfs-afc gvfs-mtp gvfs-smb udisks2"
             SERVICES="$SERVICES acpid dhcpcd elogind lightdm dbus NetworkManager polkitd power-profiles-daemon"
             LIGHTDM_SESSION=oxwm
+        ;;
+        skarwm)
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter skarwm anush gvfs gvfs-afc gvfs-mtp gvfs-smb udisks2"
+            SERVICES="$SERVICES acpid dhcpcd elogind lightdm dbus NetworkManager polkitd power-profiles-daemon"
+            LIGHTDM_SESSION=skarwm
         ;;
         enlightenment)
             PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter enlightenment terminology udisks2 firefox"

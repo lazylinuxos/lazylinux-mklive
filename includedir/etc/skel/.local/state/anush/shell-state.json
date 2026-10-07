@@ -1,0 +1,243 @@
+{
+  "bar": {
+    "height": 34,
+    "scale": 1,
+    "backgroundOpacity": 1,
+    "widgets": {
+      "launcher": true,
+      "tags": true,
+      "windowList": true,
+      "layout": true,
+      "title": false,
+      "scratchpads": true,
+      "media": true,
+      "weather": false,
+      "rss": false,
+      "metrics": false,
+      "battery": true,
+      "brightness": true,
+      "volume": true,
+      "tmux": false,
+      "micIndicator": true,
+      "network": true,
+      "tailscale": false,
+      "bluetooth": true,
+      "phone": false,
+      "keyboard": true,
+      "clipboard": true,
+      "colorPicker": false,
+      "notepad": true,
+      "tray": true,
+      "notifications": true,
+      "clock": true,
+      "capsLock": true,
+      "screenshot": false,
+      "commands": true
+    },
+    "clusters": {
+      "left": [
+        "launcher",
+        "notepad",
+        "tags",
+        "layout",
+        "windowList"
+      ],
+      "center": [
+        "title",
+        "media",
+        "clock",
+        "scratchpads",
+        "weather",
+        "metrics"
+      ],
+      "right": [
+        "colorPicker",
+        "phone",
+        "tmux",
+        "rss",
+        "keyboard",
+        "clipboard",
+        "brightness",
+        "volume",
+        "micIndicator",
+        "tailscale",
+        "network",
+        "bluetooth",
+        "battery",
+        "tray",
+        "notifications",
+        "capsLock",
+        "screenshot",
+        "commands"
+      ]
+    },
+    "showOnAllMonitors": true,
+    "position": "top",
+    "fitContent": false,
+    "floating": false,
+    "separateSections": false
+  },
+  "windowList": {
+    "showWindowsFromAllMonitors": false
+  },
+  "weather": {
+    "location": "",
+    "units": ""
+  },
+  "rss": {
+    "feeds": [],
+    "refreshMinutes": 15,
+    "maxItems": 100
+  },
+  "launcher": {
+    "icon": "glyph:\udb80\udc3b",
+    "favorites": [
+      "thunar",
+      "org.telegram.desktop",
+      "helium",
+      "brave-origin",
+      "brave-browser"
+    ]
+  },
+  "wallpaper": {
+    "directory": ""
+  },
+  "keyboard": {
+    "layout": {
+      "layouts": "us,am",
+      "variants": ",phonetic",
+      "options": "grp:alt_shift_toggle"
+    }
+  },
+  "tray": {
+    "hidden": []
+  },
+  "tailscale": {
+    "acknowledgedHealth": []
+  },
+  "tags": {
+    "count": 9,
+    "showNumbers": true,
+    "dynamicWorkspaces": true,
+    "limitVisibleTags": false,
+    "visibleTagLimit": 5
+  },
+  "pomodoro": {
+    "endMs": 0,
+    "minutes": 25
+  },
+  "notepad": {
+    "side": "left",
+    "extended": false
+  },
+  "colorPicker": {
+    "current": "",
+    "history": []
+  },
+  "theme": {
+    "accent": "orange",
+    "customAccent": "#6574A8",
+    "defaultAccent": "orange",
+    "usePresetAccent": false,
+    "preset": "srcery-dark",
+    "iconTheme": "Papirus",
+    "cursorTheme": "Fluent-dark-cursors",
+    "wallpaperEnabled": true,
+    "palette": {
+      "image": "/usr/share/anush/config/wallpaper/minimal.png",
+      "semantic": {
+        "background": "#192333",
+        "background-alt": "#233148",
+        "foreground": "#d2c5bc",
+        "border": "#4b3d34",
+        "primary": "#f4a974",
+        "secondary": "#49699d",
+        "alert": "#ed8c5e",
+        "disabled": "#5c6470"
+      },
+      "ansi": [
+        "#233148",
+        "#f09c75",
+        "#6ecf6e",
+        "#cfc66e",
+        "#5383ac",
+        "#ac5376",
+        "#4f86b0",
+        "#c2b6ad",
+        "#575f6b",
+        "#f4b79a",
+        "#8cd98c",
+        "#d9d28c",
+        "#6e97b9",
+        "#b96e8c",
+        "#6b99bd",
+        "#e2dad5"
+      ],
+      "mode": "dark",
+      "generator": "matugen",
+      "shellGenerator": "anush",
+      "material": {
+        "background": "#1a110f",
+        "error": "#ffb4ab",
+        "error_container": "#93000a",
+        "inverse_on_surface": "#392e2b",
+        "inverse_primary": "#9d4224",
+        "inverse_surface": "#f1ded9",
+        "on_background": "#f1ded9",
+        "on_error": "#690005",
+        "on_error_container": "#ffdad6",
+        "on_primary": "#5e1700",
+        "on_primary_container": "#410d00",
+        "on_primary_fixed": "#3a0b00",
+        "on_primary_fixed_variant": "#7e2b0f",
+        "on_secondary": "#4d2519",
+        "on_secondary_container": "#ffd8cc",
+        "on_secondary_fixed": "#331106",
+        "on_secondary_fixed_variant": "#683b2d",
+        "on_surface": "#f1ded9",
+        "on_surface_variant": "#dcc1b9",
+        "on_tertiary": "#003731",
+        "on_tertiary_container": "#002520",
+        "on_tertiary_fixed": "#00201c",
+        "on_tertiary_fixed_variant": "#005047",
+        "outline": "#a48b84",
+        "outline_variant": "#56423d",
+        "primary": "#ffb59e",
+        "primary_container": "#fd8b67",
+        "primary_fixed": "#ffdbd0",
+        "primary_fixed_dim": "#ffb59e",
+        "scrim": "#000000",
+        "secondary": "#f8b7a4",
+        "secondary_container": "#683b2d",
+        "secondary_fixed": "#ffdbd0",
+        "secondary_fixed_dim": "#f8b7a4",
+        "shadow": "#000000",
+        "source_color": "#fd8b67",
+        "surface": "#1a110f",
+        "surface_bright": "#423733",
+        "surface_container": "#271d1a",
+        "surface_container_high": "#322824",
+        "surface_container_highest": "#3e322f",
+        "surface_container_low": "#231916",
+        "surface_container_lowest": "#150c0a",
+        "surface_dim": "#1a110f",
+        "surface_tint": "#ffb59e",
+        "surface_variant": "#56423d",
+        "tertiary": "#44dcc7",
+        "tertiary_container": "#02bfab",
+        "tertiary_fixed": "#68f9e3",
+        "tertiary_fixed_dim": "#44dcc7"
+      }
+    },
+    "cornerRadius": 0,
+    "mode": "dark"
+  },
+  "windowManager": {
+    "gap": 8,
+    "decorations": false
+  },
+  "desktop": {
+    "nightLight": false,
+    "showBatteryPercentage": false
+  }
+}

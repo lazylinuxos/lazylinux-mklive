@@ -98,7 +98,7 @@
     zoxide
     bat
     ripgrep
-    exa
+    eza
     dust
     rofi
     zbar
@@ -131,7 +131,6 @@
     pulsemixer
     pamixer
     feh
-    nwg-look
     xbindkeys
     xvkbd
     xinput
@@ -153,21 +152,11 @@
     libnotify
     dbus-x11
     ytsub
-    sesh
-    rura
-    pik
-    yatto
-    witr
     bookokrat
     mousepad
-    arandr
-    autorandr
-    azote
     onboard
-    caffeine-ng
     aerc
-    kimun-notes
-    netwatch
+    create_ap
 
 # PACKAGE MANAGEMENT
     topgrade
@@ -220,6 +209,7 @@
     python3-Pillow
     zig
     lua
+    odin
 
 # FILE SYSTEM
     exfat-utils
@@ -242,13 +232,11 @@
     blackhole-vl-repo
 
 # GUI
-    linux-wifi-hotspot
     Thunar
     thunar-volman
     thunar-archive-plugin
     thunar-media-tags-plugin
     kitty
-    imhex
     octoxbps
     ghostwriter
     syncthing
@@ -261,7 +249,6 @@
     remmina
     timeshift
     halloy
-    dinox
     dconf-editor
     lightdm-gtk-greeter-settings
 
@@ -269,20 +256,17 @@
 # LAZY REPO PACKAGES
     calamares
     distrobox
-    zen-browser-bin
-    brave-bin
+    brave-origin-bin
     webapp-manager
-    posting
+    resterm
     thunar-shares-plugin
     termscp-bin
     zed
     onlyoffice-bin
 
 # LAZY THEMES AND ICONS
-    lazy-theme-config
+    lazy-fluent-grey
     papirus-icon-theme
-    lazy-catppuccin-tela-mix
-
 
 # LAZY ZSH config
     zsh

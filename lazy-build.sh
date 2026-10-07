@@ -16,4 +16,4 @@ yes | ./mkiso.sh \
     -r https://repo-default.voidlinux.org/current/nonfree \
     -r https://github.com/xlibre-void/xlibre/releases/latest/download \
     -r https://mirror.black-hole.dev/x86_64 \
-    -- -C "live.autologin" -v "linux7.0" -o "$path"
+    -- -C "live.autologin" -v "linux7.2" -o "$path"

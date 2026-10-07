@@ -1,0 +1,204 @@
+# skarwm configuration for the anush desktop session.
+# Reload this file at any time with Mod+Shift+r
+# (call : mod + Shift + r : reload); the reload is atomic — if a line is
+# malformed skarwm keeps the previous settings and logs the error.
+#
+# A '#' at the start of a line is a comment. Every line is `key : value`
+# (settings) or a directive with extra ':' fields. Legacy settings that only
+# decorate a titlebar skarwm does not draw (norm_bg, show_titlebar, snap, …)
+# are accepted and ignored for configuration compatibility.
+
+# ---- settings ---------------------------------------------------------------
+
+# Primary modifier: the `mod` token in every combo below. Mod1..Mod5, Super,
+# Hyper, Alt, Shift, Control are all valid.
+mod_key : super
+bar_enabled : false
+# Pixels of empty space around the work area / between tiled windows.
+outer_gap : 8
+inner_gap : 8
+# `gap : N` seeds both outer_gap and inner_gap at once. Every window reserves
+# the border inset so focus never resizes it; only the focused border is drawn.
+# Set border_width to 0 to disable borders and their reserved inset completely.
+border_width : 2
+# Rounded client corners in pixels. Set to 0 for square windows. Fullscreen
+# windows and bars remain square.
+corner_radius : 0
+
+# Optional skarwm-owned titlebars and resize frames. anush keeps this explicit
+# palette synchronized with the selected theme and accent.
+decorations_enabled : false
+decoration_titlebar_height : 20
+decoration_border_width : 1
+decoration_resize_hit_width : 4
+decoration_show_title : true
+decoration_color_source : explicit
+decoration_accent : #d59a72
+decoration_active_background : #333a46
+decoration_inactive_background : #262e3d
+decoration_active_foreground : #d59a72
+decoration_inactive_foreground : #d59a72
+decoration_active_border : #d59a72
+decoration_inactive_border : #d59a72
+
+# Window border colours as #RRGGBB. The normal colour remains accepted for
+# config compatibility; unfocused windows currently have no border.
+norm_outer_border : #5c6470
+sel_outer_border  : #d59a72
+
+# True (default): moving the pointer over a window focuses it.
+focus_follows_mouse : true
+
+# Optional WM-level ultrawide split. Output is the RandR monitor name; percent
+# controls the left region and the signed final field nudges the boundary.
+# virtual_screen : DP-1 : split : 75 : -30
+
+# Optional per-tag defaults (also accepts `tag_layout`).
+workspace_layout : 3 : dwindle
+
+# ---- launching ----------------------------------------------------------------
+
+# bind: run a shell command. Combo = modifier tokens + one key.
+bind : mod + Return : "kitty --config ${ANUSH_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/anush/config}/kitty/kitty.conf"
+# >>> anush shell (managed by anushctl) >>>
+bind : mod + a : "anushctl launcher toggle"
+bind : mod + v : "anushctl clipboard toggle"
+# Keep the generated Shift variant from arming tab placement for this
+# non-window IPC command.
+bind : mod + Shift + v : "anushctl clipboard toggle"
+bind : mod + Shift + n : "anushctl notes toggle"
+autostart : "anushctl start"
+autostart : "anushctl wallpaper restore"
+autostart : "anushctl clipboard daemon"
+autostart : "xss-lock -- anushctl lock"
+# <<< anush shell (managed by anushctl) <<<
+
+call : Alt + Tab : overview_next
+call : Alt + Shift + Tab : overview_prev
+# Every spawn binding automatically gets an otherwise-unbound Shift variant.
+# While a tabbed column is focused, mod+Shift+Return runs the same command and
+# puts its next window in that tab group. An explicit shifted binding overrides
+# this generated behavior.
+
+# Start the anush desktop environment components.
+# autostart: run once at startup (not re-run on reload).
+autostart : "pipewire"
+autostart : "pipewire-pulse"
+autostart : "lxqt-policykit-agent"
+autostart : "dunst -config ${ANUSH_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/anush/config}/dunst/dunstrc"
+autostart : "picom --config ${ANUSH_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/anush/config}/picom/picom.conf ${ANUSH_PICOM_ARGS:---no-use-damage} -b"
+autostart : "udiskie --smart-tray"
+
+# ---- key actions (call) ---------------------------------------------------------
+# Action tokens: focusleft/right/up/down resizeleft/right/up/down
+# moveleft/right/up/down ws_up ws_down
+# ws_next ws_prev togglefloating togglefullscreen layout_tabbed layout_stacked
+# toggle_tabbed layout_scrolling_tile layout_dwindle layout_monocle
+# layout_floating layout_next show_bindings show_datetime show_battery
+# focus_output_next/prev move_to_output_next/prev
+# screen_split_toggle/enable/disable screen_split_grow/shrink/ratio
+# reminder_new reminder_show_all reminder_clear_all
+# scratchpad_toggle N scratchpad_toggle_float N scratchpad_remove N
+# close_window reload_config quit.
+
+call : mod + h : focusleft
+call : mod + j : focusdown
+call : mod + k : focusup
+call : mod + l : focusright
+
+# Resize steps: left/up make the focused tile narrower/shorter;
+# right/down make it wider/taller. Other columns keep their widths, while the
+# remaining rows in a vertical stack share the leftover height proportionally.
+call : mod + Control + h : resizeleft
+call : mod + Control + j : resizedown
+call : mod + Control + k : resizeup
+call : mod + Control + l : resizeright
+
+call : mod + Shift + h : moveleft
+call : mod + Shift + j : movedown
+call : mod + Shift + k : moveup
+call : mod + Shift + l : moveright
+
+call : mod + space : togglefloating
+call : mod + f     : togglefullscreen
+call : mod + t     : toggle_tabbed
+call : mod + g     : layout_next
+call : mod + Control + Alt + h : show_bindings
+call : mod + Control + Alt + t : show_datetime
+call : mod + Control + Alt + b : show_battery
+call : mod + Control + r         : reminder_new
+call : mod + Control + Alt + r   : reminder_show_all
+call : mod + Control + Shift + r : reminder_clear_all
+# `layout_tabbed` and `layout_stacked` select a mode directly. In tabbed mode,
+# only the focused column becomes a tab group. Move chosen windows into that
+# column with mod+Shift+h/l; mod+k/j selects tabs and mod+Shift+k/j reorders.
+# Toggling tabs off splits them back into separate horizontal columns.
+# `layout_next` cycles the workspace through Scrolling Tile, Dwindle/Fibonacci,
+# Monocle, and Floating. `togglefloating` above changes only one window.
+call : mod + Shift + q : close_window
+call : mod + Shift + r : reload_config
+
+# The first toggle assigns the focused window to a session-only register;
+# later toggles hide it or summon it on the active workspace and monitor.
+call : mod + grave : scratchpad_toggle 1
+call : mod + Shift + grave : scratchpad_toggle_float 2
+call : mod + Control + grave : scratchpad_remove 1
+
+call : mod + n : ws_next
+call : mod + p : ws_prev
+call : mod + Control + n : tag_next
+call : mod + Control + p : tag_prev
+
+# Focus another monitor, or send the focused window there. Monitor order comes
+# from RandR and wraps at either end.
+call : mod + comma         : focus_output_prev
+call : mod + period        : focus_output_next
+call : mod + Shift + comma : move_to_output_prev
+call : mod + Shift + period : move_to_output_next
+
+# Virtual-screen controls for an ultrawide monitor. F5/F8 move the shared
+# boundary by 15px; F6 returns to one logical screen; F7 enables the default
+# 75/25 main/side split. These operate on the active screen's physical parent.
+call : mod + F5 : screen_split_shrink 15
+call : mod + F6 : screen_split_disable
+call : mod + F7 : screen_split_enable 75
+call : mod + F8 : screen_split_grow 15
+
+# Fixed mouse actions use mod_key: Mod+wheel up/down scrolls the workspace strip
+# under the pointer. Mod+left-drag moves floating windows or drops tiled windows
+# across monitors. The nearest tiled window is the target:
+# left/right inserts a column beside it and top/bottom inserts a row beside it.
+# Mod+Alt+left-drag onto a tiled window joins its column in tabbed mode and
+# makes the dragged window the active tab.
+# Mod+left-drag on a tab header reorders the complete tabbed column.
+# Mod+right-drag resizes floaters; on a tile, outward grows the column/row and
+# inward shrinks it from the side where the drag began.
+
+# ---- dynamic workspaces --------------------------------------------------------
+# A workspace is created on demand the first time it is shown, so ids are not
+# limited to the rows bound below.
+
+workspace : mod + 1 : view 1
+workspace : mod + 2 : view 2
+workspace : mod + 3 : view 3
+workspace : mod + 4 : view 4
+
+workspace : mod + Shift + 1 : tag 1
+workspace : mod + Shift + 2 : tag 2
+workspace : mod + Shift + 3 : tag 3
+workspace : mod + Shift + 4 : tag 4
+
+# ---- window rules ------------------------------------------------------------
+# Match against the window class, instance or title. The pattern is a plain
+# substring test (not a regex); quote it with " when it contains spaces. Effects
+# (space-separated, any order): `workspace <N>` sends the window to that
+# workspace; `floating` (or `floating true` / `floating false`) overrides tiling.
+
+rule : class : XTerm : floating
+rule : title : Network : floating
+rule : title : "Choose launcher icon" : floating
+rule : instance : firefox : workspace 3
+rule : title : "Mozilla Firefox" : floating
+rule : class : lxqt-policykit-agent : floating
+rule : instance : lxqt-policykit-agent : floating
+rule : title : "Authentication Required" : floating
