@@ -101,7 +101,7 @@ build_variant() {
             GFX_PKGS="xorg-video-drivers xf86-video-intel"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
-            KERNEL_PKG="linux7.1"
+            KERNEL_PKG="linux7.2"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)
