@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Brave
+Type=X-XFCE-Helper
+Icon=brave-origin
+X-XFCE-Category=WebBrowser
+X-XFCE-Commands=brave-origin-stable;
+X-XFCE-CommandsWithParameter=brave-origin-stable "%s";

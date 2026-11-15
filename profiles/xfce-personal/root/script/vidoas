@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -eu
+
+DOASDIR=$(mktemp -d /tmp/vidoas.XXXXXX)
+trap 'rm -rf -- "$DOASDIR"' EXIT
+DOASFILE="$DOASDIR/doas.conf"
+
+install -m 600 /etc/doas.conf "$DOASFILE"
+
+"${EDITOR:-vi}" "$DOASFILE"
+sync
+
+if doas -C "$DOASFILE"; then
+    echo "valid config"
+    install -m 400 "$DOASFILE" /etc/doas.conf
+else
+    echo "invalid config"
+fi
+sync

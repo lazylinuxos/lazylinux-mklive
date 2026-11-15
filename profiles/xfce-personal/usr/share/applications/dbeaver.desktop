@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=DBeaver
+GenericName=DBeaver
+Exec=dbeaver
+Icon=dbeaver
+Type=Application
+Categories=Development;

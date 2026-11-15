@@ -1,0 +1,117 @@
+# BASE PACKAGES
+    doasedit
+    linux-headers
+    noto-fonts-ttf-extra
+    opendoas
+
+# NETWORKING
+    NetworkManager-l2tp
+    NetworkManager-openconnect
+    NetworkManager-openvpn
+    NetworkManager-pptp
+    NetworkManager-strongswan
+    ntp
+
+# POWER
+    powertop
+
+# UTILITIES
+    binutils
+    btop
+    eza
+    expect
+    hddtemp
+    ksuperkey
+    openfortivpn
+    tesseract-ocr
+    tesseract-ocr-eng
+    tesseract-ocr-hye
+    tesseract-ocr-rus
+    tesseract-ocr-script-Armenian
+    unzip
+    xarchiver
+    xterm
+    xz
+    zellij
+
+# DEVELOPMENT
+    autoconf
+    automake
+    bison
+    docker
+    docker-buildx
+    flex
+    gcc
+    lazydocker
+    libtool
+    m4
+    make
+    pkg-config
+
+# FILE SYSTEM
+    fuse-exfat
+
+# TEXT EDITORS
+    helix
+    vim
+
+# LOCALIZATION
+    libreoffice-i18n-en-US
+    libreoffice-i18n-ru
+
+# GUI
+    barrier
+    barrier-gui
+    bleachbit
+    bridge-utils
+    cortile
+    dbeaver
+    deadbeef
+    fluux-messenger-bin
+    fsearch
+    galculator-gtk3
+    ghostwriter
+    gnome-icon-theme-xfce
+    gparted
+    gufw
+    handbrake
+    imhex
+    libvirt
+    liferea
+    lightdm-gtk-greeter-settings
+    linux-wifi-hotspot
+    mugshot
+    nare
+    obs
+    qbittorrent
+    qdirstat
+    qemu
+    qtpass
+    thunar-archive-plugin
+    thunar-media-tags-plugin
+    thunar-shares-plugin
+    virt-manager
+    xfce4-docklike-plugin
+    xfce4-dynamic-workspaces
+    xfce4-launcher-plugin
+    xfce4-plugins
+    xreader
+
+# LAZY REPOSITORY PACKAGES
+    brave-origin-bin
+    fingwit
+    muCommander-bin
+    podman-desktop-bin
+    skippy-xd-2026.11.14_1
+    bruno-bin
+    zed-bin
+    zen-browser-bin
+
+# THEMES AND ICONS
+    bluecurve
+    lazy-backstep-icons
+    lazy-backstep-theme
+    lazy-catppuccin-tela-mix
+    lazy-fluent-grey
+    lazy-nordic-icons
+    lazy-squared-theme
