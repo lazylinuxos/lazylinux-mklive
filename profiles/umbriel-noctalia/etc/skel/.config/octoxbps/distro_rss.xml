@@ -1,0 +1,853 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+	<title>Void news</title>
+	<subtitle>Follow Void Linux news</subtitle>
+	<link href="https://voidlinux.org/"/>
+	<link type="application/atom+xml" rel="self" href="https://voidlinux.org/atom.xml"/>
+	<updated>2023-01-19T23:42:18+00:00</updated>
+	<author>
+		<name>Void Linux Team</name>
+	</author>
+	<id>https://voidlinux.org/</id>
+
+
+	<entry>
+		<title>Void Accepted to Fastly Fast Forward!</title>
+		<link href="https://voidlinux.org/news/2022/12/fastly-fast-forward.html"/>
+		<id>https://voidlinux.org/news/2022/12/fastly-fast-forward</id>
+		<published>2022-12-19T00:00:00+00:00</published>
+		<updated>2022-12-19T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>Did you know that Void has over 20 mirrors?  We have mirrors all over
+the world, but just having a bunch of servers isn’t enough to
+effectively deliver package updates to all Void users.  A mirror that
+is nearby can have extremely good performance if you know it’s there
+and switch to it, but for many people what we would like to offer is
+just a URL that works anywhere in the world to provide the best
+download experience available in that location.  When you look at what
+we’re trying to achieve, its pretty clear we’d be trying to build a
+content delivery network (CDN) for Void.</p>
+
+<p>Rather than re-inventing the wheel, we reached out to the team at
+Fastly to see if they’d be interested in working with us to improve
+the default package experience for Void users globally.  We’re excited
+to announce that the answer is yes; Void has been accepted to the
+Fastly <a href="https://www.fastly.com/fast-forward">Fast Forward</a> program.
+As part of this project, we’ll be provisioning a new repo URL that
+will retrieve packages via Fastly’s global CDN.</p>
+
+<p>Stay tuned over the next few weeks for the new mirror to become live,
+and a post about how Void’s mirror infrastructure works!</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>US Mirror Issues</title>
+		<link href="https://voidlinux.org/news/2022/12/repo-us-issues.html"/>
+		<id>https://voidlinux.org/news/2022/12/repo-us-issues</id>
+		<published>2022-12-01T00:00:00+00:00</published>
+		<updated>2022-12-01T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>The US mirror, <a href="https://repo-us.voidlinux.org/">repo-us.voidlinux.org</a>, is currently having hardware issues and is no longer syncing with the other mirrors for the time being.
+Until this is fixed, <a href="https://docs.voidlinux.org/xbps/repositories/mirrors/changing.html">switching to another mirror</a> is recommended.
+There are <a href="https://docs.voidlinux.org/xbps/repositories/mirrors/index.html">several other mirrors</a> located in the US that are still operational.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>New Images! (October 2022 Edition)</title>
+		<link href="https://voidlinux.org/news/2022/10/new-images.html"/>
+		<id>https://voidlinux.org/news/2022/10/new-images</id>
+		<published>2022-10-16T00:00:00+00:00</published>
+		<updated>2022-10-16T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>We’re pleased to announce that the 20221001 image set has been promoted to
+current and is now generally available.</p>
+
+<p>You can find the new images on our <a href="/download/">downloads page</a> and on our many
+<a href="https://docs.voidlinux.org/xbps/repositories/mirrors/index.html">mirrors</a>.</p>
+
+<p>Special thanks for this image set goes out to <a href="https://github.com/CameronNemo">@CameronNemo</a>
+for work in fixing some of the issues with networking in the installer and
+<a href="https://github.com/paper42">@paper42</a> for various improvements to the live
+image contents.</p>
+
+<p>Also in this release, the Raspberry Pi platform images are now condensed into
+one image per architecture. See <a href="https://docs.voidlinux.org/installation/guides/arm-devices/platforms.html#supported-models">here</a>
+for more details about which image to use for which Raspberry Pi model.</p>
+
+<p>You may verify the authenticity of the images by following the instructions
+on the downloads page, and using the following signify key information:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>untrusted comment: This key is only valid for images with date 20221001. public key
+RWQ0DEc5FwYgp8wuGTRe3IWJGagpbeOpPqfSQbPIJie9GP8oBybejTqs
+</code></pre></div></div>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Hacktoberfest 2022</title>
+		<link href="https://voidlinux.org/news/2022/09/hacktoberfest.html"/>
+		<id>https://voidlinux.org/news/2022/09/hacktoberfest</id>
+		<published>2022-09-30T00:00:00+00:00</published>
+		<updated>2022-09-30T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>Are you ready for Hacktoberfest 2022?  Void Linux is!  We’re excited
+to be participating for our 6th year.  Contributions that help to
+address our out-of-date packages queue are especially welcome.  This
+is a great way to dip your feet into the world of Linux distro package
+management and what happens behind the scenes to provide a wide
+selection of packages and make sure your system remains up to date.</p>
+
+<p>Updating packages is very easy.  You can select a package from the
+list of <a href="http://repo-default.voidlinux.org/void-updates/void-updates.txt">out of date
+packages</a>
+and update it using the tools in the <a href="https://github.com/void-linux/void-packages">void-packages
+repo</a>.  The
+<a href="https://github.com/void-linux/void-packages/blob/master/Manual.md">manual</a>
+might be of assistance when you are updating packages.</p>
+
+<p>As a general rule, we recommend that newcomers to the Void Linux
+project steer clear of “structural” packages unless you have specific
+domain knowledge that qualifies you to work on high-risk packages.
+When selecting a package to update, prefer packages registered to
+<code class="language-plaintext highlighter-rouge">orphan@voidlinux.org</code>.  These packages are otherwise unmaintained,
+and your contribution will have a bigger impact.  You can update
+packages that have a maintainer assigned, but understand that
+conflicting changes between a maintainer and contributor will be
+resolved at the discretion of Void staff.</p>
+
+<p>Here are some useful tips when updating packages:</p>
+
+<ul>
+  <li>While we’re not completely opposed to PRs that add new packages,
+you’re much more likely to get your PR approved and merged if it’s
+a well written update.</li>
+  <li>Don’t PR broken code. Our maintainers are much less likely to give
+a second look to a PR that didn’t build when it was submitted.</li>
+  <li>While it’s possible to run xbps-src from an alien distro, this
+isn’t really supported.  If you’re a seasoned Linux user and want
+to try Void, now is the time!</li>
+  <li>The update list is sometimes wrong. We’d love to get patches that
+improve its reliability by <a href="https://github.com/void-linux/void-packages/blob/master/Manual.md#checking-for-new-upstream-releases">ignoring beta
+versions</a>
+or adding checks to packages that are not correctly detected as
+out of date.</li>
+  <li>If you have expertise in C, GNU Autotools, or other build systems,
+taking a look at projects that we’ve marked as incompatible
+with cross compilation and fixing the upstream issue can be
+an amazing contribution that impacts more than just Void.</li>
+</ul>
+
+<p>Want to contribute but don’t know how to code?  No sweat!  We have a
+documentation project that’s managed in git and can help you learn how
+to use the tools of the trade without needing to simultaneously learn
+how to manage our package build system.  Docs contributions should be
+in the style of the manual, so make sure you <a href="https://docs.voidlinux.org/about/about-this-handbook.html">understand the
+manual</a> and
+feel free to open an issue or ask on IRC before starting on a larger
+contribution to make sure your change can be accepted.</p>
+
+<p>We look forward to working with the amazing world of open source
+developers this month to improve Void and continue our high standards
+for quality and reliability.  To ensure your PR has the best chance at
+being accepted, feel free to reach out for help as explained in the
+manual.  Together, we can make this a high-impact Hacktoberfest.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>New Mirror Default</title>
+		<link href="https://voidlinux.org/news/2022/05/default-mirror.html"/>
+		<id>https://voidlinux.org/news/2022/05/default-mirror</id>
+		<published>2022-05-27T00:00:00+00:00</published>
+		<updated>2022-05-27T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>The default mirror has been updated to
+https://repo-default.voidlinux.org.  If you wish to specify a mirror
+that is nearer to you geographically you can find the full list of
+currently active mirrors here:
+<a href="https://docs.voidlinux.org/xbps/repositories/mirrors/index.html">https://docs.voidlinux.org/xbps/repositories/mirrors/index.html</a>.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>US Mirror Retirement</title>
+		<link href="https://voidlinux.org/news/2021/10/mirror-retirement.html"/>
+		<id>https://voidlinux.org/news/2021/10/mirror-retirement</id>
+		<published>2021-10-03T00:00:00+00:00</published>
+		<updated>2021-10-03T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>The alpha.us.repo.voidlinux.org mirror has been retired.  Users should
+switch to https://repo-us.voidlinux.org for continued service out of
+the central US.  As part of the switch the US tier one mirror has
+gained TLS, and is running on a more reliable host.</p>
+
+<p>All contributors with in-flight PRs should rebase to ensure that the
+latest URL is reflected in your branch’s CI configuration.</p>
+
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Hacktoberfest 2021</title>
+		<link href="https://voidlinux.org/news/2021/09/hacktoberfest.html"/>
+		<id>https://voidlinux.org/news/2021/09/hacktoberfest</id>
+		<published>2021-09-23T00:00:00+00:00</published>
+		<updated>2021-09-23T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>Are you ready for Hacktoberfest 2021?  Void Linux is!  We’re excited
+to be participating for our 5th year.  Contributions that help to
+address our out-of-date packages queue are especially welcome.  This
+is a great way to dip your feet into the world of Linux distro package
+management and what happens behind the scenes to provide a wide
+selection of packages and make sure your system remains up to date.</p>
+
+<p>Updating packages is very easy.  You can select a package from the
+list of <a href="http://repo-default.voidlinux.org/void-updates/void-updates.txt">out of date
+packages</a>
+and update it using the tools in the <a href="https://github.com/void-linux/void-packages">void-packages
+repo</a>.  The
+<a href="https://github.com/void-linux/void-packages/blob/master/Manual.md">manual</a>
+might be of assistance when you are updating packages.</p>
+
+<p>As a general rule, we recommend that newcommers to the Void Linux
+project steer clear of “structural” packages unless you have specific
+domain knowledge that qualifies you to work on high-risk packages.
+When selecting a package to update, prefer packages registered to
+<code class="language-plaintext highlighter-rouge">orphan@voidlinux.org</code>.  These packages are otherwise unmaintained,
+and your contribution will have a bigger impact.  You can update
+packages that have a maintainer assigned, but understand that
+conflicting changes between a maintainer and contributor will be
+resolved at the discretion of Void staff.</p>
+
+<p>Here are some useful tips when updating packages:</p>
+
+<ul>
+  <li>While we’re not completely opposed to PRs that add new packages,
+you’re much more likely to get your PR approved and merged if it’s
+a well written update.</li>
+  <li>Don’t PR broken code. Our maintainers are much less likely to give
+a second look to a PR that didn’t build when it was submitted.</li>
+  <li>While it’s possible to run xbps-src from an alien distro, this
+isn’t really supported.  If you’re a seasoned Linux user and want
+to try Void, now is the time!</li>
+  <li>The update list is sometimes wrong. We’d love to get patches that
+improve its reliability by <a href="https://github.com/void-linux/void-packages/blob/master/Manual.md#checking-for-new-upstream-releases">ignoring beta
+versions</a>
+or adding checks to packages that are not correctly detected as
+out of date.</li>
+  <li>If you have expertise in C, GNU Autotools, or other build systems,
+taking a look at projects that we’ve marked as incompatible
+with cross compilation and fixing the upstream issue can be
+an amazing contribution that impacts more than just Void.</li>
+</ul>
+
+<p>We look forward to working with the amazing world of open source
+developers this month to improve Void and continue our high standards
+for quality and reliability.  To ensure your PR has the best chance at
+being accepted, feel free to reach out for help as explained in the
+manual.  Together, we can make this a high-impact Hacktoberfest.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>DigitalOcean Renews Sponsorship</title>
+		<link href="https://voidlinux.org/news/2021/09/sponsor-do-renew.html"/>
+		<id>https://voidlinux.org/news/2021/09/sponsor-do-renew</id>
+		<published>2021-09-03T00:00:00+00:00</published>
+		<updated>2021-09-03T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>Void is pleased to announce that DigitalOcean has renewed their
+sponsorship of our project as part of the <a href="https://www.digitalocean.com/open-source/">Digital Ocean Open Source
+program</a>.  DigitalOcean
+provides us with reliable infrastructure on which we run the control
+plane for our distributed fleet of machines, as well as some assorted
+monitoring and fleet management services.  You can find our full list
+of sponsors on the <a href="/acknowledgments/">Acknowledgements page</a>.</p>
+
+<p>Should you also want to run a Void Linux VM on DigitalOcean’s droplet
+service, we provide tooling for generating Void Linux images in <a href="https://github.com/void-linux/void-mklive">the
+mklive repository</a>.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Repository Signing Disruption</title>
+		<link href="https://voidlinux.org/news/2021/07/signing-disruption.html"/>
+		<id>https://voidlinux.org/news/2021/07/signing-disruption</id>
+		<published>2021-07-17T00:00:00+00:00</published>
+		<updated>2021-07-17T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>We are aware of an ongoing infrastructure issue affecting repository
+synchronization and package signing.  We are working to resolve this
+disruption, but first must resolve another unrelated infrastructure
+issue.  We have no short term ETA for service restoration, however our
+worst case resolution timeline is Friday the 23rd of July.</p>
+
+<p>Your patience is appreciated while we perform this work as fast as
+possible.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Void Linux freenode Channels Have Been Hijacked</title>
+		<link href="https://voidlinux.org/news/2021/05/freenode-takeover.html"/>
+		<id>https://voidlinux.org/news/2021/05/freenode-takeover</id>
+		<published>2021-05-26T00:00:00+00:00</published>
+		<updated>2021-05-26T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>We have been made aware that during the mass channel takeover that is
+ongoing on freenode that bogus <code class="language-plaintext highlighter-rouge">##voidlinux</code> and <code class="language-plaintext highlighter-rouge">##xbps</code> channels
+have been created in the secondary namespace.</p>
+
+<p>We do not operate or engage with these channels, and we do not
+maintain an official presence on the freenode network.  We are still
+in the process of finalizing the shutdown of the <code class="language-plaintext highlighter-rouge">#xbps</code> and
+<code class="language-plaintext highlighter-rouge">#voidlinux</code> channels in the primary namespace, and have removed our
+channels from the public listing as part of this process.</p>
+
+<p>Though you should always exercise caution when running code obtained
+from the internet, we urge you exercise extreme caution when using any
+code from any channels on the freenode network that claims affiliation
+with the Void Linux project.  You can always find our official points
+of presence listed at the top of our <a href="/">home page</a>.</p>
+
+<p>If you want to ask the Void team questions in real-time about this or
+any other Void related matter, feel free to ask at any time in
+<code class="language-plaintext highlighter-rouge">#voidlinux</code> on <code class="language-plaintext highlighter-rouge">irc.libera.chat</code>.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>IRC network switch to Libera</title>
+		<link href="https://voidlinux.org/news/2021/05/libera.html"/>
+		<id>https://voidlinux.org/news/2021/05/libera</id>
+		<published>2021-05-21T00:00:00+00:00</published>
+		<updated>2021-05-21T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>Given the recent <a href="https://lwn.net/Articles/856543/">upheaval at Freenode</a>, the
+Void Linux team has made the decision to switch to another IRC network. Our
+network of choice is <a href="https://libera.chat">libera.chat</a>, managed by former
+Freenode staff. When accessing <code class="language-plaintext highlighter-rouge">#voidlinux</code> and <code class="language-plaintext highlighter-rouge">#xbps</code>, be sure to use
+<code class="language-plaintext highlighter-rouge">irc.libera.chat</code>! We are excited to welcome you there, and hope this doesn’t
+inconvenience anyone unduly. Be sure to let us know of any issues.</p>
+
+<p>Contacting us will remain the same: you can <a href="https://github.com/void-linux/void-packages/issues/new">open an
+issue</a> on GitHub or
+ping us in the new <code class="language-plaintext highlighter-rouge">#voidlinux</code> channel on <a href="https://libera.chat">libera.chat</a>.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>In memoriam pullmoll</title>
+		<link href="https://voidlinux.org/news/2021/03/In-memoriam-pullmoll.html"/>
+		<id>https://voidlinux.org/news/2021/03/In-memoriam-pullmoll</id>
+		<published>2021-03-27T00:00:00+00:00</published>
+		<updated>2021-03-27T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><center>
+	<img src="/assets/img/pullmoll.png" alt="Picture of Pullmoll" />
+</center>
+
+<p>Today, we were informed that our long time contributor and maintainer Jürgen
+Buchmüller (pullmoll) has passed away.</p>
+
+<p>With boundless dedication, Jürgen was one of the most prolific contributors to
+the Void project and sponsored the project financially, too.</p>
+
+<p>He invested lots of his time in keeping GCC up to date and well tested, supplied tons of
+patches to port packages to new compilers and platforms and also took care of
+(co-)maintaining many packages, including several non-trivial ones, like OpenJDK
+and LibreOffice.</p>
+
+<p>He was not only a dedicated and driven developer in the Void Linux project, he
+also was one of the friendliest and warmest people we had the pleasure to work
+with. Jürgen will be missed as a steady force and a calm and wise voice in
+discussions. Most of all, he will be remembered as a friend to all of us.</p>
+
+<p>Our thoughts and condolences go out to Jürgen’s family, friends, and loved ones.</p>
+
+<p><strong>Thank you, pullmoll.</strong></p>
+
+<p>– The Void Linux maintainers</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Friday in the Void: OpenSSL and Kernel Hardening</title>
+		<link href="https://voidlinux.org/news/2021/03/OpenSSL-hardening-updates.html"/>
+		<id>https://voidlinux.org/news/2021/03/OpenSSL-hardening-updates</id>
+		<published>2021-03-05T00:00:00+00:00</published>
+		<updated>2021-03-05T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>The previously announced <a href="https://voidlinux.org/news/2021/02/OpenSSL.html">OpenSSL switch</a>
+is now underway. Because OpenSSL is a dependency of a large number of packages,
+the full rebuild process is expected to take several days. Syncing between the
+builders and public repositories has been suspended to ensure that the package
+tree remains consistent. Consequently, no new package updates will appear until
+the switch is complete.</p>
+
+<p>Once updates appear, we recommend that you perform a complete system update to
+simplify the transition. Partial updates are possible, but you will need to
+manually trace all OpenSSL dependants installed on your system and update them
+atomically.</p>
+
+<hr />
+
+<p>Since 2016, the default bootloader configuration in Void Linux has set
+the Linux kernel command-line options <code class="language-plaintext highlighter-rouge">slub_debug=P</code> and <code class="language-plaintext highlighter-rouge">page_poison=1</code> to
+provide some level of kernel hardening. Kernel series 5.3 and later offer
+alternative measures <code class="language-plaintext highlighter-rouge">init_on_alloc</code> and <code class="language-plaintext highlighter-rouge">init_on_free</code> (see <a href="https://github.com/torvalds/linux/commit/6471384af">this kernel
+commit</a>).</p>
+
+<p>Void’s kernels come with the <code class="language-plaintext highlighter-rouge">init_on_alloc</code> option enabled by default where
+available (<em>i.e.</em>, <code class="language-plaintext highlighter-rouge">linux5.4&gt;=5.4.102</code>, <code class="language-plaintext highlighter-rouge">linux5.10&gt;=5.10.20</code> and
+<code class="language-plaintext highlighter-rouge">linux5.11&gt;=5.11.3</code>). In most cases, you should not disable this option, as it
+has a fairly minimal impact on performance (within 1%). The <code class="language-plaintext highlighter-rouge">init_on_free</code>
+option is more expensive (around 5% on average) and needs to be enabled by hand
+by passing <code class="language-plaintext highlighter-rouge">init_on_free=1</code> on the kernel command line. Similarly,
+<code class="language-plaintext highlighter-rouge">init_on_alloc</code> can be disabled if needed by passing <code class="language-plaintext highlighter-rouge">init_on_alloc=0</code>.</p>
+
+<p>As a consequence of these changes, Void’s default kernel command-line now omits
+the <code class="language-plaintext highlighter-rouge">slub_debug</code> and <code class="language-plaintext highlighter-rouge">page_poison</code> options. There is a chance that your
+existing system still has the old options enabled. They still work in newer
+kernels, but have a performance impact more in line with <code class="language-plaintext highlighter-rouge">init_on_free=1</code>. On
+older hardware this can be quite noticeable. If you are running a kernel series
+older than 5.4, you can keep them (or add them) for extra security at the cost
+of performance; otherwise, you should remove them.</p>
+
+<hr />
+
+<p>As always, if you experience any issues, feel free to reach out to us! You can
+<a href="https://github.com/void-linux/void-packages/issues/new">open an issue</a> on
+GitHub or seek help in the <code class="language-plaintext highlighter-rouge">#voidlinux</code> channel on <a href="https://freenode.net">https://freenode.net</a>.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Switching back to OpenSSL</title>
+		<link href="https://voidlinux.org/news/2021/02/OpenSSL.html"/>
+		<id>https://voidlinux.org/news/2021/02/OpenSSL</id>
+		<published>2021-02-23T00:00:00+00:00</published>
+		<updated>2021-02-23T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>The Void Linux team is <a href="https://github.com/void-linux/void-packages/pull/21056">switching back to
+OpenSSL</a> on March 5th,
+2021 (2021-03-05).</p>
+
+<p>For most users, there should be no noticeable change. If you have any packages
+installed that are no longer provided by Void, or your system has explicit
+dependencies on LibreSSL, you will of course need to take action to ensure your
+system continues to function after the switch.</p>
+
+<p>If you experience any issues, feel free to reach out to us! You can <a href="https://github.com/void-linux/void-packages/issues/new">open an
+issue</a> on GitHub or
+ping us in the <code class="language-plaintext highlighter-rouge">#voidlinux</code> channel on <a href="https://freenode.net">https://freenode.net</a>.</p>
+
+<hr />
+
+<p>A discussion about switching to OpenSSL began in a Request For Comments (RFC)
+posted on April 12th, 2020, at
+<a href="https://github.com/void-linux/void-packages/issues/20935">void-linux/void-packages#20935</a>.
+Since then, a majority of Void maintainers have expressed support for the move.
+The main reasons for the switch are as listed in the RFC:</p>
+
+<ul>
+  <li>Because most software targets OpenSSL, Void will no longer have to maintain
+(in some cases, very complex) patches to support LibreSSL. The complexity of
+the OpenSSL API makes such patching burdensome and risky, with mistakes
+potentially causing runtime errors or security issues - we have avoided
+those, as far as we know, but this has required a lot of effort.</li>
+  <li>Extensive support for platform specific optimizations outside of x86.</li>
+  <li>Access to new standards and algorithms earlier, such as full TLS 1.3 support.</li>
+</ul>
+
+<p>As a result of the above, the switch to OpenSSL is expected to lessen the time
+and effort spent on packages that require an OpenSSL-like library. This is
+especially notable because most other distributions which used LibreSSL have
+dropped it, so there aren’t as many people amongst whom to distribute the
+effort.</p>
+
+<ul>
+  <li>Alpine, which switched to LibreSSL temporarily, switched back to OpenSSL in
+January 2019, with the <a href="https://alpinelinux.org/posts/Alpine-3.9.0-released.html">3.9.0
+release</a>.</li>
+  <li>More recently, Gentoo, which used to offer LibreSSL as an option, has
+<a href="https://www.gentoo.org/support/news-items/2021-01-05-libressl-support-discontinued.html">discontinued that
+support</a>
+as well.</li>
+</ul>
+
+<p>For further context, LWN <a href="https://lwn.net/Articles/841664/">covered the subject of LibreSSL on
+Linux</a> at the beginning of this year. The
+article also covers the attention and improvements that the OpenSSL project has
+received post-Heartbleed, which was one of the main reasons for Void’s initial
+switch to LibreSSL.</p>
+
+<p>For an example of extra work caused by packages that expect OpenSSL, Void’s
+version of Qt5 is heavily patched in order to properly support LibreSSL.
+Furthermore, the just released Qt6 would also need significant effort to be
+patched and maintained to use LibreSSL, without the possibility of such effort
+being upstreamed.</p>
+
+<p>At the same time, other software can have limited functionality or hit edge
+cases when using LibreSSL, due to not being thoroughly tested with it. One
+example is Python, which is limited in the ciphers available to running
+programs, since it depends on what the SSL library provides - they are even
+<a href="https://www.python.org/dev/peps/pep-0644/#libressl-support">considering dropping any support for LibreSSL in the
+future</a>. Another
+example is OpenVPN, which we have received bug reports for connection issues
+with LibreSSL
+(<a href="https://github.com/void-linux/void-packages/issues/23413">void-linux/void-packages#23413</a>).
+This required us to switch the package to use Mbed TLS by default, resulting in
+some limitations to the resulting package. With the switch to OpenSSL, the
+OpenVPN package will now be provided in the most widely deployed and tested
+configuration, so similar compatibility hiccups are unlikely to reappear.</p>
+
+<p>Unfortunately, this move has required us to drop some packages that rely on the
+OpenSSL 1.0.1 API; while LibreSSL maintains compatibility with this legacy API,
+modern OpenSSL has abandoned it.</p>
+
+<p>One great feature of LibreSSL not offered by OpenSSL is the <code class="language-plaintext highlighter-rouge">libtls</code> library,
+which aims to be a hard to misuse interface for communicating over the web
+safely, with sane defaults. Some of the packages we ship depend on it, so work
+has been done to package a standalone version of it in
+<a href="https://github.com/void-linux/void-packages/pull/28732">void-linux/void-packages#28732</a>.</p>
+
+<p>The Void Linux team is grateful for the work of the OpenBSD community on
+<a href="https://github.com/libressl-portable/portable">libressl-portable</a>, we have
+greatly benefited from their work. Void continues to package other excellent
+OpenBSD software, including OpenSSH and signify, which is our tool of choice
+for signing live images.</p>
+
+<p>In conclusion, we expect our switch to OpenSSL to ease maintenance overhead,
+provide the same reliable experience to users, and improve functionality in
+select packages. Look forward to the update landing some time after March 5th!</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>New Images!</title>
+		<link href="https://voidlinux.org/news/2021/02/new-images.html"/>
+		<id>https://voidlinux.org/news/2021/02/new-images</id>
+		<published>2021-02-18T00:00:00+00:00</published>
+		<updated>2021-02-18T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>We’re pleased to announce that the 20210218 image set has been
+promoted to current and is now generally available.</p>
+
+<p>You can find the new images on our <a href="/download/">downloads page</a> and on
+our many <a href="https://docs.voidlinux.org/xbps/repositories/mirrors/index.html">mirrors</a>.</p>
+
+<p>Special thanks for this image set goes out to @ericonr for work in
+validating the images, and to @paper42 for providing us a new image in
+the grub splash screen.</p>
+
+<p>You may verify the authenticity of the images by following the
+instructions on the downloads page, and using the following signify
+key information:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>untrusted comment: This key is only valid for images with date 20210218. public key
+RWRSNnH5WbLx1EWUgJGeccx/Dof1MH5k5tZFytMlIOgpRJvRxHJtMqrP
+</code></pre></div></div>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Upcoming glibc upgrade requires updates for other packages on 32-bit machines</title>
+		<link href="https://voidlinux.org/news/2021/01/glibc-2.32.html"/>
+		<id>https://voidlinux.org/news/2021/01/glibc-2.32</id>
+		<published>2021-01-18T00:00:00+00:00</published>
+		<updated>2021-01-18T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p><strong>Note:</strong> This only applies to users of Void’s glibc version on 32-bit
+machines. If the command <code class="language-plaintext highlighter-rouge">xbps-uhelper arch</code> prints something other than
+<code class="language-plaintext highlighter-rouge">i686</code>, <code class="language-plaintext highlighter-rouge">armv7l</code> or <code class="language-plaintext highlighter-rouge">armv6l</code>, like <code class="language-plaintext highlighter-rouge">armv6l-musl</code>, you don’t need to do
+anything.</p>
+
+<p>Void Linux currently packages glibc version 2.30, but is going to update to
+2.32 soon, together with the long awaited GCC 10. Since this new version makes
+use of new system calls, due to the ongoing time64 (support for times after
+2038 on 32-bit platforms) work on glibc, applications with restrictive seccomp
+filters that haven’t been rebuilt for the new glibc version <strong>will stop
+working</strong>. Packages with such issues include:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">openssh</code></li>
+  <li><code class="language-plaintext highlighter-rouge">firefox</code></li>
+  <li><code class="language-plaintext highlighter-rouge">chromium</code></li>
+  <li><code class="language-plaintext highlighter-rouge">qt5-webengine</code> (and consequently dependants, such as <code class="language-plaintext highlighter-rouge">qutebrowser</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">electron*</code> (and consequently dependants, such as <code class="language-plaintext highlighter-rouge">element-desktop</code>)</li>
+</ul>
+
+<p>We will be pushing updates to these packages <em>before</em> the glibc update, if
+possible, but it won’t be possible for all of them. This includes <code class="language-plaintext highlighter-rouge">openssh</code>,
+which means you can be <strong>locked out of your system</strong> if that’s what you use to
+access it and you perform a partial upgrade that only includes the <code class="language-plaintext highlighter-rouge">glibc</code>
+package.</p>
+
+<p>Therefore, even though Void enables partial upgrades, you should perform a full
+system upgrade when <code class="language-plaintext highlighter-rouge">glibc</code> appears in the <code class="language-plaintext highlighter-rouge">xbps-install -Su</code> list. Be sure to
+test these packages - for <code class="language-plaintext highlighter-rouge">openssh</code> this includes actually opening a session,
+since <code class="language-plaintext highlighter-rouge">sshd</code> itself runs without issue. If for some reason something in your
+system stops working, you can of course reinstall the old <code class="language-plaintext highlighter-rouge">glibc</code> package using
+<a href="https://man.voidlinux.org/xtools.1">xdowngrade(1)</a> from the <code class="language-plaintext highlighter-rouge">xtools</code> package:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># xdowngrade /var/cache/xbps/glibc-2.30_2.x86_64.xbps /var/cache/xbps/glibc-locales-2.30_2.x86_64.xbps
+</code></pre></div></div>
+
+<p>If we missed some package with this issue, please let us know! You can <a href="https://github.com/void-linux/void-packages/issues/new">open an
+issue</a> on GitHub or
+ping us in the <code class="language-plaintext highlighter-rouge">#voidlinux</code> channel on <a href="https://freenode.net">https://freenode.net</a>.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Upcoming PAM upgrade requires review of custom configurations</title>
+		<link href="https://voidlinux.org/news/2020/12/pam-1.5.1.html"/>
+		<id>https://voidlinux.org/news/2020/12/pam-1.5.1</id>
+		<published>2020-12-11T00:00:00+00:00</published>
+		<updated>2020-12-11T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>Void Linux currently packages PAM version 1.3.0 and, until today, a standard
+PAM configuration that requires the <code class="language-plaintext highlighter-rouge">pam_tally</code> and <code class="language-plaintext highlighter-rouge">pam_lastlog</code>
+authentication modules. The <code class="language-plaintext highlighter-rouge">pam_tally</code> module was
+<a href="https://raw.githubusercontent.com/linux-pam/linux-pam/master/NEWS">deprecated in 1.4.0 and removed in 1.5.0</a>,
+and the <code class="language-plaintext highlighter-rouge">pam_lastlog</code> module is no longer built for musl systems. The Void team
+plans to <a href="https://github.com/void-linux/void-packages/pull/25506">upgrade to PAM 1.5.1</a>
+by the end of the year.</p>
+
+<p>For the upgraded PAM to function properly, any <code class="language-plaintext highlighter-rouge">pam_tally</code> (and, for musl
+users, <code class="language-plaintext highlighter-rouge">pam_lastlog</code>) requirements must be removed from the configuration files
+in <code class="language-plaintext highlighter-rouge">/etc/pam.d</code>. An updated <a href="https://github.com/void-linux/void-packages/commit/e065ac229d78c4a1819098c7bda45bbd717120ba"><code class="language-plaintext highlighter-rouge">pam-base</code> package</a>
+released today removes the <code class="language-plaintext highlighter-rouge">pam_tally</code> and <code class="language-plaintext highlighter-rouge">pam_lastlog</code> requirements from the
+standard configuration. If you have not modified the standard PAM
+configuration and have not enabled the XBPS <code class="language-plaintext highlighter-rouge">keepconf</code> option described in
+<a href="https://man.voidlinux.org/xbps.d.5"><code class="language-plaintext highlighter-rouge">xbps.d(5)</code></a>, upgrading the <code class="language-plaintext highlighter-rouge">pam-base</code>
+package should be sufficient to adjust your configuration.</p>
+
+<p>Whether or not you have modified the PAM configuration, please make sure to
+upgrade <code class="language-plaintext highlighter-rouge">pam-base</code> and confirm that no configuration files in <code class="language-plaintext highlighter-rouge">/etc/pam.d</code>
+contain references to the <code class="language-plaintext highlighter-rouge">pam_tally</code> module (and <code class="language-plaintext highlighter-rouge">pam_lastlog</code> on musl)
+<strong>before</strong> upgrading to PAM 1.5.1 when it becomes available.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Passwords generated with previous versions of rclone might be unsafe</title>
+		<link href="https://voidlinux.org/news/2020/11/rclone-1.53.3.html"/>
+		<id>https://voidlinux.org/news/2020/11/rclone-1.53.3</id>
+		<published>2020-11-21T00:00:00+00:00</published>
+		<updated>2020-11-21T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>The <a href="https://github.com/void-linux/void-packages/commit/c2f27e9a75169e6bdc67f420d5e8a12648a8d8f0">latest rclone update</a>
+to version 1.53.3 fixes
+<a href="https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28924">CVE-2020-28924</a>.
+From the <a href="https://forum.rclone.org/t/rclone-1-53-3-release/20569">release announcement</a>:</p>
+
+<blockquote>
+  <p>Some passwords generated with rclone config may be insecure. In
+particular if you used the ‘g’ generate option with rclone
+v1.49 - v1.53.2 then your password will based on the second it was
+generated in. This means that there are fixed number of passwords
+in that period ~33 million.</p>
+</blockquote>
+
+<p>We updated the rclone package to version 1.49.0, the first one affected,
+on August 27, 2019. The upstream project recommends using their
+<a href="https://github.com/rclone/passwordcheck">passwordcheck</a> utility to verify
+that your passwords aren’t among the ~33 million vulnerable ones. On a
+Void Linux system, you can obtain this utility by installing the <code class="language-plaintext highlighter-rouge">go</code>
+package and then building <code class="language-plaintext highlighter-rouge">passwordcheck</code> locally:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># xbps-install -S go
+$ go get github.com/rclone/passwordcheck
+</code></pre></div></div>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Hacktoberfest and Void Linux</title>
+		<link href="https://voidlinux.org/news/2020/10/hacktoberfest.html"/>
+		<id>https://voidlinux.org/news/2020/10/hacktoberfest</id>
+		<published>2020-10-01T00:00:00+00:00</published>
+		<updated>2020-10-01T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p><em>Update:</em> Unfortunately due to recent changes that significantly
+increase the effort required from Void, we can no longer promise that
+your changes will count towards the 4 PRs required for Hacktoberfest.</p>
+
+<p>Many maintainers use <code class="language-plaintext highlighter-rouge">git am</code> in a script to apply patches and batch
+them into build units that the buildbot can work on at a time.  This
+precludes the application of labels unless the maintainer separately
+opens a browser, logs into GitHub, and interacts with the PR there.
+While the <code class="language-plaintext highlighter-rouge">git am</code> method should technically work, we’ve noticed in
+the past that GitHub occasionally applies the wrong status to PRs
+using this method (ignores magic closing words).  We aren’t currently
+aware why this works intermittently and we can’t guarantee that a
+specific PR will satisfy the new requirements for Hacktoberfest.</p>
+
+<p>It’s unfortunate that the rules were changed mid-run, as under the
+previous rules we could process contributions without disruptive
+alterations to our review process, and we could accept many first time
+contributors’ work to low-risk packages.  You are of course still
+welcome to send your patches and they will be reviewed at the
+avaiability of the Void team.</p>
+
+<hr />
+
+<p>It’s the first day of October, the air is crisp in parts of the
+northern hemisphere, and it’s time for
+<a href="https://hacktoberfest.digitalocean.com/">Hacktoberfest</a> again.  This
+year is shaping up to be bigger than previous years, and as Void has
+participated since the start we’d like to provide some helpful tips
+and tricks for sending your first Pull Requests (PRs) to Void.</p>
+
+<p>This year Void is accepting patches for two main areas, patches from
+unknown contributors beyond these areas have a high likelihood of
+being dismissed, so please color within the lines.</p>
+
+<p>The first area is for non-code contributions.  We maintain all of our
+documentation using a tool called
+<a href="https://github.com/rust-lang/mdBook">mdBook</a>.  This has the net
+effect that all of our documentation is written as version controlled
+markdown files.  If you regularly use Void and have been looking for a
+place to get involved, this is a good point to jump in.  We aren’t
+trying to recreate the <a href="https://wiki.archlinux.org/">ArchWiki</a> though,
+so make sure you understand the scope and purpose of the docs repo
+before sending your documentation.</p>
+
+<p>For technical contributions, we are accepting updates of existing
+packages.  While new packages may count as well, we have had many
+problems in the past with people adding packages and then abandoning
+them, so expect to meet significant resistance if you are a new
+contributor trying to add a package to the repo.  Updating packages is
+very easy.  You can select a package from the list of <a href="http://repo-default.voidlinux.org/void-updates/void-updates.txt">out of date
+packages</a>
+and update it using the tools in the <a href="https://github.com/void-linux/void-packages">void-packages
+repo</a>.  The
+<a href="https://github.com/void-linux/void-packages/blob/master/Manual.md">manual</a>
+might be of assistance when you are updating packages.</p>
+
+<p>As a general rule, we would prefer Hacktoberfest contributors that do
+not have a previous track record with the Void Linux project steer
+clear of “structural” packages unless you have specific domain
+knowledge that qualifies you to work on high-risk packages.  When
+selecting a package to update, select a package registered to
+<code class="language-plaintext highlighter-rouge">orphan@voidlinux.org</code> when possible.  These packages are otherwise
+unmaintained, and your contribution will have a bigger impact.  You
+can update packages that are owned by existing developers, but
+understand that conflicts between a maintainer and contributor will be
+resolved at the discretion of Void staff.</p>
+
+<p>Here are some useful tips when updating packages:</p>
+
+<ul>
+  <li>Don’t PR broken code, our maintainers are much less likely to give
+a second look to a PR that didn’t build when it was submitted.</li>
+  <li>While it’s possible to run xbps-src from an alien distro, this
+isn’t really supported.  If you’re a seasonsed Linux user and want
+to try Void, now is the time!</li>
+  <li>The docs use <a href="https://github.com/bobertlo/vmd">versioned
+markdown</a>, available in the
+vmdfmt package.  You can run this locally to format your files.</li>
+  <li>The update list is sometimes wrong, we’d love to get patches that
+improve its reliability by ignoring beta versions or adding checks
+to packages that are not detected as out of date correctly.</li>
+  <li>If you have expertise in C, GNU Autotools, or other build systems,
+taking a look at projects that we’ve marked as not
+cross-compilation compatible and fixing the upstream issue can be
+an amazing contribution that impacts more than just Void.</li>
+</ul>
+
+<p>We look forward to working with the amazing world of open source
+developers this month to improve Void and continue our high standards
+for quality and reliability.  To ensure your PR has the best chance at
+being accepted, feel free to reach out for help as explained in the
+manual.  Together this will be a high impact Hacktoberfest.</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+	<entry>
+		<title>Welcome New Contributors!</title>
+		<link href="https://voidlinux.org/news/2020/05/new-contributors.html"/>
+		<id>https://voidlinux.org/news/2020/05/new-contributors</id>
+		<published>2020-05-01T00:00:00+00:00</published>
+		<updated>2020-05-01T00:00:00+00:00</updated>
+		<content type="xhtml">
+			<div xmlns="http://www.w3.org/1999/xhtml">
+				<p><p>The Void project is pleased to welcome onboard 3 new members today.</p>
+
+<p>Joining us to work on packages is <code class="language-plaintext highlighter-rouge">@abenson</code>.</p>
+
+<p>Joining us to advance the docs site are <code class="language-plaintext highlighter-rouge">@flexibeast</code> and <code class="language-plaintext highlighter-rouge">@ericonr</code>.</p>
+
+<p>Interested in seeing your name in a future update here?  Read our
+<a href="https://docs.voidlinux.org/contributing/index.html">Contributing Page</a>
+and join us today!</p>
+</p>
+			</div>
+		</content>
+	</entry>
+
+
+</feed>

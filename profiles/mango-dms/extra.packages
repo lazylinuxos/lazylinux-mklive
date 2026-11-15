@@ -1,0 +1,85 @@
+#BASE PKGS
+    acpi
+    alsa-tools
+    brightnessctl
+    ca-certificates
+    cmus
+    elogind
+    ethtool
+    inxi
+    libayatana-appindicator
+    libayatana-indicator
+    nerd-fonts-symbols-ttf
+    polkit
+    power-profiles-daemon
+    qt5-graphicaleffects
+    qt5-quickcontrols2
+    qt5ct
+    qt6-declarative
+    qt6-svg
+    qt6ct
+    sddm
+    usbutils
+    util-linux
+    xcalc
+    xdg-desktop-portal
+    xdg-utils
+    xf86-input-synaptics
+    xinit
+    xorg
+    xorg-server
+
+# PRINTER
+    cups-browsed
+
+# UTILITIES
+    btop
+    Clipboard
+    feh
+    hddtemp
+    mpv
+    mupdf
+    nwg-look
+    qimgv
+    smartmontools
+    udiskie
+    ufw
+    vsv
+    wl-clipboard
+    wlr-randr
+    xsettingsd
+    zathura
+    zathura-pdf-mupdf
+    zellij
+
+# FILE SYSTEM
+    dosfstools
+    e2fsprogs
+    kpmcore
+    libblkid
+    parted
+    Thunar
+    thunar-archive-plugin
+    thunar-media-tags-plugin
+    thunar-shares-plugin
+    thunar-volman
+    xfce4-terminal
+    xfsprogs
+
+# GUI
+    fsearch
+    galculator-gtk3
+    gparted
+    gufw
+    kitty
+    qbittorrent
+    qdirstat
+    qtpass
+
+# LAZY REPO PACKAGES
+    adw-gtk3-theme
+    bulletty
+    cliamp
+    superseedr
+    termscp-bin
+    ytsub

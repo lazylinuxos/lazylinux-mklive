@@ -141,7 +141,7 @@ iso639_language() {
     an)  echo "Aragonese" ;;
     ar)  echo "Arabic" ;;
     ast) echo "Asturian" ;;
-    be)  echo "Belgian" ;;
+    be)  echo "Belarusian" ;;
     bg)  echo "Bulgarian" ;;
     bhb) echo "Bhili" ;;
     br)  echo "Breton" ;;
@@ -867,7 +867,7 @@ configure_wifi() {
     local dev="$1" ssid enc pass _wpasupconf=/etc/wpa_supplicant/wpa_supplicant.conf
 
     DIALOG --form "Wireless configuration for ${dev}\n(encryption type: wep, wpa, or sae)" 0 0 0 \
-        "SSID:" 1 1 "" 1 16 30 0 \
+        "SSID:" 1 1 "" 1 16 32 0 \
         "Encryption:" 2 1 "" 2 16 4 3 \
         "Password:" 3 1 "" 3 16 63 0 || return 1
     readarray -t values <<<$(cat $ANSWER)
@@ -1361,7 +1361,8 @@ ${BOLD}Do you want to continue?${RESET}" 20 80 || return
     # Create and mount filesystems
     create_filesystems
 
-    if find "$TARGETDIR" -xdev -mindepth 1 -maxdepth 1 -not -name 'lost+found' | read; then
+    # check if there are any files in the root partition, ignoring lost+found
+    if find "$TARGETDIR" -xdev -not -name 'lost+found' -not -type d | read; then
         DIALOG --msgbox "${BOLD}${RED}ERROR:${RESET} \
 Root partition not empty! Aborting..." ${MSGBOXSIZE}
         DIE 1

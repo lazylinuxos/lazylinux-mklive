@@ -1,0 +1,6 @@
+[Global]
+LookAndFeelSet=org.kde.silverlightbottompanel.desktop
+RefreshedConfig=6.5.3
+
+[Windeco]
+ButtonIconStyle=StyleSuessigSilver

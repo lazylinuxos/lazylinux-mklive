@@ -1,0 +1,190 @@
+#BASE PKGS
+    alsa-ucm-conf
+    alsa-utils
+    cronie
+    crun
+    cryptsetup
+    dialog
+    ffmpeg
+    grub-btrfs
+    hostapd
+    lazy-grub
+    lazy-os-prober
+    lazy-runit
+    lazysvctl
+    libwebkit2gtk41
+    libxcrypt-compat
+    lvm2
+    mdadm
+    mesa
+    mesa-dri
+    mesa-vaapi
+    snooze
+    sof-firmware
+    superd
+    xmirror
+
+# NETWORKING
+    NetworkManager
+
+# BLUETOOTH
+    blueman
+    bluez
+    libspa-bluetooth
+
+# PRINTER
+    cups
+    cups-filters
+    cups-pk-helper
+    foomatic-db
+    foomatic-db-engine
+    system-config-printer
+
+# POWER
+    tlp
+    tlp-rdw
+
+# FONTS
+    noto-fonts-emoji
+    noto-fonts-ttf
+
+# UTILITIES
+    7zip
+    7zip-unrar
+    bash-completion
+    bat
+    curl
+    dust
+    eza
+    fastfetch
+    fd
+    file
+    fish-shell
+    fzf
+    hblock
+    htop
+    ImageMagick
+    jq
+    lm_sensors
+    mlocate
+    mtools
+    poppler
+    preload
+    ripgrep
+    rofi
+    socklog-void
+    wget
+    wmctrl
+    xclip
+    xcolor
+    xdg-user-dirs
+    xdg-user-dirs-gtk
+    xdotool
+    xkblayout-state
+    xkill
+    xsel
+    yazi
+    zbar
+    zip
+    zoxide
+    zstd
+
+# PACKAGE MANAGEMENT
+    cargo
+    flatpak
+    nix
+    topgrade
+
+# DEVELOPMENT
+    base-devel
+    git
+    glib-devel
+    go
+    gprolog
+    gtk+3-devel
+    lazygit
+    libpng-devel
+    libX11-devel
+    libXcursor-devel
+    libXft-devel
+    libXi-devel
+    libXinerama-devel
+    libXrandr-devel
+    lua
+    meson
+    ninja
+    nodejs
+    optipng
+    podman
+    python3-devel
+    python3-Pillow
+    python3-pip
+    python3-PyQt5-dbus
+    python3-setproctitle
+    python3-xlib
+    qrencode-devel
+    qt5
+    sassc
+    sqlite-devel
+    zig
+
+# FILE SYSTEM
+    btrfs-progs
+    exfat-utils
+    gptfdisk
+    ntfs-3g
+    samba
+    smbclient
+
+# TEXT EDITORS
+    mousepad
+    nano
+
+# REPOSITORIES
+    void-repo-multilib
+    void-repo-multilib-nonfree
+    void-repo-nonfree
+
+# GUI
+    dconf-editor
+    flameshot
+    gimp
+    halloy
+    imagewriter
+    inkscape
+    octoxbps
+    onboard
+    plymouth
+    redshift-gtk
+    remmina
+    simple-scan
+    syncthing
+    syncthingtray
+    telegram-desktop
+    thunderbird
+    thunderbird-i18n-en-US
+    thunderbird-i18n-hy-AM
+    thunderbird-i18n-ru
+    timeshift
+    vlc
+
+# LAZY REPO PACKAGES
+    brave-origin-bin
+    calamares
+    distrobox
+    mindwtr-bin
+    onlyoffice-bin
+    webapp-manager
+
+# LAZY THEMES AND ICONS
+    lazy-theme-config
+    papirus-icon-theme
+
+# LAZY ZSH config
+    lazy-zsh-config
+    oh-my-zsh
+    zsh
+    zsh-autosuggestions
+    zsh-history-substring-search
+    zsh-syntax-highlighting
+    zsh-theme-powerlevel10k

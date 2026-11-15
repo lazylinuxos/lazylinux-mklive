@@ -1,0 +1,85 @@
+#BASE PKGS
+    elogind
+
+# BLUETOOTH
+    bluetui
+
+# POWER
+    power-profiles-daemon
+    tlpui
+
+# UTILITIES
+    acpi
+    aerc
+    betterlockscreen
+    bookokrat
+    brightnessctl
+    btop
+    cliamp
+    clipmenu
+    create_ap
+    dbus-x11
+    dnsmasq
+    dunst
+    feh
+    hddtemp
+    khal
+    lazysql
+    lazyssh
+    libnotify
+    lxqt-policykit
+    matugen
+    mpc
+    mpv
+    mupdf
+    neovim
+    pamixer
+    picom
+    playerctl
+    pulsemixer
+    qimgv
+    qrencode
+    qt5ct
+    qt6ct
+    setxkbmap
+    tesseract-ocr
+    tesseract-ocr-eng
+    tesseract-ocr-hye
+    tesseract-ocr-rus
+    tesseract-ocr-script-Armenian
+    udiskie
+    usbutils
+    util-linux
+    xbacklight
+    xbindkeys
+    xinput
+    xset
+    xsettingsd
+    xss-lock
+    xterm
+    xvkbd
+    ytsub
+    zathura
+    zathura-pdf-mupdf
+
+# DEVELOPMENT
+    odin
+
+# REPOSITORIES
+    xlibre-repo
+
+# GUI
+    lightdm-gtk-greeter-settings
+    nare
+    Thunar
+    thunar-archive-plugin
+    thunar-media-tags-plugin
+    thunar-shares-plugin
+    thunar-volman
+    gnome-icon-theme-xfce
+
+# LAZY REPO PACKAGES
+    darya
+    resterm
+    superseedr
+    termscp-bin

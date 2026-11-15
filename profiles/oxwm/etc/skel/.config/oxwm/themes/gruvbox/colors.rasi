@@ -1,0 +1,16 @@
+/* Gruvbox — rofi color variables. */
+
+* {
+    bg:          #282828;
+    fg:          #ebdbb2;
+    accent:      #d79921;
+    accent-2:    #fabd2f;
+    border:      #d79921;
+    urgent:      #fabd2f;
+    selected-fg: #ebdbb2;
+    entry-fg:    #fabd2f;
+    prompt-fg:   #d79921;
+    header:      #458588;
+
+    background-color: @bg;
+}

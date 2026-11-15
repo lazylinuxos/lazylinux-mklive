@@ -1,0 +1,16 @@
+/* Dracula — rofi color variables. */
+
+* {
+    bg:          #282a36;
+    fg:          #f8f8f2;
+    accent:      #f1fa8c;
+    accent-2:    #ffb86c;
+    border:      #f1fa8c;
+    urgent:      #ffb86c;
+    selected-fg: #f8f8f2;
+    entry-fg:    #ffb86c;
+    prompt-fg:   #f1fa8c;
+    header:      #6272a4;
+
+    background-color: @bg;
+}

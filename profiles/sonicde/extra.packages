@@ -1,0 +1,36 @@
+#BASE PKGS
+    elogind
+
+# POWER
+    power-profiles-daemon
+
+# UTILITIES
+    acpi
+    brightnessctl
+    gwenview
+    tesseract-ocr
+    tesseract-ocr-eng
+    tesseract-ocr-hye
+    tesseract-ocr-rus
+    tesseract-ocr-script-Armenian
+    usbutils
+    util-linux
+    xterm
+
+# REPOSITORIES
+    blackhole-vl-repo
+    sonicde-repo
+    xlibre-repo
+
+# GUI
+    ark
+    drawy
+    fsearch
+    galculator-gtk3
+    gparted
+    gufw
+    isoimagewriter
+    okular
+    qbittorrent
+    qdirstat
+    qtpass

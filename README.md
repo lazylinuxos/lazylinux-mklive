@@ -96,17 +96,19 @@ that can change the behavior of the live system:
 Usage: mkiso.sh [options ...] [-- mklive options ...]
 
 Wrapper script around mklive.sh for several standard flavors of live images.
-Adds void-installer and other helpful utilities to the generated images.
+Adds lazy-installer and other helpful utilities to the generated images.
 
 OPTIONS
- -a <arch>     Set architecture (or platform) in the image
- -b <variant>  One of base, enlightenment, xfce, mate, cinnamon, gnome, kde,
-               lxde, lxqt, or xfce-wayland (default: base). May be specified multiple times
-               to build multiple variants
+ -a <arch>     Set XBPS_ARCH in the image
+ -b <variant>  One of base, enlightenment, xfce, xfce-wayland, mate, cinnamon,
+               gnome, kde, lxde, lxqt, sonicde, skarwm-anush, oxwm, mango-dms,
+               or umbriel-noctalia (default: base). May be specified multiple times
  -d <date>     Override the datestamp on the generated image (YYYYMMDD format)
  -t <arch-date-variant>
                Equivalent to setting -a, -b, and -d
  -r <repo>     Use this XBPS repository. May be specified multiple times
+ -P <file>     Install packages listed in this file. May be specified multiple times
+               (default: common/extra.packages)
  -h            Show this help and exit
  -V            Show version and exit
 
@@ -126,7 +128,7 @@ To generate a more complete live ISO image, use mkiso.sh.
 
 OPTIONS
  -a <arch>          Set XBPS_ARCH in the ISO image
- -b <system-pkg>    Set an alternative base package (default: base-system)
+ -b <system-pkg>    Set an alternative base package (default: lazy-base-system)
  -r <repo>          Use this XBPS repository. May be specified multiple times
  -c <cachedir>      Use this XBPS cache directory (default: ./xbps-cachedir-<arch>)
  -H <host_cachedir> Use this Host XBPS cache directory (default: ./xbps-cachedir-<host_arch>)
@@ -171,12 +173,13 @@ Supported architectures:
  riscv64, riscv64-musl
 
 OPTIONS
- -b <system-pkg>  Set an alternative base-system package (default: base-container-full)
+ -b <system-pkg>  Set an alternative lazy-base-system package (default: base-container-full)
  -c <cachedir>    Set XBPS cache directory (default: ./xbps-cachedir-<arch>)
  -C <file>        Full path to the XBPS configuration file
  -r <repo>        Use this XBPS repository. May be specified multiple times
  -o <file>        Filename to write the ROOTFS to (default: automatic)
  -x <num>         Number of threads to use for image compression (default: dynamic)
+ -z <format>      Compression format to use [xz, none] (default: xz)
  -h               Show this help and exit
  -V               Show version and exit
 ```
@@ -194,7 +197,7 @@ Supported platforms: i686, x86_64, GCP,
                      pinebookpro, pinephone, rock64, rockpro64, asahi
 
 OPTIONS
- -b <system-pkg>  Set an alternative base-system package (default: base-system)
+ -b <system-pkg>  Set an alternative lazy-base-system package (default: lazy-base-system)
  -c <cachedir>    Set the XBPS cache directory (default: ./xbps-cachedir-<arch>)
  -C <file>        Full path to the XBPS configuration file
  -k <cmd>         Call '<cmd> <ROOTFSPATH>' after building the ROOTFS

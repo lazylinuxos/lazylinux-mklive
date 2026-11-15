@@ -10,6 +10,7 @@ IMAGES="base"
 TRIPLET=
 REPO=
 DATE=$(date -u +%Y%m%d)
+PACKAGE_FILES=()
 
 usage() {
 	cat <<-EOH
@@ -20,12 +21,15 @@ usage() {
 
 	OPTIONS
 	 -a <arch>     Set XBPS_ARCH in the image
-	 -b <variant>  One of base, enlightenment, xfce, mate, cinnamon, gnome, kde,
-	               lxde, lxqt, or xfce-wayland (default: base). May be specified multiple times
+	 -b <variant>  One of base, enlightenment, xfce, xfce-wayland, mate, cinnamon,
+	               gnome, kde, lxde, lxqt, sonicde, skarwm-anush, oxwm, mango-dms,
+	               or umbriel-noctalia (default: base). May be specified multiple times
 	 -d <date>     Override the datestamp on the generated image (YYYYMMDD format)
 	 -t <arch-date-variant>
 	               Equivalent to setting -a, -b, and -d
 	 -r <repo>     Use this XBPS repository. May be specified multiple times
+	 -P <file>     Install packages listed in this file. May be specified multiple times
+	               (default: common/extra.packages)
 	 -h            Show this help and exit
 	 -V            Show version and exit
 
@@ -34,11 +38,12 @@ usage() {
 	EOH
 }
 
-while getopts "a:b:d:t:hr:V" opt; do
+while getopts "a:b:d:t:hr:P:V" opt; do
 case $opt in
     a) ARCH="$OPTARG";;
     b) IMAGES="$OPTARG";;
     d) DATE="$OPTARG";;
+    P) PACKAGE_FILES+=("$OPTARG");;
     r) REPO="-r $OPTARG $REPO";;
     t) TRIPLET="$OPTARG";;
     V) version; exit 0;;
@@ -47,6 +52,10 @@ case $opt in
 esac
 done
 shift $((OPTIND - 1))
+
+if [ "${#PACKAGE_FILES[@]}" -eq 0 ]; then
+    PACKAGE_FILES=(common/extra.packages)
+fi
 
 INCLUDEDIR=$(mktemp -d)
 trap "cleanup" INT TERM
@@ -69,7 +78,7 @@ include_installer() {
 }
 
 setup_pipewire() {
-    PKGS="$PKGS pipewire alsa-pipewire"
+    PKGS="$PKGS pipewire alsa-pipewire wireplumber"
     case "$ARCH" in
         asahi*)
             PKGS="$PKGS asahi-audio"
@@ -101,7 +110,7 @@ build_variant() {
             GFX_PKGS="xorg-video-drivers xf86-video-intel"
             GFX_WL_PKGS="mesa-dri"
             WANT_INSTALLER=yes
-            KERNEL_PKG="linux7.1"
+            KERNEL_PKG="linux-mainline"
             TARGET_ARCH="$ARCH"
             ;;
         aarch64*)
@@ -127,10 +136,11 @@ build_variant() {
     PKGS="dialog cryptsetup lvm2 mdadm void-docs-browse xtools-minimal xmirror chrony tmux $A11Y_PKGS $GRUB_PKGS"
     FONTS="font-misc-misc terminus-font dejavu-fonts-ttf"
     WAYLAND_PKGS="$GFX_WL_PKGS $FONTS orca"
-    XORG_PKGS="xorg-minimal xorg-input-drivers xorg-video-drivers setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf noto-fonts-ttf-extra alsa-plugins-pulseaudio alsa-utils apulse alsa-ucm-conf sof-firmware orca"
-    CUSTOM_PKGS="$(grep '^[^#].' lazy.packages)"
+    XORG_PKGS="xlibre setxkbmap xauth font-misc-misc terminus-font dejavu-fonts-ttf noto-fonts-emoji noto-fonts-ttf alsa-utils alsa-ucm-conf sof-firmware orca"
+    XORG_PKGS_NO_XLIBRE="${XORG_PKGS#xlibre }"
+    CUSTOM_PKGS="$(grep -h '^[^#].' "${PACKAGE_FILES[@]}")"
     PKGS_TO_IGNORE="parole"
-    SERVICES="sshd chronyd podman docker containerd tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
+    SERVICES="sshd chronyd podman tlp cupsd bluetoothd cronie snooze-daily socklog-unix nanoklogd preload nix-daemon smbd"
 
     LIGHTDM_SESSION=''
 
@@ -139,7 +149,7 @@ build_variant() {
             SERVICES="$SERVICES dhcpcd wpa_supplicant acpid"
         ;;
         enlightenment)
-            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter enlightenment terminology udisks2 firefox"
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter enlightenment terminology udisks2"
             SERVICES="$SERVICES acpid dhcpcd wpa_supplicant lightdm dbus polkitd"
             LIGHTDM_SESSION=enlightenment
         ;;
@@ -154,32 +164,54 @@ build_variant() {
             fi
         ;;
         mate)
-            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter mate mate-extra gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter mate mate-extra gnome-keyring network-manager-applet gvfs-afc gvfs-mtp gvfs-smb udisks2"
             SERVICES="$SERVICES dbus lightdm NetworkManager polkitd"
             LIGHTDM_SESSION=mate
         ;;
         cinnamon)
-            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter cinnamon gnome-keyring colord gnome-terminal gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter cinnamon gnome-keyring colord gnome-terminal gvfs-afc gvfs-mtp gvfs-smb udisks2"
             SERVICES="$SERVICES dbus lightdm NetworkManager polkitd"
             LIGHTDM_SESSION=cinnamon
         ;;
         gnome)
-            PKGS="$PKGS $XORG_PKGS gnome firefox"
+            PKGS="$PKGS $XORG_PKGS gnome"
             SERVICES="$SERVICES dbus gdm NetworkManager polkitd"
         ;;
         kde)
-            PKGS="$PKGS $XORG_PKGS kde5 konsole firefox dolphin NetworkManager"
+            PKGS="$PKGS $XORG_PKGS kde5 konsole dolphin NetworkManager"
             SERVICES="$SERVICES dbus NetworkManager sddm"
         ;;
         lxde)
-            PKGS="$PKGS $XORG_PKGS lxde lightdm lightdm-gtk-greeter gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
+            PKGS="$PKGS $XORG_PKGS lxde lightdm lightdm-gtk-greeter gvfs-afc gvfs-mtp gvfs-smb udisks2"
             SERVICES="$SERVICES acpid dbus dhcpcd wpa_supplicant lightdm polkitd"
             LIGHTDM_SESSION=LXDE
         ;;
         lxqt)
-            PKGS="$PKGS $XORG_PKGS lxqt sddm gvfs-afc gvfs-mtp gvfs-smb udisks2 firefox"
+            PKGS="$PKGS $XORG_PKGS lxqt sddm gvfs-afc gvfs-mtp gvfs-smb udisks2"
             SERVICES="$SERVICES dbus dhcpcd wpa_supplicant sddm polkitd"
         ;;
+        sonicde)
+            PKGS="$PKGS $XORG_PKGS sonicde-meta sonic-terminal sonic-ecco NetworkManager"
+            SERVICES="$SERVICES dbus NetworkManager sddm"
+        ;;
+        skarwm-anush)
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter skarwm anush gvfs gvfs-afc gvfs-mtp gvfs-smb udisks2"
+            SERVICES="$SERVICES acpid dhcpcd elogind lightdm dbus NetworkManager polkitd power-profiles-daemon"
+            LIGHTDM_SESSION=skarwm
+        ;;
+        oxwm)
+            PKGS="$PKGS $XORG_PKGS lightdm lightdm-gtk-greeter oxwm gvfs gvfs-afc gvfs-mtp gvfs-smb udisks2"
+            SERVICES="$SERVICES acpid dhcpcd elogind lightdm dbus NetworkManager polkitd power-profiles-daemon"
+            LIGHTDM_SESSION=oxwm
+        ;;
+        mango-dms)
+            PKGS="$PKGS $XORG_PKGS_NO_XLIBRE $WAYLAND_PKGS cliphist mangowc dms-shell dgop dsearch dcal ImageMagick mate-polkit matugen qt5-wayland qt6-wayland quickshell wayland-devel wayland-protocols xdg-desktop-portal-wlr"
+            SERVICES="$SERVICES dbus elogind sddm NetworkManager polkitd power-profiles-daemon"
+            ;;
+        umbriel-noctalia)
+            PKGS="$PKGS $XORG_PKGS_NO_XLIBRE $WAYLAND_PKGS cliphist umbriel-git noctalia ImageMagick mate-polkit matugen qt5-wayland qt6-wayland quickshell wayland-devel wayland-protocols xdg-desktop-portal-umbriel-git"
+            SERVICES="$SERVICES dbus elogind sddm NetworkManager polkitd power-profiles-daemon"
+            ;;
         *)
             >&2 echo "Unknown variant $variant"
             exit 1
@@ -204,12 +236,10 @@ EOF
         chmod 755 "$INCLUDEDIR"/usr/bin/lazy-installer
     fi
 
-    if [ "$variant" != base ]; then
-        setup_pipewire
-    fi
+    setup_pipewire
 
     # -o "$IMG"
-    ./mklive.sh -a "$TARGET_ARCH" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -I ./includedir/ -g "$PKGS_TO_IGNORE" \
+    ./mklive.sh -a "$TARGET_ARCH" -T "LazyLinux" -p "$PKGS $CUSTOM_PKGS" -S "$SERVICES" -I "$INCLUDEDIR" -g "$PKGS_TO_IGNORE" \
         ${KERNEL_PKG:+-v $KERNEL_PKG} ${REPO} "$@"
 
 	cleanup

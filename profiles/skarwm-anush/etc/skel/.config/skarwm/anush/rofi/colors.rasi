@@ -1,0 +1,15 @@
+/* Generated from wallpaper: minimal.png */
+
+* {
+    bg:          #192333;
+    fg:          #d2c5bc;
+    accent:      #d59a72;
+    accent-2:    #49699d;
+    border:      #d59a72;
+    urgent:      #ed8c5e;
+    selected-fg: #192333;
+    entry-fg:    #49699d;
+    prompt-fg:   #d59a72;
+    header:      #49699d;
+    background-color: @bg;
+}
